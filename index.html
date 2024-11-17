@@ -1,0 +1,807 @@
+<!--
+This code implements an interactive and visually appealing Curriculum Vitae (CV) using Vue.js and Tailwind CSS.
+
+Main features:
+- **Language and Version Switching**: Allows users to select between different languages (English, Spanish, and French) and CV versions.
+- **Dynamic Data**: CV data is managed directly within the script, eliminating the need for external JSON files and avoiding CORS issues.
+- **Frameworks Used**:
+  - **Vue.js 3**: Handles the frontend reactivity and logic.
+  - **Tailwind CSS**: Efficiently styles the page using utility classes.
+- **Structured Metadata**: Includes a JSON-LD block to provide structured metadata, enhancing search engine optimization (SEO).
+- **PDF Export Functionality**: Enables users to export the CV as a PDF while maintaining the original aspect ratio.
+
+Important Considerations:
+- **PDF Export**: The export functionality uses html2pdf.js to convert the CV content into a PDF. The CV content is wrapped in a separate div (#cv-content) to exclude controls from the PDF.
+- **Serving the Application from a Local Server**: To ensure all functionalities work correctly, especially the PDF export, it's recommended to serve the application from a local server. You can use the VSCode Live Server extension or a simple local server like http-server.
+- **Data Structure**: Ensure that the CV data within the script follows the expected structure to avoid rendering issues.
+- **Future Updates**: The code is designed to be modular and scalable, making it easy to add more languages or CV versions in the future.
+- **Comments and Maintenance**: Clear comments and a well-structured codebase facilitate maintenance and collaboration with other developers.
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Enrique Peña - CV</title>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Montserrat:wght@400;600&display=swap"
+    rel="stylesheet">
+
+  <!-- Font Awesome for Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Importmap for Vue 3 -->
+  <script type="importmap">
+    {
+      "imports": {
+        "vue": "https://unpkg.com/vue@3/dist/vue.esm-browser.js"
+      }
+    }
+  </script>
+
+  <!-- html2pdf.js for PDF Export -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+  <!-- html2canvas.js for Image Export -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+  <!-- Structured Metadata for CV (dynamically updated) -->
+  <script type="application/ld+json" id="jsonld-data"></script>
+
+  <!-- Additional Styles -->
+  <style>
+    .font-roboto {
+      font-family: 'Roboto', sans-serif;
+    }
+
+    .font-montserrat {
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #f1f1f1;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #4a4a4a;
+      border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #3b3b3b;
+    }
+
+    /* Card Effect for Sections */
+    .card {
+      background: #ffffff;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      padding: 15px;
+      margin-bottom: 10px;
+      border-left: 4px solid #4b0082;
+    }
+
+    /* Section Titles */
+    .section-title {
+      font-family: 'Montserrat', sans-serif;
+      color: #4b0082;
+      text-align: left;
+      font-size: 1.25rem;
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+
+    /* Overall Style Changes for a More Professional Look */
+    .text-primary {
+      color: #4b0082;
+    }
+
+    .contact-info {
+      color: #4b0082;
+    }
+
+    .card ul {
+      margin-left: 1rem;
+    }
+
+    .skill-badge {
+      background-color: #f3e8ff;
+      color: #4b0082;
+      padding: 0.15rem 0.5rem;
+      border-radius: 9999px;
+      font-size: 0.7rem;
+      margin-bottom: 4px;
+    }
+
+    /* Button Styles for a Consistent Color Theme */
+    .bg-primary-button {
+      background-color: #4b0082;
+      color: white;
+    }
+
+    .bg-primary-button:hover {
+      background-color: #3a006b;
+    }
+  </style>
+</head>
+
+<body class="font-montserrat text-gray-800 bg-gray-100 m-0 p-0">
+  <div id="app" class="max-w-[800px] mx-auto my-8 bg-white p-5 shadow-md rounded-lg">
+    <!-- Language and Version Controls -->
+    <div class="controls flex justify-between mb-5 flex-wrap items-center">
+      <div class="mb-3 flex items-center">
+        <label for="language" class="mr-2 font-semibold text-base">{{ labels.selectLanguage }}</label>
+        <select v-model="selectedLanguage" @change="filterCVs"
+          class="p-2 px-3 text-sm rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-400">
+          <option v-for="(langName, langCode) in languages" :key="langCode" :value="langCode">{{ langName }}</option>
+        </select>
+      </div>
+      <div class="mb-3 flex items-center">
+        <label for="version" class="mr-2 font-semibold text-base">{{ labels.selectVersion }}</label>
+        <select v-model="selectedVersion" @change="filterCVs"
+          class="p-2 px-3 text-sm rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-400">
+          <option v-for="version in availableVersions" :key="version" :value="version">{{ version }}</option>
+        </select>
+      </div>
+      <div class="mb-3 flex space-x-3">
+        <button @click="exportPDF"
+          class="bg-primary-button px-3 py-1 rounded-md transition duration-300 flex items-center shadow">
+          <i class="fas fa-file-pdf mr-1"></i> Export to PDF
+        </button>
+        <button @click="exportImage"
+          class="bg-primary-button px-3 py-1 rounded-md transition duration-300 flex items-center shadow">
+          <i class="fas fa-file-image mr-1"></i> Export to Image
+        </button>
+      </div>
+    </div>
+
+    <!-- CV Content -->
+    <div id="cv-content">
+      <!-- Header -->
+      <header class="text-center pb-3 mb-5">
+        <h1 class="text-primary text-3xl font-semibold">{{ cvData.personal_info.name }}</h1>
+        <h2 class="text-gray-600 text-lg mt-1">{{ cvData.personal_info.title }}</h2>
+        <div class="contact mt-3 text-sm contact-info">
+          <p class="flex justify-center items-center space-x-3">
+            <i class="fas fa-envelope text-gray-600"></i>
+            <a :href="'mailto:' + cvData.personal_info.contact.email" class="hover:underline">
+              {{ cvData.personal_info.contact.email }}
+            </a>
+            <span class="mx-3">|</span>
+            <i class="fas fa-phone text-gray-600"></i>
+            <a :href="'tel:' + cvData.personal_info.contact.phone" class="hover:underline">
+              {{ cvData.personal_info.contact.phone }}
+            </a>
+            <span class="mx-3">|</span>
+            <i class="fas fa-map-marker-alt text-gray-600"></i>
+            <span>{{ cvData.personal_info.contact.location }}</span>
+          </p>
+          <p class="flex justify-center items-center space-x-2 mt-2">
+            <i class="fab fa-linkedin text-gray-600"></i>
+            <a :href="cvData.personal_info.contact.linkedin" target="_blank" class="hover:underline">
+              LinkedIn
+            </a>
+          </p>
+        </div>
+      </header>
+
+      <!-- Experience - Moved to the top for prominence -->
+      <section class="experience card" v-if="cvData.experience.length">
+        <h2 class="section-title">{{ labels.experience }}</h2>
+        <ul class="space-y-3">
+          <li v-for="(job, index) in cvData.experience" :key="index">
+            <div class="flex justify-between items-center">
+              <h3 class="text-lg font-semibold text-gray-800">{{ job.role }}</h3>
+              <span class="text-gray-500 italic text-sm">{{ job.date_range }}</span>
+            </div>
+            <p class="text-gray-600 mt-1 text-sm"><strong>{{ job.company }}</strong> - {{ job.location }}</p>
+            <ul class="list-disc list-inside text-gray-600 mt-2 text-sm">
+              <li v-for="(desc, i) in job.description" :key="i">{{ desc }}</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <!-- Summary -->
+      <section class="summary card">
+        <h2 class="section-title">{{ labels.summary }}</h2>
+        <p class="text-justify text-sm">{{ cvData.personal_info.summary }}</p>
+      </section>
+
+      <!-- Education -->
+      <section class="education card" v-if="cvData.education.length">
+        <h2 class="section-title">{{ labels.education }}</h2>
+        <ul class="space-y-3">
+          <li v-for="(edu, index) in cvData.education" :key="index">
+            <div class="flex justify-between items-center">
+              <h3 class="text-lg font-semibold text-gray-800">{{ edu.degree }}</h3>
+              <span class="text-gray-500 italic text-sm">{{ edu.years }}</span>
+            </div>
+            <p class="text-gray-600 text-sm">{{ edu.institution }}</p>
+          </li>
+        </ul>
+      </section>
+
+      <!-- Skills - Grouped into Categories for Better Clarity -->
+      <section class="skills card" v-if="cvData.skills.length">
+        <h2 class="section-title">{{ labels.skills }}</h2>
+        <div class="flex flex-wrap gap-2">
+          <span class="skill-badge" v-for="(skill, index) in cvData.skills" :key="index">
+            {{ skill }}
+          </span>
+        </div>
+      </section>
+
+      <!-- References - Moved to the Bottom as an Optional Section -->
+      <section class="references card" v-if="cvData.references.length">
+        <h2 class="section-title">{{ labels.references }}</h2>
+        <ul class="space-y-3">
+          <li v-for="(ref, index) in cvData.references" :key="index">
+            <p class="text-gray-800 font-semibold text-sm">{{ ref.name }}, {{ ref.title }} at {{ ref.company }}</p>
+            <p class="text-gray-600 mt-1 text-sm">"{{ ref.content }}"</p>
+          </li>
+        </ul>
+      </section>
+    </div>
+
+    <!-- Vue.js 3 with ES Modules -->
+    <script type="module">
+      import { createApp } from 'vue';
+
+      const app = {
+        data() {
+          return {
+            cvs: [
+              {
+                "id": "en-1",
+                "language": "en",
+                "version": 1,
+                "personal_info": {
+                  "name": "Enrique Peña",
+                  "title": "Front-End Developer",
+                  "contact": {
+                    "email": "enriquep36@hotmail.com",
+                    "phone": "+33 0782708654",
+                    "location": "Marseille, France",
+                    "linkedin": "https://www.linkedin.com/in/enpepolicy"
+                  },
+                  "summary": "Front-End Developer with 4 years of professional experience specializing in crafting responsive and dynamic user interfaces using Vue.js, enriched by Tailwind CSS for modern and clean design with sophisticated state management. Expertise in TypeScript for robust front-end architecture, ensuring type safety and adherence to maintainable coding standards, essential for complex, large-scale web applications."
+                },
+                "experience": [
+                  {
+                    "role": "Senior Front-End Developer",
+                    "company": "Dispatcher-pro",
+                    "location": "France",
+                    "date_range": "Jun 2024 - Nov 2024",
+                    "description": [
+                      "Developed new features and maintained an enterprise dashboard application for construction companies using Vue.js 2.7.",
+                      "Implemented an end-to-end testing suite using Playwright, enhancing application reliability.",
+                      "Worked in a Dockerized environment with CI/CD pipelines in GitLab."
+                    ]
+                  },
+                  {
+                    "role": "Front-End Developer",
+                    "company": "Event Horizon Tech EU",
+                    "location": "Marseille, France",
+                    "date_range": "Dec 2023 - Jun 2024",
+                    "description": [
+                      "Managed and consolidated freelance projects and tech initiatives under Event Horizon Tech EU.",
+                      "Delivered over 35 projects across America and Europe with high client retention and 95% positive ratings.",
+                      "Led front-end development efforts, providing tailored solutions that enhanced user engagement."
+                    ]
+                  },
+                  {
+                    "role": "Front-End Developer",
+                    "company": "CARFT",
+                    "location": "France",
+                    "date_range": "Aug 2022 - May 2023",
+                    "description": [
+                      "Spearheaded front-end development and Web3 architecture design for a blockchain-based collectible car card game.",
+                      "Enhanced gameplay with real-world prizes, backed by Ubisoft and other investors.",
+                      "Integrated Web3 technologies with Google Cloud platforms to ensure scalability and robust performance."
+                    ]
+                  },
+                  {
+                    "role": "Front-End JavaScript Developer",
+                    "company": "ERA 2140",
+                    "location": "France",
+                    "date_range": "Jan 2022 - Aug 2022",
+                    "description": [
+                      "Developed front-end components for crypto gaming platforms utilizing Web3 technologies.",
+                      "Built reactive interfaces and integrated front-end wallets adhering to ERC standards.",
+                      "Optimized application performance and user experience using advanced front-end tools including Vite."
+                    ]
+                  }
+                ],
+                "skills": [
+                  "Vue.js",
+                  "TypeScript",
+                  "JavaScript (ES6)",
+                  "Tailwind CSS",
+                  "Responsive UI Design",
+                  "HTML5 & CSS3",
+                  "Vite",
+                  "Playwright",
+                  "CI/CD Workflows (Jenkins, AWS CodePipeline, Netlify)",
+                  "Docker",
+                  "Web3 Integration",
+                  "Firebase Services",
+                  "AWS Ecosystem",
+                  "Websockets",
+                  "Agile Methodologies",
+                  "User Experience (UX) Design",
+                  "Mentoring New Web Developers"
+                ],
+                "education": [
+                  {
+                    "degree": "Political Scientist, Political Science and Government",
+                    "institution": "Universidad Nacional de Colombia",
+                    "location": "Colombia",
+                    "years": "2012 - 2017"
+                  }
+                ],
+                "references": [
+                  {
+                    "name": "Yanis Aissani",
+                    "title": "Full Stack / Blockchain Engineer",
+                    "company": "ERA 2140",
+                    "content": "I had the chance to work with Enrique, who is an excellent developer with many technical qualities."
+                  },
+                  {
+                    "name": "Juan David Polanco Rojas",
+                    "title": "Blockchain Developer",
+                    "company": "BSM - Universitat Pompeu Fabra",
+                    "content": "I have worked side by side with Enrique on two blockchain projects and look forward to many more. His knowledge in the blockchain ecosystem is impressive; he's up-to-date with the latest trends and tools. Working with Enrique is exciting due to his can-do mentality and best coding practices."
+                  }
+                ],
+                "honors_awards": [
+                  {
+                    "title": "BCN HACK - Aüt protocol [2nd prize] - ETH BCN",
+                    "date": "Jul 2022",
+                    "description": "Drug Duck, 'Foursquare' for drugs to save thousands of lives annually.",
+                    "link": "https://taikai.network/en/datanatives/hackathons/bcn-hack/projects/cl5e0nc539095610108tojenn07/idea"
+                  },
+                  {
+                    "title": "ETHCC HACK 2022 - Polygon [Best Tooling / Infra Project IRL]",
+                    "date": "Aug 2022",
+                    "description": "Red Packet aims to gamify and simplify sending gifts to friends and family across multiple blockchains.",
+                    "link": "https://devpost.com/software/red-pocket"
+                  }
+                ]
+              },
+              {
+                "id": "en-2",
+                "language": "en",
+                "version": 2,
+                "personal_info": {
+                  "name": "Enrique Peña",
+                  "title": "Full Stack Developer",
+                  "contact": {
+                    "email": "enriquep36@hotmail.com",
+                    "phone": "+33 0782708654",
+                    "location": "Marseille, France",
+                    "linkedin": "https://www.linkedin.com/in/enpepolicy"
+                  },
+                  "summary": "Full Stack Developer specializing in TypeScript-focused software development within the Vue.js framework ecosystem, enhancing web design with responsive and dynamic user interfaces. Adept in Node.js for back-end development, producing high-performance, scalable applications within the AWS ecosystem, complemented by Firebase services for added functionality. Experienced in managing CI/CD workflows with tools like Jenkins, AWS CodePipeline, and Netlify."
+                },
+                "experience": [
+                  {
+                    "role": "Senior Front-End Developer",
+                    "company": "Dispatcher-pro",
+                    "location": "France",
+                    "date_range": "Jun 2024 - Nov 2024",
+                    "description": [
+                      "Developed and maintained an enterprise dashboard application for construction companies using Vue.js 2.7.",
+                      "Implemented end-to-end testing with Playwright in a Dockerized environment with GitLab CI/CD.",
+                      "Collaborated with back-end teams to optimize API integrations."
+                    ]
+                  },
+                  {
+                    "role": "Full Stack Developer",
+                    "company": "Event Horizon Tech EU",
+                    "location": "Marseille, France",
+                    "date_range": "Dec 2023 - Jun 2024",
+                    "description": [
+                      "Managed and consolidated freelance projects and tech initiatives under Event Horizon Tech EU.",
+                      "Delivered over 35 projects across America and Europe with high client retention and 95% positive ratings.",
+                      "Managed full stack development, ensuring seamless integration between front-end applications and back-end services."
+                    ]
+                  },
+                  {
+                    "role": "Full Stack Developer",
+                    "company": "CARFT",
+                    "location": "France",
+                    "date_range": "Aug 2022 - May 2023",
+                    "description": [
+                      "Managed both front-end and back-end development for a blockchain-based collectible car card game.",
+                      "Integrated Node.js services with Vue.js front-end to enhance game functionality and user experience.",
+                      "Ensured scalability and robust performance through integration with Google Cloud platforms."
+                    ]
+                  },
+                  {
+                    "role": "Full Stack JavaScript Developer",
+                    "company": "ERA 2140",
+                    "location": "France",
+                    "date_range": "Jan 2022 - Aug 2022",
+                    "description": [
+                      "Developed and maintained full stack components for crypto gaming platforms using Vue.js and Node.js.",
+                      "Ensured seamless communication between client-side applications and server-side APIs.",
+                      "Implemented features for NFT marketplaces and DeFi environments."
+                    ]
+                  }
+                ],
+                "skills": [
+                  "Vue.js",
+                  "Node.js",
+                  "TypeScript",
+                  "JavaScript (ES6)",
+                  "Express & Nest.js",
+                  "PHP & Laravel",
+                  "AWS Ecosystem",
+                  "Firebase Services",
+                  "CI/CD Workflows (Git, Jenkins, AWS CodePipeline, Netlify)",
+                  "Docker",
+                  "HTML5 & CSS3",
+                  "Tailwind CSS",
+                  "MySQL and MongoDB",
+                  "API Integration",
+                  "Websockets",
+                  "Agile Methodologies",
+                  "Mentoring New Web Developers"
+                ],
+                "education": [
+                  {
+                    "degree": "Political Scientist, Political Science and Government",
+                    "institution": "Universidad Nacional de Colombia",
+                    "location": "Colombia",
+                    "years": "2012 - 2017"
+                  }
+                ],
+                "references": [
+                  {
+                    "name": "Yanis Aissani",
+                    "title": "Full Stack / Blockchain Engineer",
+                    "company": "ERA 2140",
+                    "content": "I had the chance to work with Enrique, an excellent developer with many technical skills and a strong work ethic."
+                  },
+                  {
+                    "name": "Juan David Polanco Rojas",
+                    "title": "Blockchain Developer",
+                    "company": "BSM - Universitat Pompeu Fabra",
+                    "content": "I have worked side by side with Enrique on two blockchain projects and look forward to many more. His knowledge in the blockchain ecosystem is impressive; he's up-to-date with the latest trends and tools. Working with Enrique is exciting due to his can-do mentality and best coding practices."
+                  }
+                ],
+                "honors_awards": [
+                  {
+                    "title": "BCN HACK - Aüt protocol [2nd prize] - ETH BCN",
+                    "date": "Jul 2022",
+                    "description": "Drug Duck, 'Foursquare' for drugs to save thousands of lives annually.",
+                    "link": "https://taikai.network/en/datanatives/hackathons/bcn-hack/projects/cl5e0nc539095610108tojenn07/idea"
+                  },
+                  {
+                    "title": "ETHCC HACK 2022 - Polygon [Best Tooling / Infra Project IRL]",
+                    "date": "Aug 2022",
+                    "description": "Red Packet aims to gamify and simplify sending gifts to friends and family across multiple blockchains.",
+                    "link": "https://devpost.com/software/red-pocket"
+                  }
+                ]
+              },
+              {
+                "id": "en-3",
+                "language": "en",
+                "version": 3,
+                "personal_info": {
+                  "name": "Enrique Peña",
+                  "title": "Blockchain and Web3 Developer",
+                  "contact": {
+                    "email": "enriquep36@hotmail.com",
+                    "phone": "+33 0782708654",
+                    "location": "Marseille, France",
+                    "linkedin": "https://www.linkedin.com/in/enpepolicy"
+                  },
+                  "summary": "Blockchain and Web3 Developer with over 4 years of professional experience, including 2 years focused on blockchain technologies and Web3. Competent in developing decentralized applications, smart contract programming, and full-stack Ethereum solutions, with additional expertise in blockchain gaming, NFTs, and DeFi platforms."
+                },
+                "experience": [
+                  {
+                    "role": "Développeur Full Stack Javascript",
+                    "company": "Dispatcher-pro",
+                    "location": "France",
+                    "date_range": "Jun 2024 - Nov 2024",
+                    "description": [
+                      "Developed and maintained front-end components for enterprise applications using Vue.js.",
+                      "Implemented testing suites and collaborated on integrating blockchain features where applicable.",
+                      "Worked with Dockerized environments and GitLab CI/CD."
+                    ]
+                  },
+                  {
+                    "role": "Full Stack Developer",
+                    "company": "Event Horizon Tech EU",
+                    "location": "Marseille, France",
+                    "date_range": "Dec 2023 - Jun 2024",
+                    "description": [
+                      "Managed and consolidated freelance projects and tech initiatives under Event Horizon Tech EU.",
+                      "Delivered over 35 projects with high client retention and 95% positive ratings.",
+                      "Led the development of blockchain-integrated applications, ensuring security and scalability."
+                    ]
+                  },
+                  {
+                    "role": "Développeur Full Stack",
+                    "company": "CARFT",
+                    "location": "France",
+                    "date_range": "Aug 2022 - May 2023",
+                    "description": [
+                      "Designed and implemented Web3 architecture for a blockchain-based collectible car card game.",
+                      "Integrated smart contracts and ensured compliance with blockchain standards.",
+                      "Collaborated with cross-functional teams to deliver a seamless gaming experience."
+                    ]
+                  },
+                  {
+                    "role": "Développeur Full Stack Javascript",
+                    "company": "ERA 2140",
+                    "location": "France",
+                    "date_range": "Jan 2022 - Aug 2022",
+                    "description": [
+                      "Developed blockchain-based gaming platforms, integrating Web3 technologies.",
+                      "Built NFT marketplaces and DeFi environments, leveraging tools like Moralis.",
+                      "Facilitated smart contract interactions using Ethers.js."
+                    ]
+                  }
+                ],
+                "skills": [
+                  "Blockchain Development",
+                  "Web3 Technologies",
+                  "Smart Contracts",
+                  "Ethereum & EVM",
+                  "Solidity",
+                  "Web3.js & Ethers.js",
+                  "Vue.js",
+                  "Node.js",
+                  "TypeScript",
+                  "CI/CD Workflows (Git, Jenkins, AWS CodePipeline, Netlify)",
+                  "Docker",
+                  "NFT Marketplaces",
+                  "DeFi Protocols",
+                  "Moralis",
+                  "Infura",
+                  "MetaMask Integration",
+                  "AWS Ecosystem",
+                  "Firebase Services",
+                  "Mentoring New Web Developers"
+                ],
+                "education": [
+                  {
+                    "degree": "Political Scientist, Political Science and Government",
+                    "institution": "Universidad Nacional de Colombia",
+                    "location": "Colombia",
+                    "years": "2012 - 2017"
+                  }
+                ],
+                "references": [
+                  {
+                    "name": "Yanis Aissani",
+                    "title": "Full Stack / Blockchain Engineer",
+                    "company": "ERA 2140",
+                    "content": "Enrique is an excellent developer with many technical skills. His expertise in blockchain technologies is remarkable."
+                  },
+                  {
+                    "name": "Juan David Polanco Rojas",
+                    "title": "Blockchain Developer",
+                    "company": "BSM - Universitat Pompeu Fabra",
+                    "content": "I have worked side by side with Enrique on two blockchain projects and look forward to many more. His knowledge in the blockchain ecosystem is impressive; he's up-to-date with the latest trends and tools. Working with Enrique is exciting due to his can-do mentality and best coding practices."
+                  }
+                ],
+                "honors_awards": [
+                  {
+                    "title": "BCN HACK - Aüt protocol [2nd prize] - ETH BCN",
+                    "date": "Jul 2022",
+                    "description": "Drug Duck, 'Foursquare' for drugs to save thousands of lives annually.",
+                    "link": "https://taikai.network/en/datanatives/hackathons/bcn-hack/projects/cl5e0nc539095610108tojenn07/idea"
+                  },
+                  {
+                    "title": "ETHCC HACK 2022 - Polygon [Best Tooling / Infra Project IRL]",
+                    "date": "Aug 2022",
+                    "description": "Red Packet aims to gamify and simplify sending gifts to friends and family across multiple blockchains.",
+                    "link": "https://devpost.com/software/red-pocket"
+                  }
+                ]
+              }
+            ],
+            languages: {
+              en: 'English',
+              // es: 'Español',
+              fr: 'Français'
+            },
+            selectedLanguage: 'en', // You can change the default language if you wish
+            selectedVersion: 1,
+            availableVersions: [],
+            cvData: {
+              personal_info: {
+                name: '',
+                title: '',
+                contact: {
+                  email: '',
+                  phone: '',
+                  location: '',
+                  linkedin: ''
+                },
+                summary: ''
+              },
+              experience: [],
+              education: [],
+              skills: [],
+              references: []
+            },
+            labels: {}
+          };
+        },
+        methods: {
+          exportPDF() {
+            const element = document.getElementById('cv-content');
+            const opt = {
+              margin: 0.3,
+              filename: `${this.cvData.personal_info.name.replace(/ /g, '_')}_CV.pdf`,
+              image: { type: 'jpeg', quality: 1.0 },
+              html2canvas: { scale: 3 },
+              jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
+            };
+            html2pdf().set(opt).from(element).save();
+          },
+          exportImage() {
+            const element = document.getElementById('cv-content');
+            html2canvas(element).then(canvas => {
+              const link = document.createElement('a');
+              link.download = `${this.cvData.personal_info.name.replace(/ /g, '_')}_CV.png`;
+              link.href = canvas.toDataURL('image/png');
+              link.click();
+            });
+          },
+          fetchCVs() {
+            this.populateAvailableVersions();
+            this.filterCVs();
+          },
+          filterCVs() {
+            const filtered = this.cvs.filter(
+              cv => cv.language === this.selectedLanguage && cv.version === this.selectedVersion
+            );
+            if (filtered.length > 0) {
+              this.cvData = filtered[0];
+              this.updateLabels();
+              this.updateJSONLD();
+            } else {
+              this.cvData = {
+                personal_info: {
+                  name: '',
+                  title: '',
+                  contact: {
+                    email: '',
+                    phone: '',
+                    location: '',
+                    linkedin: ''
+                  },
+                  summary: ''
+                },
+                experience: [],
+                education: [],
+                skills: [],
+                references: []
+              };
+              this.clearJSONLD();
+            }
+          },
+          updateLabels() {
+            if (this.selectedLanguage === 'en') {
+              this.labels = {
+                summary: 'Summary',
+                experience: 'Experience',
+                education: 'Education',
+                skills: 'Skills',
+                references: 'References',
+                selectLanguage: 'Select Language',
+                selectVersion: 'Select Version'
+              };
+            } else if (this.selectedLanguage === 'es') {
+              this.labels = {
+                summary: 'Resumen',
+                experience: 'Experiencia',
+                education: 'Educación',
+                skills: 'Habilidades',
+                references: 'Referencias',
+                selectLanguage: 'Seleccionar Idioma',
+                selectVersion: 'Seleccionar Versión'
+              };
+            } else if (this.selectedLanguage === 'fr') {
+              this.labels = {
+                summary: 'Résumé',
+                experience: 'Expérience',
+                education: 'Éducation',
+                skills: 'Compétences',
+                references: 'Références',
+                selectLanguage: 'Sélectionner la Langue',
+                selectVersion: 'Sélectionner la Version'
+              };
+            }
+          },
+          updateJSONLD() {
+            const cv = this.cvData;
+            const jsonld = {
+              "@context": "https://schema.org",
+              "@type": "Person",
+              "name": cv.personal_info.name,
+              "jobTitle": cv.personal_info.title,
+              "email": cv.personal_info.contact.email,
+              "telephone": cv.personal_info.contact.phone,
+              "address": {
+                "@type": "PostalAddress",
+                "addressLocality": cv.personal_info.contact.location
+              },
+              "url": cv.personal_info.contact.linkedin,
+              "description": cv.personal_info.summary,
+              "worksFor": cv.experience.map(job => ({
+                "@type": "Organization",
+                "name": job.company,
+                "jobTitle": job.role,
+                "startDate": job.date_range.split(' - ')[0],
+                "endDate": job.date_range.includes('Present') || job.date_range.includes('Presente') || job.date_range.includes('Présent') ? "Present" : job.date_range.split(' - ')[1],
+                "description": job.description.join(' ')
+              })),
+              "alumniOf": cv.education.map(edu => ({
+                "@type": "EducationalOrganization",
+                "name": edu.institution,
+                "degree": edu.degree,
+                "startDate": edu.years.split('-')[0],
+                "endDate": edu.years.split('-')[1]
+              })),
+              "skills": cv.skills,
+              "references": cv.references.map(ref => ({
+                "@type": "Person",
+                "name": ref.name,
+                "jobTitle": ref.title,
+                "worksFor": ref.company,
+                "description": ref.content
+              }))
+            };
+            document.getElementById('jsonld-data').textContent = JSON.stringify(jsonld, null, 2);
+          },
+          clearJSONLD() {
+            document.getElementById('jsonld-data').textContent = '';
+          },
+          populateAvailableVersions() {
+            const versions = this.cvs
+              .filter(cv => cv.language === this.selectedLanguage)
+              .map(cv => cv.version);
+            this.availableVersions = [...new Set(versions)].sort((a, b) => a - b);
+            if (!this.availableVersions.includes(this.selectedVersion)) {
+              this.selectedVersion = this.availableVersions.length ? this.availableVersions[0] : null;
+            }
+          }
+        },
+        watch: {
+          selectedLanguage() {
+            this.populateAvailableVersions();
+            this.filterCVs();
+          },
+          selectedVersion() {
+            this.filterCVs();
+          }
+        },
+        mounted() {
+          this.fetchCVs();
+        }
+      };
+
+      createApp(app).mount('#app');
+    </script>
+  </div>
+</body>
+
+</html>
