@@ -313,9 +313,10 @@ Important Considerations:
             });
           },
           fetchCVs() {
-            fetch('cvs.json')
+            fetch(`cvs.json?timestamp=${new Date().getTime()}`)
               .then(response => response.json())
               .then(data => {
+                console.log(data);
                 this.cvs = data;
                 this.populateAvailableVersions();
                 this.filterCVs();
