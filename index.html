@@ -190,7 +190,7 @@ Important Considerations:
           <p class="flex justify-center items-center space-x-2 mt-2">
             <i class="fab fa-linkedin text-gray-600"></i>
             <a :href="cvData.personal_info.contact.linkedin" target="_blank" class="hover:underline">
-              {{ cvData.personal_info.contact.linkedin }}
+              Linkedin
             </a>
           </p>
         </div>
@@ -206,7 +206,7 @@ Important Considerations:
               <span class="text-gray-500 italic text-sm">{{ job.date_range }}</span>
             </div>
             <p class="text-gray-600 mt-1 text-sm"><strong>{{ job.company }}</strong> - {{ job.location }}</p>
-            <ul class="list-disc list-inside text-gray-600 mt-2 text-[0.8rem]">
+            <ul class="list-disc list-inside text-gray-600 mt-2 text-[0.82rem]">
               <li v-for="(desc, i) in job.description" :key="i">{{ desc }}</li>
             </ul>
           </li>
@@ -296,7 +296,7 @@ Important Considerations:
             const element = document.getElementById('cv-content');
             const opt = {
               margin: 0.3,
-              filename: `${this.cvData.personal_info.name.replace(/ /g, '_')}_CV.pdf`,
+              filename: `${this.cvData.personal_info.name.replace(/ /g, '_')}_${this.cvData.personal_info.title.replace(/ /g, '_')}.pdf`,
               image: { type: 'jpeg', quality: 1.0 },
               html2canvas: { scale: 3 },
               jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
