@@ -151,7 +151,7 @@ Important Considerations:
         <label for="version" class="mr-2 font-semibold text-base">{{ labels.selectVersion }}</label>
         <select v-model="selectedVersion" @change="filterCVs"
           class="p-2 px-3 text-sm rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-400">
-          <option v-for="version in availableVersions" :key="version" :value="version">{{ version }}</option>
+          <option v-for="ver in availableVersions" :key="ver.version" :value="ver.version">{{ ver.title }}</option>
         </select>
       </div>
       <div class="mb-3 flex space-x-3">
@@ -190,7 +190,7 @@ Important Considerations:
           <p class="flex justify-center items-center space-x-2 mt-2">
             <i class="fab fa-linkedin text-gray-600"></i>
             <a :href="cvData.personal_info.contact.linkedin" target="_blank" class="hover:underline">
-              LinkedIn
+              {{ cvData.personal_info.contact.linkedin }}
             </a>
           </p>
         </div>
@@ -206,7 +206,7 @@ Important Considerations:
               <span class="text-gray-500 italic text-sm">{{ job.date_range }}</span>
             </div>
             <p class="text-gray-600 mt-1 text-sm"><strong>{{ job.company }}</strong> - {{ job.location }}</p>
-            <ul class="list-disc list-inside text-gray-600 mt-2 text-sm">
+            <ul class="list-disc list-inside text-gray-600 mt-2 text-[0.8rem]">
               <li v-for="(desc, i) in job.description" :key="i">{{ desc }}</li>
             </ul>
           </li>
@@ -265,7 +265,7 @@ Important Considerations:
             cvs: [],            
             languages: {
               en: 'English',
-              // es: 'Español',
+              es: 'Español',
               fr: 'Français'
             },
             selectedLanguage: 'en', // You can change the default language if you wish
@@ -362,8 +362,8 @@ Important Considerations:
                 education: 'Education',
                 skills: 'Skills',
                 references: 'References',
-                selectLanguage: 'Select Language',
-                selectVersion: 'Select Version'
+                selectLanguage: 'Language',
+                selectVersion: 'Version'
               };
             } else if (this.selectedLanguage === 'es') {
               this.labels = {
@@ -372,8 +372,8 @@ Important Considerations:
                 education: 'Educación',
                 skills: 'Habilidades',
                 references: 'Referencias',
-                selectLanguage: 'Seleccionar Idioma',
-                selectVersion: 'Seleccionar Versión'
+                selectLanguage: 'Idioma',
+                selectVersion: 'Versión'
               };
             } else if (this.selectedLanguage === 'fr') {
               this.labels = {
@@ -382,8 +382,8 @@ Important Considerations:
                 education: 'Éducation',
                 skills: 'Compétences',
                 references: 'Références',
-                selectLanguage: 'Sélectionner la Langue',
-                selectVersion: 'Sélectionner la Version'
+                selectLanguage: 'Langue',
+                selectVersion: 'Version'
               };
             }
           },
@@ -434,12 +434,28 @@ Important Considerations:
           populateAvailableVersions() {
             const versions = this.cvs
               .filter(cv => cv.language === this.selectedLanguage)
-              .map(cv => cv.version);
-            this.availableVersions = [...new Set(versions)].sort((a, b) => a - b);
-            if (!this.availableVersions.includes(this.selectedVersion)) {
-              this.selectedVersion = this.availableVersions.length ? this.availableVersions[0] : null;
+              .map(cv => ({ version: cv.version, title: cv.personal_info.title }));
+            // Remove duplicates based on version
+            const uniqueVersions = [];
+            const versionSet = new Set();
+            versions.forEach(v => {
+              if (!versionSet.has(v.version)) {
+                versionSet.add(v.version);
+                uniqueVersions.push(v);
+              }
+            });
+            this.availableVersions = uniqueVersions.sort((a, b) => a.version - b.version);
+            // Ensure the selected version is valid
+            if (!this.availableVersions.some(v => v.version === this.selectedVersion)) {
+              this.selectedVersion = this.availableVersions.length ? this.availableVersions[0].version : null;
             }
-          }
+          },
+        },
+        computed: {
+          currentRole() {
+            const cv = this.cvs.find(cv => cv.language === this.selectedLanguage && cv.version === this.selectedVersion);
+            return cv ? cv.personal_info.title : '';
+          },
         },
         watch: {
           selectedLanguage() {
@@ -452,7 +468,7 @@ Important Considerations:
         },
         mounted() {
           this.fetchCVs();
-        }
+        },
       };
 
       createApp(app).mount('#app');

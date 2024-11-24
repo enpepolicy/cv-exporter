@@ -12,24 +12,24 @@
         "location": "Marseille, France",
         "linkedin": "https://www.linkedin.com/in/enpepolicy"
       },
-      "summary": "Front-End Developer with 4 years of professional experience specializing in crafting responsive and dynamic user interfaces using Vue.js, enriched by Tailwind CSS for modern and clean design with sophisticated state management. Expertise in TypeScript for robust front-end architecture, ensuring type safety and adherence to maintainable coding standards, essential for complex, large-scale web applications."
+      "summary": "Front-End Developer with 5 years of professional experience specializing in crafting responsive and dynamic user interfaces using Vue.js, enriched by Tailwind CSS for modern and clean design with sophisticated state management. Expertise in TypeScript for robust front-end architecture, ensuring type safety and adherence to maintainable coding standards, essential for complex, large-scale web applications."
     },
     "experience": [
       {
         "role": "Senior Front-End Developer",
         "company": "Dispatcher-pro",
         "location": "Paris, France",
-        "date_range": "Jun 2024 - Nov 2024",
+        "date_range": "Jun 2024 - Dic 2024",
         "description": [
-          "Developed new features and maintained an enterprise dashboard application for construction companies using Vue.js 2.7.",
+          "Developed new features and maintained an enterprise dashboard application for construction companies using Vue.js",
           "Implemented an end-to-end testing suite using Playwright, enhancing application reliability.",
           "Worked in a Dockerized environment with CI/CD pipelines in GitLab."
         ]
       },
       {
         "role": "Front-End Developer",
-        "company": "Event Horizon Tech EU",
-        "location": "Marseille, France",
+        "company": "Event Horizon Tech EU [Contractor]",
+        "location": "America and Europe",
         "date_range": "Dec 2023 - Jun 2024",
         "description": [
           "Managed and consolidated freelance projects and tech initiatives under Event Horizon Tech EU.",
@@ -136,17 +136,17 @@
         "role": "Senior Front-End Developer",
         "company": "Dispatcher-pro",
         "location": "Paris, France",
-        "date_range": "Jun 2024 - Nov 2024",
+        "date_range": "Jun 2024 - Dic 2024",
         "description": [
-          "Developed and maintained an enterprise dashboard application for construction companies using Vue.js 2.7.",
+          "Developed and maintained an enterprise dashboard application for construction companies using Vue.js",
           "Implemented end-to-end testing with Playwright in a Dockerized environment with GitLab CI/CD.",
           "Collaborated with back-end teams to optimize API integrations."
         ]
       },
       {
         "role": "Full Stack Developer",
-        "company": "Event Horizon Tech EU",
-        "location": "Marseille, France",
+        "company": "Event Horizon Tech EU [Contractor]",
+        "location": "America and Europe",
         "date_range": "Dec 2023 - Jun 2024",
         "description": [
           "Managed and consolidated freelance projects and tech initiatives under Event Horizon Tech EU.",
@@ -246,24 +246,24 @@
         "location": "Marseille, France",
         "linkedin": "https://www.linkedin.com/in/enpepolicy"
       },
-      "summary": "Blockchain and Web3 Developer with over 4 years of professional experience, including 2 years focused on blockchain technologies and Web3. Competent in developing decentralized applications, smart contract programming, and full-stack Ethereum solutions, with additional expertise in blockchain gaming, NFTs, and DeFi platforms."
+      "summary": "Blockchain and Web3 Developer with over 5 years of professional experience, including 2 years focused on blockchain technologies and Web3. Competent in developing decentralized applications, smart contract programming, and full-stack Ethereum solutions, with additional expertise in blockchain gaming, NFTs, and DeFi platforms."
     },
     "experience": [
       {
         "role": "Senior Front-End Developer",
         "company": "Dispatcher-pro",
         "location": "Paris, France",
-        "date_range": "Jun 2024 - Nov 2024",
+        "date_range": "Jun 2024 - Dic 2024",
         "description": [
           "Developed and maintained front-end components for enterprise applications using Vue.js.",
-          "Implemented testing suites and collaborated on integrating blockchain features where applicable.",
+          "Implemented end-to-end testing suites using Playwright.",
           "Worked with Dockerized environments and GitLab CI/CD."
         ]
       },
       {
         "role": "Full Stack Developer",
-        "company": "Event Horizon Tech EU",
-        "location": "Marseille, France",
+        "company": "Event Horizon Tech EU [Contractor]",
+        "location": "America and Europe",
         "date_range": "Dec 2023 - Jun 2024",
         "description": [
           "Managed and consolidated freelance projects and tech initiatives under Event Horizon Tech EU.",
@@ -348,6 +348,359 @@
         "title": "ETHCC HACK 2022 - Polygon [Best Tooling / Infra Project IRL]",
         "date": "Aug 2022",
         "description": "Red Packet aims to gamify and simplify sending gifts to friends and family across multiple blockchains.",
+        "link": "https://devpost.com/software/red-pocket"
+      }
+    ]
+  },
+  {
+    "id": "fr-1",
+    "language": "fr",
+    "version": 1,
+    "personal_info": {
+      "name": "Enrique Peña",
+      "title": "Développeur Front-End",
+      "contact": {
+        "email": "enriquep36@hotmail.com",
+        "phone": "+33 0782708654",
+        "location": "Marseille, France",
+        "linkedin": "https://www.linkedin.com/in/enpepolicy"
+      },
+      "summary": "Développeur Front-End avec 4 ans d'expérience professionnelle, spécialisé dans la création d'interfaces utilisateur réactives et dynamiques en utilisant Vue.js, enrichi par Tailwind CSS pour un design moderne et épuré avec une gestion d'état sophistiquée. Expertise en TypeScript pour une architecture front-end robuste, garantissant la sécurité des types et le respect des normes de codage maintenables, essentiels pour des applications web complexes et à grande échelle."
+    },
+    "experience": [
+      {
+        "role": "Senior Front-End Developer",
+        "company": "Dispatcher-pro",
+        "location": "Paris, France",
+        "date_range": "juin 2024 - decembre 2024",
+        "description": [
+          "Développé de nouvelles fonctionnalités et maintenu une application de tableau de bord d'entreprise pour les sociétés de construction en utilisant Vue.js.",
+          "Implémenté une suite de tests end-to-end avec Playwright, améliorant la fiabilité de l'application.",
+          "Travaillé dans un environnement Dockerisé avec des pipelines CI/CD sur GitLab."
+        ]
+      },
+      {
+        "role": "Front-End Developer",
+        "company": "Event Horizon Tech EU [Contractor]",
+        "location": "Amerique et Europe",
+        "date_range": "décembre 2023 - juin 2024",
+        "description": [
+          "Géré et consolidé des projets freelance et des initiatives technologiques sous Event Horizon Tech EU.",
+          "Livré plus de 35 projets à travers l'Amérique et l'Europe avec une forte rétention de clients et 95% d'évaluations positives.",
+          "Dirigé les efforts de développement front-end, fournissant des solutions sur mesure qui ont amélioré l'engagement des utilisateurs."
+        ]
+      },
+      {
+        "role": "Full Stack Developer",
+        "company": "CARFT",
+        "location": "Lyon, France",
+        "date_range": "août 2022 - mai 2023",
+        "description": [
+          "Dirigé le développement front-end et la conception de l'architecture Web3 pour un jeu de cartes de voitures de collection basé sur la blockchain.",
+          "Amélioré le gameplay avec des prix réels, soutenu par Ubisoft et d'autres investisseurs.",
+          "Intégré des technologies Web3 avec les plateformes Google Cloud pour assurer évolutivité et performances robustes."
+        ]
+      },
+      {
+        "role": "Full Stack JavaScript Developer",
+        "company": "ERA 2140",
+        "location": "Paris, France",
+        "date_range": "janvier 2022 - août 2022",
+        "description": [
+          "Développé des composants front-end pour des plateformes de jeux crypto utilisant les technologies Web3.",
+          "Construit des interfaces réactives et intégré des portefeuilles front-end conformément aux standards ERC.",
+          "Optimisé les performances de l'application et l'expérience utilisateur en utilisant des outils front-end avancés, y compris Vite."
+        ]
+      }
+    ],
+    "skills": [
+      "Vue.js",
+      "TypeScript",
+      "JavaScript (ES6)",
+      "Tailwind CSS",
+      "Responsive UI Design",
+      "HTML5 & CSS3",
+      "Vite",
+      "Playwright",
+      "CI/CD Workflows (Jenkins, AWS CodePipeline, Netlify)",
+      "Docker",
+      "Web3 Integration",
+      "Firebase Services",
+      "AWS Ecosystem",
+      "Websockets",
+      "Méthodologies Agile",
+      "User Experience (UX) Design",
+      "Mentorat de nouveaux développeurs web"
+    ],
+    "education": [
+      {
+        "degree": "Scientifique politique, Sciences politiques et gouvernement",
+        "institution": "Universidad Nacional de Colombia",
+        "location": "Colombie",
+        "years": "2012 - 2017"
+      }
+    ],
+    "references": [
+      {
+        "name": "Yanis Aissani",
+        "title": "Full Stack / Blockchain Engineer",
+        "company": "ERA 2140",
+        "content": "J'ai eu la chance de travailler avec Enrique, qui est un excellent développeur avec de nombreuses qualités techniques."
+      },
+      {
+        "name": "Juan David Polanco Rojas",
+        "title": "Développeur Blockchain",
+        "company": "BSM - Universitat Pompeu Fabra",
+        "content": "J'ai travaillé aux côtés d'Enrique sur deux projets blockchain et j'attends avec impatience d'en réaliser beaucoup d'autres. Sa connaissance de l'écosystème blockchain est impressionnante; il est à jour avec les dernières tendances et outils. Travailler avec Enrique est passionnant grâce à sa mentalité positive et ses meilleures pratiques de codage."
+      }
+    ],
+    "honors_awards": [
+      {
+        "title": "BCN HACK - Aüt protocol [2ème prix] - ETH BCN",
+        "date": "juillet 2022",
+        "description": "Drug Duck, un 'Foursquare' pour les drogues visant à sauver des milliers de vies chaque année.",
+        "link": "https://taikai.network/en/datanatives/hackathons/bcn-hack/projects/cl5e0nc539095610108tojenn07/idea"
+      },
+      {
+        "title": "ETHCC HACK 2022 - Polygon [Meilleur projet d'outillage / infrastructure IRL]",
+        "date": "août 2022",
+        "description": "Red Packet vise à gamifier et simplifier l'envoi de cadeaux à des amis et à la famille sur plusieurs blockchains.",
+        "link": "https://devpost.com/software/red-pocket"
+      }
+    ]
+  },
+  {
+    "id": "fr-2",
+    "language": "fr",
+    "version": 2,
+    "personal_info": {
+      "name": "Enrique Peña",
+      "title": "Développeur Full Stack",
+      "contact": {
+        "email": "enriquep36@hotmail.com",
+        "phone": "+33 0782708654",
+        "location": "Marseille, France",
+        "linkedin": "https://www.linkedin.com/in/enpepolicy"
+      },
+      "summary": "Développeur Full Stack spécialisé dans le développement logiciel axé sur TypeScript au sein de l'écosystème du framework Vue.js, améliorant la conception web avec des interfaces utilisateur réactives et dynamiques. Compétent en Node.js pour le développement back-end, produisant des applications performantes et évolutives au sein de l'écosystème AWS, complétées par les services Firebase pour une fonctionnalité accrue. Expérimenté dans la gestion des workflows CI/CD avec des outils comme Jenkins, AWS CodePipeline et Netlify."
+    },
+    "experience": [
+      {
+        "role": "Senior Front-End Developer",
+        "company": "Dispatcher-pro",
+        "location": "Paris, France",
+        "date_range": "juin 2024 - decembre 2024",
+        "description": [
+          "Développé et maintenu une application de tableau de bord d'entreprise pour les sociétés de construction en utilisant Vue.js 2.7.",
+          "Implémenté des tests end-to-end avec Playwright dans un environnement Dockerisé avec GitLab CI/CD.",
+          "Collaboré avec les équipes back-end pour optimiser les intégrations API."
+        ]
+      },
+      {
+        "role": "Full Stack Developer",
+        "company": "Event Horizon Tech EU [Contractor]",
+        "location": "Amerique et Europe",
+        "date_range": "décembre 2023 - juin 2024",
+        "description": [
+          "Géré et consolidé des projets freelance et des initiatives technologiques sous Event Horizon Tech EU.",
+          "Livré plus de 35 projets à travers l'Amérique et l'Europe avec une forte rétention de clients et 95% d'évaluations positives.",
+          "Géré le développement full stack, assurant une intégration transparente entre les applications front-end et les services back-end."
+        ]
+      },
+      {
+        "role": "Full Stack Developer",
+        "company": "CARFT",
+        "location": "Lyon, France",
+        "date_range": "août 2022 - mai 2023",
+        "description": [
+          "Géré le développement front-end et back-end pour un jeu de cartes de voitures de collection basé sur la blockchain.",
+          "Intégré des services Node.js avec le front-end Vue.js pour améliorer la fonctionnalité du jeu et l'expérience utilisateur.",
+          "Assuré l'évolutivité et des performances robustes grâce à l'intégration avec les plateformes Google Cloud."
+        ]
+      },
+      {
+        "role": "Full Stack JavaScript Developer",
+        "company": "ERA 2140",
+        "location": "Paris, France",
+        "date_range": "janvier 2022 - août 2022",
+        "description": [
+          "Développé et maintenu des composants full stack pour des plateformes de jeux crypto en utilisant Vue.js et Node.js.",
+          "Assuré une communication transparente entre les applications côté client et les API côté serveur.",
+          "Implémenté des fonctionnalités pour les marketplaces NFT et les environnements DeFi."
+        ]
+      }
+    ],
+    "skills": [
+      "Vue.js",
+      "Node.js",
+      "TypeScript",
+      "JavaScript (ES6)",
+      "Express & Nest.js",
+      "PHP & Laravel",
+      "AWS Ecosystem",
+      "Firebase Services",
+      "CI/CD Workflows (Git, Jenkins, AWS CodePipeline, Netlify)",
+      "Docker",
+      "HTML5 & CSS3",
+      "Tailwind CSS",
+      "MySQL et MongoDB",
+      "API Integration",
+      "Websockets",
+      "Méthodologies Agile",
+      "Mentorat de nouveaux développeurs web"
+    ],
+    "education": [
+      {
+        "degree": "Scientifique politique, Sciences politiques et gouvernement",
+        "institution": "Universidad Nacional de Colombia",
+        "location": "Colombie",
+        "years": "2012 - 2017"
+      }
+    ],
+    "references": [
+      {
+        "name": "Yanis Aissani",
+        "title": "Full Stack / Blockchain Engineer",
+        "company": "ERA 2140",
+        "content": "J'ai eu la chance de travailler avec Enrique, un excellent développeur avec de nombreuses compétences techniques et une solide éthique de travail."
+      },
+      {
+        "name": "Juan David Polanco Rojas",
+        "title": "Développeur Blockchain",
+        "company": "BSM - Universitat Pompeu Fabra",
+        "content": "J'ai travaillé aux côtés d'Enrique sur deux projets blockchain et j'attends avec impatience d'en réaliser beaucoup d'autres. Sa connaissance de l'écosystème blockchain est impressionnante; il est à jour avec les dernières tendances et outils. Travailler avec Enrique est passionnant grâce à sa mentalité positive et ses meilleures pratiques de codage."
+      }
+    ],
+    "honors_awards": [
+      {
+        "title": "BCN HACK - Aüt protocol [2ème prix] - ETH BCN",
+        "date": "juillet 2022",
+        "description": "Drug Duck, un 'Foursquare' pour les drogues visant à sauver des milliers de vies chaque année.",
+        "link": "https://taikai.network/en/datanatives/hackathons/bcn-hack/projects/cl5e0nc539095610108tojenn07/idea"
+      },
+      {
+        "title": "ETHCC HACK 2022 - Polygon [Meilleur projet d'outillage / infrastructure IRL]",
+        "date": "août 2022",
+        "description": "Red Packet vise à gamifier et simplifier l'envoi de cadeaux à des amis et à la famille sur plusieurs blockchains.",
+        "link": "https://devpost.com/software/red-pocket"
+      }
+    ]
+  },
+  {
+    "id": "fr-3",
+    "language": "fr",
+    "version": 3,
+    "personal_info": {
+      "name": "Enrique Peña",
+      "title": "Développeur Blockchain et Web3",
+      "contact": {
+        "email": "enriquep36@hotmail.com",
+        "phone": "+33 0782708654",
+        "location": "Marseille, France",
+        "linkedin": "https://www.linkedin.com/in/enpepolicy"
+      },
+      "summary": "Développeur Blockchain et Web3 avec plus de 4 ans d'expérience professionnelle, dont 2 ans axés sur les technologies blockchain et Web3. Compétent dans le développement d'applications décentralisées, la programmation de smart contracts et les solutions Ethereum full stack, avec une expertise supplémentaire dans le gaming blockchain, les NFT et les plateformes DeFi."
+    },
+    "experience": [
+      {
+        "role": "Senior Front-End Developer",
+        "company": "Dispatcher-pro",
+        "location": "Paris, France",
+        "date_range": "juin 2024 - decembre 2024",
+        "description": [
+          "Développé et maintenu des composants front-end pour des applications d'entreprise en utilisant Vue.js.",
+          "Implémenté des suites e2e de tests et collaboré à l'intégration des differents fonctionnalités.",
+          "Travaillé avec des environnements Dockerisés et GitLab CI/CD."
+        ]
+      },
+      {
+        "role": "Full Stack Developer",
+        "company": "Event Horizon Tech EU [Contractor]",
+        "location": "Amerique et Europe",
+        "date_range": "décembre 2023 - juin 2024",
+        "description": [
+          "Géré et consolidé des projets freelance et des initiatives technologiques sous Event Horizon Tech EU.",
+          "Livré plus de 35 projets avec une forte rétention de clients et 95% d'évaluations positives.",
+          "Dirigé le développement d'applications intégrées à la blockchain, en assurant sécurité et évolutivité."
+        ]
+      },
+      {
+        "role": "Développeur Full Stack",
+        "company": "CARFT",
+        "location": "Lyon, France",
+        "date_range": "août 2022 - mai 2023",
+        "description": [
+          "Conçu et implémenté l'architecture Web3 pour un jeu de cartes de voitures de collection basé sur la blockchain.",
+          "Intégré des smart contracts et assuré la conformité avec les standards blockchain.",
+          "Collaboré avec des équipes multifonctionnelles pour offrir une expérience de jeu fluide."
+        ]
+      },
+      {
+        "role": "Développeur Full Stack Javascript",
+        "company": "ERA 2140",
+        "location": "France",
+        "date_range": "janvier 2022 - août 2022",
+        "description": [
+          "Développé des plateformes de jeux basées sur la blockchain, intégrant les technologies Web3.",
+          "Construit des marketplaces NFT et des environnements DeFi, en utilisant des outils comme Moralis.",
+          "Facilité les interactions avec les smart contracts en utilisant Ethers.js."
+        ]
+      }
+    ],
+    "skills": [
+      "Blockchain Development",
+      "Web3 Technologies",
+      "Smart Contracts",
+      "Ethereum & EVM",
+      "Solidity",
+      "Web3.js & Ethers.js",
+      "Vue.js",
+      "Node.js",
+      "TypeScript",
+      "CI/CD Workflows (Git, Jenkins, AWS CodePipeline, Netlify)",
+      "Docker",
+      "NFT Marketplaces",
+      "DeFi Protocols",
+      "Moralis",
+      "Infura",
+      "MetaMask Integration",
+      "AWS Ecosystem",
+      "Firebase Services",
+      "Mentorat de nouveaux développeurs web"
+    ],
+    "education": [
+      {
+        "degree": "Scientifique politique, Sciences politiques et gouvernement",
+        "institution": "Universidad Nacional de Colombia",
+        "location": "Colombie",
+        "years": "2012 - 2017"
+      }
+    ],
+    "references": [
+      {
+        "name": "Yanis Aissani",
+        "title": "Full Stack / Blockchain Engineer",
+        "company": "ERA 2140",
+        "content": "Enrique est un excellent développeur avec de nombreuses compétences techniques. Son expertise dans les technologies blockchain est remarquable."
+      },
+      {
+        "name": "Juan David Polanco Rojas",
+        "title": "Développeur Blockchain",
+        "company": "BSM - Universitat Pompeu Fabra",
+        "content": "J'ai travaillé aux côtés d'Enrique sur deux projets blockchain et j'attends avec impatience d'en réaliser beaucoup d'autres. Sa connaissance de l'écosystème blockchain est impressionnante; il est à jour avec les dernières tendances et outils. Travailler avec Enrique est passionnant grâce à sa mentalité positive et ses meilleures pratiques de codage."
+      }
+    ],
+    "honors_awards": [
+      {
+        "title": "BCN HACK - Aüt protocol [2ème prix] - ETH BCN",
+        "date": "juillet 2022",
+        "description": "Drug Duck, un 'Foursquare' pour les drogues visant à sauver des milliers de vies chaque année.",
+        "link": "https://taikai.network/en/datanatives/hackathons/bcn-hack/projects/cl5e0nc539095610108tojenn07/idea"
+      },
+      {
+        "title": "ETHCC HACK 2022 - Polygon [Meilleur projet d'outillage / infrastructure IRL]",
+        "date": "août 2022",
+        "description": "Red Packet vise à gamifier et simplifier l'envoi de cadeaux à des amis et à la famille sur plusieurs blockchains.",
         "link": "https://devpost.com/software/red-pocket"
       }
     ]
