@@ -24,7 +24,8 @@
           "Developed new features and maintained an enterprise dashboard application for construction companies using Vue.js",
           "Implemented an end-to-end testing suite using Playwright, enhancing application reliability.",
           "Worked in a Dockerized environment with CI/CD pipelines in GitLab."
-        ]
+        ],
+        "external": "https://dispatcher-pro.com/"
       },
       {
         "role": "Front-End Developer",
@@ -35,7 +36,8 @@
           "Managed and consolidated freelance projects and tech initiatives under Event Horizon Tech EU.",
           "Delivered over 35 projects across America and Europe with high client retention and 95% positive ratings.",
           "Led front-end development efforts, providing tailored solutions that enhanced user engagement."
-        ]
+        ],
+        "external": "https://eventhorizontech.eu/"
       },
       {
         "role": "Full Stack Developer",
@@ -46,7 +48,8 @@
           "Spearheaded front-end development and Web3 architecture design for a blockchain-based collectible car card game.",
           "Enhanced gameplay with real-world prizes, backed by Ubisoft and other investors.",
           "Integrated Web3 technologies with Google Cloud platforms to ensure scalability and robust performance."
-        ]
+        ],
+        "external": "https://www.forbes.fr/entrepreneurs/rencontre-avec-morgan-pezzo-ceo-de-carft-quand-la-passion-automobile-investit-le-web3/"
       },
       {
         "role": "Full Stack JavaScript Developer",
@@ -57,7 +60,8 @@
           "Developed front-end components for crypto gaming platforms utilizing Web3 technologies.",
           "Built reactive interfaces and integrated front-end wallets adhering to ERC standards.",
           "Optimized application performance and user experience using advanced front-end tools including Vite."
-        ]
+        ],
+        "external": "https://www.era2140.com/"
       }
     ],
     "skills": [
@@ -141,7 +145,8 @@
           "Developed and maintained an enterprise dashboard application for construction companies using Vue.js",
           "Implemented end-to-end testing with Playwright in a Dockerized environment with GitLab CI/CD.",
           "Collaborated with back-end teams to optimize API integrations."
-        ]
+        ],
+        "external": "https://dispatcher-pro.com/"
       },
       {
         "role": "Full Stack Developer",
@@ -152,7 +157,8 @@
           "Managed and consolidated freelance projects and tech initiatives under Event Horizon Tech EU.",
           "Delivered over 35 projects across America and Europe with high client retention and 95% positive ratings.",
           "Managed full stack development, ensuring seamless integration between front-end applications and back-end services."
-        ]
+        ],
+        "external": "https://eventhorizontech.eu/"
       },
       {
         "role": "Full Stack Developer",
@@ -163,7 +169,8 @@
           "Managed both front-end and back-end development for a blockchain-based collectible car card game.",
           "Integrated Node.js services with Vue.js front-end to enhance game functionality and user experience.",
           "Ensured scalability and robust performance through integration with Google Cloud platforms."
-        ]
+        ],
+        "external": "https://www.forbes.fr/entrepreneurs/rencontre-avec-morgan-pezzo-ceo-de-carft-quand-la-passion-automobile-investit-le-web3/"
       },
       {
         "role": "Full Stack JavaScript Developer",
@@ -174,7 +181,8 @@
           "Developed and maintained full stack components for crypto gaming platforms using Vue.js and Node.js.",
           "Ensured seamless communication between client-side applications and server-side APIs.",
           "Implemented features for NFT marketplaces and DeFi environments."
-        ]
+        ],
+        "external": "https://www.era2140.com/"
       }
     ],
     "skills": [
@@ -258,7 +266,8 @@
           "Developed and maintained front-end components for enterprise applications using Vue.js.",
           "Implemented end-to-end testing suites using Playwright.",
           "Worked with Dockerized environments and GitLab CI/CD."
-        ]
+        ],
+        "external": "https://dispatcher-pro.com/"
       },
       {
         "role": "Full Stack Developer",
@@ -269,7 +278,8 @@
           "Managed and consolidated freelance projects and tech initiatives under Event Horizon Tech EU.",
           "Delivered over 35 projects with high client retention and 95% positive ratings.",
           "Led the development of blockchain-integrated applications, ensuring security and scalability."
-        ]
+        ],
+        "external": "https://eventhorizontech.eu/"
       },
       {
         "role": "Développeur Full Stack",
@@ -280,7 +290,8 @@
           "Designed and implemented Web3 architecture for a blockchain-based collectible car card game.",
           "Integrated smart contracts and ensured compliance with blockchain standards.",
           "Collaborated with cross-functional teams to deliver a seamless gaming experience."
-        ]
+        ],
+        "external": "https://www.forbes.fr/entrepreneurs/rencontre-avec-morgan-pezzo-ceo-de-carft-quand-la-passion-automobile-investit-le-web3/"
       },
       {
         "role": "Développeur Full Stack Javascript",
@@ -291,7 +302,8 @@
           "Developed blockchain-based gaming platforms, integrating Web3 technologies.",
           "Built NFT marketplaces and DeFi environments, leveraging tools like Moralis.",
           "Facilitated smart contract interactions using Ethers.js."
-        ]
+        ],
+        "external": "https://www.era2140.com/"
       }
     ],
     "skills": [
@@ -377,7 +389,8 @@
           "Développé de nouvelles fonctionnalités et maintenu une application de tableau de bord d'entreprise pour les sociétés de construction en utilisant Vue.js.",
           "Implémenté une suite de tests end-to-end avec Playwright, améliorant la fiabilité de l'application.",
           "Travaillé dans un environnement Dockerisé avec des pipelines CI/CD sur GitLab."
-        ]
+        ],
+        "external": "https://dispatcher-pro.com/"
       },
       {
         "role": "Front-End Developer",
@@ -388,7 +401,8 @@
           "Géré et consolidé des projets freelance et des initiatives technologiques sous Event Horizon Tech EU.",
           "Livré plus de 35 projets à travers l'Amérique et l'Europe avec une forte rétention de clients et 95% d'évaluations positives.",
           "Dirigé les efforts de développement front-end, fournissant des solutions sur mesure qui ont amélioré l'engagement des utilisateurs."
-        ]
+        ],
+        "external": "https://eventhorizontech.eu/"
       },
       {
         "role": "Full Stack Developer",
@@ -399,7 +413,8 @@
           "Dirigé le développement front-end et la conception de l'architecture Web3 pour un jeu de cartes de voitures de collection basé sur la blockchain.",
           "Amélioré le gameplay avec des prix réels, soutenu par Ubisoft et d'autres investisseurs.",
           "Intégré des technologies Web3 avec les plateformes Google Cloud pour assurer évolutivité et performances robustes."
-        ]
+        ],
+        "external": "https://www.forbes.fr/entrepreneurs/rencontre-avec-morgan-pezzo-ceo-de-carft-quand-la-passion-automobile-investit-le-web3/"
       },
       {
         "role": "Full Stack JavaScript Developer",
@@ -410,7 +425,8 @@
           "Développé des composants front-end pour des plateformes de jeux crypto utilisant les technologies Web3.",
           "Construit des interfaces réactives et intégré des portefeuilles front-end conformément aux standards ERC.",
           "Optimisé les performances de l'application et l'expérience utilisateur en utilisant des outils front-end avancés, y compris Vite."
-        ]
+        ],
+        "external": "https://www.era2140.com/"
       }
     ],
     "skills": [
@@ -494,7 +510,8 @@
           "Développé et maintenu une application de tableau de bord d'entreprise pour les sociétés de construction en utilisant Vue.js 2.7.",
           "Implémenté des tests end-to-end avec Playwright dans un environnement Dockerisé avec GitLab CI/CD.",
           "Collaboré avec les équipes back-end pour optimiser les intégrations API."
-        ]
+        ],
+        "external": "https://dispatcher-pro.com/"
       },
       {
         "role": "Full Stack Developer",
@@ -505,7 +522,8 @@
           "Géré et consolidé des projets freelance et des initiatives technologiques sous Event Horizon Tech EU.",
           "Livré plus de 35 projets à travers l'Amérique et l'Europe avec une forte rétention de clients et 95% d'évaluations positives.",
           "Géré le développement full stack, assurant une intégration transparente entre les applications front-end et les services back-end."
-        ]
+        ],
+        "external": "https://eventhorizontech.eu/"
       },
       {
         "role": "Full Stack Developer",
@@ -516,7 +534,8 @@
           "Géré le développement front-end et back-end pour un jeu de cartes de voitures de collection basé sur la blockchain.",
           "Intégré des services Node.js avec le front-end Vue.js pour améliorer la fonctionnalité du jeu et l'expérience utilisateur.",
           "Assuré l'évolutivité et des performances robustes grâce à l'intégration avec les plateformes Google Cloud."
-        ]
+        ],
+        "external": "https://www.forbes.fr/entrepreneurs/rencontre-avec-morgan-pezzo-ceo-de-carft-quand-la-passion-automobile-investit-le-web3/"
       },
       {
         "role": "Full Stack JavaScript Developer",
@@ -527,7 +546,8 @@
           "Développé et maintenu des composants full stack pour des plateformes de jeux crypto en utilisant Vue.js et Node.js.",
           "Assuré une communication transparente entre les applications côté client et les API côté serveur.",
           "Implémenté des fonctionnalités pour les marketplaces NFT et les environnements DeFi."
-        ]
+        ],
+        "external": "https://www.era2140.com/"
       }
     ],
     "skills": [
@@ -611,7 +631,8 @@
           "Développé et maintenu des composants front-end pour des applications d'entreprise en utilisant Vue.js.",
           "Implémenté des suites e2e de tests et collaboré à l'intégration des differents fonctionnalités.",
           "Travaillé avec des environnements Dockerisés et GitLab CI/CD."
-        ]
+        ],
+        "external": "https://dispatcher-pro.com/"
       },
       {
         "role": "Full Stack Developer",
@@ -622,7 +643,8 @@
           "Géré et consolidé des projets freelance et des initiatives technologiques sous Event Horizon Tech EU.",
           "Livré plus de 35 projets avec une forte rétention de clients et 95% d'évaluations positives.",
           "Dirigé le développement d'applications intégrées à la blockchain, en assurant sécurité et évolutivité."
-        ]
+        ],
+        "external": "https://eventhorizontech.eu/"
       },
       {
         "role": "Développeur Full Stack",
@@ -633,7 +655,8 @@
           "Conçu et implémenté l'architecture Web3 pour un jeu de cartes de voitures de collection basé sur la blockchain.",
           "Intégré des smart contracts et assuré la conformité avec les standards blockchain.",
           "Collaboré avec des équipes multifonctionnelles pour offrir une expérience de jeu fluide."
-        ]
+        ],
+        "external": "https://www.forbes.fr/entrepreneurs/rencontre-avec-morgan-pezzo-ceo-de-carft-quand-la-passion-automobile-investit-le-web3/"
       },
       {
         "role": "Développeur Full Stack Javascript",
@@ -644,7 +667,8 @@
           "Développé des plateformes de jeux basées sur la blockchain, intégrant les technologies Web3.",
           "Construit des marketplaces NFT et des environnements DeFi, en utilisant des outils comme Moralis.",
           "Facilité les interactions avec les smart contracts en utilisant Ethers.js."
-        ]
+        ],
+        "external": "https://www.era2140.com/"
       }
     ],
     "skills": [
@@ -730,7 +754,8 @@
           "Desarrollé nuevas características y mantuve una aplicación de panel de control empresarial para empresas de construcción utilizando Vue.js.",
           "Implementé una suite de pruebas end-to-end usando Playwright, mejorando la confiabilidad de la aplicación.",
           "Trabajé en un entorno Dockerizado con pipelines CI/CD en GitLab."
-        ]
+        ],
+        "external": "https://dispatcher-pro.com/"
       },
       {
         "role": "Front-End Developer",
@@ -741,7 +766,8 @@
           "Gestioné y consolidé proyectos freelance e iniciativas tecnológicas bajo Event Horizon Tech EU.",
           "Entregué más de 35 proyectos a través de América y Europa con alta retención de clientes y 95% de valoraciones positivas.",
           "Lideré esfuerzos de desarrollo front-end, proporcionando soluciones a medida que mejoraron el compromiso de los usuarios."
-        ]
+        ],
+        "external": "https://eventhorizontech.eu/"
       },
       {
         "role": "Full Stack Developer",
@@ -752,7 +778,8 @@
           "Dirigí el desarrollo front-end y el diseño de la arquitectura Web3 para un juego de cartas coleccionables de autos basado en blockchain.",
           "Mejoré la jugabilidad con premios del mundo real, respaldado por Ubisoft y otros inversores.",
           "Integré tecnologías Web3 con plataformas de Google Cloud para asegurar escalabilidad y rendimiento robusto."
-        ]
+        ],
+        "external": "https://www.forbes.fr/entrepreneurs/rencontre-avec-morgan-pezzo-ceo-de-carft-quand-la-passion-automobile-investit-le-web3/"
       },
       {
         "role": "Full Stack JavaScript Developer",
@@ -763,7 +790,8 @@
           "Desarrollé componentes front-end para plataformas de juegos cripto utilizando tecnologías Web3.",
           "Construí interfaces reactivas e integré billeteras front-end adheridas a los estándares ERC.",
           "Optimicé el rendimiento de la aplicación y la experiencia del usuario utilizando herramientas avanzadas de front-end, incluyendo Vite."
-        ]
+        ],
+        "external": "https://www.era2140.com/"
       }
     ],
     "skills": [
@@ -847,7 +875,8 @@
           "Desarrollé y mantuve una aplicación de panel de control empresarial para empresas de construcción utilizando Vue.js.",
           "Implementé pruebas end-to-end con Playwright en un entorno Dockerizado con GitLab CI/CD.",
           "Colaboré con equipos back-end para optimizar integraciones API."
-        ]
+        ],
+        "external": "https://dispatcher-pro.com/"
       },
       {
         "role": "Full Stack Developer",
@@ -858,7 +887,8 @@
           "Gestioné y consolidé proyectos freelance e iniciativas tecnológicas bajo Event Horizon Tech EU.",
           "Entregué más de 35 proyectos a través de América y Europa con alta retención de clientes y 95% de valoraciones positivas.",
           "Gestioné el desarrollo full stack, asegurando una integración fluida entre aplicaciones front-end y servicios back-end."
-        ]
+        ],
+        "external": "https://eventhorizontech.eu/"
       },
       {
         "role": "Full Stack Developer",
@@ -869,7 +899,8 @@
           "Gestioné el desarrollo front-end y back-end para un juego de cartas coleccionables de autos basado en blockchain.",
           "Integré servicios de Node.js con front-end de Vue.js para mejorar la funcionalidad del juego y la experiencia del usuario.",
           "Aseguré escalabilidad y rendimiento robusto a través de la integración con plataformas de Google Cloud."
-        ]
+        ],
+        "external": "https://www.forbes.fr/entrepreneurs/rencontre-avec-morgan-pezzo-ceo-de-carft-quand-la-passion-automobile-investit-le-web3/"
       },
       {
         "role": "Full Stack JavaScript Developer",
@@ -880,7 +911,8 @@
           "Desarrollé y mantuve componentes full stack para plataformas de juegos cripto utilizando Vue.js y Node.js.",
           "Aseguré comunicación fluida entre aplicaciones del lado del cliente y APIs del lado del servidor.",
           "Implementé funciones para marketplaces de NFT y entornos DeFi."
-        ]
+        ],
+        "external": "https://www.era2140.com/"
       }
     ],
     "skills": [
@@ -964,7 +996,8 @@
           "Desarrollé y mantuve componentes front-end para aplicaciones empresariales utilizando Vue.js.",
           "Implementé suites de pruebas end-to-end utilizando Playwright.",
           "Trabajé con entornos Dockerizados y GitLab CI/CD."
-        ]
+        ],
+        "external": "https://dispatcher-pro.com/"
       },
       {
         "role": "Full Stack Developer",
@@ -975,7 +1008,8 @@
           "Gestioné y consolidé proyectos freelance e iniciativas tecnológicas bajo Event Horizon Tech EU.",
           "Entregué más de 35 proyectos con alta retención de clientes y 95% de valoraciones positivas.",
           "Lideré el desarrollo de aplicaciones integradas con blockchain, asegurando seguridad y escalabilidad."
-        ]
+        ],
+        "external": "https://eventhorizontech.eu/"
       },
       {
         "role": "Développeur Full Stack",
@@ -986,7 +1020,8 @@
           "Diseñé e implementé la arquitectura Web3 para un juego de cartas coleccionables de autos basado en blockchain.",
           "Integré smart contracts y aseguré el cumplimiento con estándares blockchain.",
           "Colaboré con equipos multifuncionales para ofrecer una experiencia de juego fluida."
-        ]
+        ],
+        "external": "https://www.forbes.fr/entrepreneurs/rencontre-avec-morgan-pezzo-ceo-de-carft-quand-la-passion-automobile-investit-le-web3/"
       },
       {
         "role": "Développeur Full Stack Javascript",
@@ -997,7 +1032,8 @@
           "Desarrollé plataformas de juegos basadas en blockchain, integrando tecnologías Web3.",
           "Construí marketplaces de NFT y entornos DeFi, aprovechando herramientas como Moralis.",
           "Facilité interacciones con smart contracts utilizando Ethers.js."
-        ]
+        ],
+        "external": "https://www.era2140.com/"
       }
     ],
     "skills": [
