@@ -14,13 +14,12 @@
 
 ## Next Steps
 
-- Populate `memory-bank/progress.md`.
 - Review all populated Memory Bank files for consistency and completeness.
-- Address the discrepancy noted in `index.html` comments vs. code regarding `cvs.json` loading (comment says data is in script, code fetches `cvs.json`). This should be clarified in `progress.md` or by updating the comment in `index.html`.
+- Update `memory-bank/progress.md` to reflect that the previously noted comment discrepancy in `index.html` regarding `cvs.json` loading is already resolved in the current version of `index.html`.
 
 ## Active Decisions & Considerations
 
-- **Data Source Clarification**: The comment in `index.html` states: "CV data is managed directly within the script, eliminating the need for external JSON files and avoiding CORS issues." However, the Vue app's `fetchCVs` method clearly fetches `cvs.json?timestamp=...`. This needs to be reconciled. For now, documentation assumes `cvs.json` is the source of truth as per the code.
+- **Data Source Clarification (Resolved)**: Previously, a discrepancy was noted where the `index.html` comment suggested CV data was in-script, while the code fetched `cvs.json`. Upon review of the current `index.html` (as of 2025-05-22), the comment correctly states that data is loaded from `cvs.json`. This issue is considered resolved.
 - **Project Simplicity**: The project is currently a single HTML file with inline Vue.js and styles, relying on CDNs. This is simple for deployment but has limitations (e.g., no build step, harder to manage larger codebases). This simplicity is reflected in the documentation.
 
 ## Important Patterns & Preferences
@@ -36,4 +35,4 @@
 - It effectively uses Vue.js for dynamic content and `cvs.json` for data management.
 - The export functionalities (PDF/Image) are key features.
 - The use of import maps is a modern approach for managing modules without a build step in simpler projects.
-- There's a minor inconsistency in code comments versus implementation regarding data sourcing that should be addressed for clarity.
+- The previously noted inconsistency in `index.html` comments regarding data sourcing has been verified as resolved in the current file version.

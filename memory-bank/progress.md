@@ -30,17 +30,13 @@
 
 ## Known Issues
 
-- **Comment vs. Code Discrepancy for Data Source**:
-    -   **Issue**: The main comment block at the top of `index.html` states: "CV data is managed directly within the script, eliminating the need for external JSON files and avoiding CORS issues."
-    -   **Reality**: The Vue application's `fetchCVs` method explicitly fetches data from `cvs.json` using `fetch(\`cvs.json?timestamp=\${new Date().getTime()}\`)`.
-    -   **Impact**: This is a documentation inconsistency. The code's behavior (fetching `cvs.json`) is what's actually happening.
-    -   **Recommendation**: Update the comment in `index.html` to accurately reflect that data is loaded from `cvs.json`.
 - **Potential CDN Downtime/Blocking**: Reliance on CDNs means that if a CDN is down or blocked (e.g., in a restricted network environment), the application might not load or function correctly. This is an inherent trade-off of using CDNs without local fallbacks for this type of simple project.
 
 ## Evolution of Project Decisions
 
-- **Initial State (as of 2025-05-22)**:
+- **Initial State & Documentation Review (as of 2025-05-22)**:
     -   The project was found in its current state.
     -   Decision made to populate the Memory Bank to document the existing structure and functionality.
-    -   The primary data source is `cvs.json`, despite a misleading comment in `index.html`.
+    -   A previously noted discrepancy regarding a comment in `index.html` (suggesting CV data was in-script) versus the actual code (fetching `cvs.json`) has been reviewed. The current `index.html` file's comment accurately reflects that data is loaded from `cvs.json`. This specific documentation issue is now considered resolved.
+    -   The primary data source is confirmed to be `cvs.json`.
     -   The application uses Vue.js 3 via CDN and import maps, indicating a preference for a no-build-step setup for simplicity.
