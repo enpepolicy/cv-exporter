@@ -1,59 +1,47 @@
 # Progress
 
-## What Works (as of Vite Migration)
+## What Works (as of Vite Migration & Deployment Fix)
 
-- **Local Development Server (`npm run dev`)**:
-    - Application runs successfully after migrating to Vite.
-    - Vue.js initializes correctly from `src/App.vue`.
-    - CV data is imported from `src/cvs.json` and processed.
-    - Language and version switching are functional.
-    - CV content displays dynamically.
-    - PDF and Image export functionalities are working.
-    - Styling with Tailwind CSS and global styles is applied.
-    - JSON-LD metadata is updated.
-- **Dependencies**: All dependencies (Vue, Tailwind, Font Awesome, export libraries) are managed via npm and correctly bundled/processed by Vite for local development.
+- **Local Development Server (`npm run dev`)**: Fully functional.
+- **Dependencies**: All managed via npm and correctly bundled.
+- **GitHub Action Build (`npm run build` in CI)**: Successful.
+- **GitHub Pages Deployment Runtime (`https://enpepolicy.github.io/cv-exporter/`)**:
+    - **Resolved**: Site was showing a blank page with a 404 error for `main.js`.
+    - **Cause**: GitHub Pages deployment source was incorrectly set to `main` branch, `/ (root)` folder.
+    - **Fix**: User updated GitHub Pages settings to serve from the `gh-pages` branch (or equivalent deployment branch), `/ (root)` folder.
+    - **Status**: The site now loads and functions correctly.
 
 ## What's Left to Build / Verify
 
-- **GitHub Action Build (`npm run build` in CI)**:
-    - Previously failed due to missing `@fortawesome/free-brands-svg-icons` in `package.json`.
-    - This dependency has now been added to `package.json`.
-    - **Action item for user**: Commit and push updated `package.json` and re-run the GitHub Action.
-- **Production Build Test (`npm run preview` locally)**:
-    - After a successful `npm run build` (locally or in CI), the production build in `dist/` should be tested.
 - **Labels in `cvs.json`**:
-    - User needs to ensure that each CV object in `src/cvs.json` contains a `labels` object with appropriate translations for UI elements (e.g., "Select Language", "Experience") for full localization functionality.
+    - User needs to ensure that each CV object in `src/cvs.json` contains a `labels` object with appropriate translations for UI elements for full localization functionality (ongoing consideration).
+- **General Testing**: Further testing of all features on the deployed site is always recommended.
 
 ## Current Status
 
-- **Major Architectural Refactor Completed**: Project successfully migrated from a CDN-based single HTML file to a Vite-powered build system.
-- **Dependency Management**: Switched from CDNs to npm for all key libraries.
-- **Data Handling**: `cvs.json` is now a local module imported into `src/App.vue`, with data transformation logic implemented.
-- **Troubleshooting**:
-    - Resolved local `npm run dev` errors related to Font Awesome and `cvs.json` data structure.
-    - Identified and fixed the missing `@fortawesome/free-brands-svg-icons` dependency in `package.json`, which was causing GitHub Action build failures.
-- **Pending User Action**: User needs to commit changes and test the GitHub Action build.
+- **Major Architectural Refactor Completed**: Project successfully migrated to a Vite-powered build system.
+- **Dependency Management**: Switched from CDNs to npm.
+- **Data Handling**: `cvs.json` is a local module, imported and transformed.
+- **Deployment**: Successfully deployed to GitHub Pages and runtime issues resolved.
+- **All critical issues related to the Vite migration and deployment are now resolved.**
 
 ## Known Issues
 
-- **(Resolved)** GitHub Action build failure due to missing Font Awesome package. (Fix applied to `package.json`, pending CI test).
+- **(Resolved)** GitHub Action build failure due to missing Font Awesome package.
+- **(Resolved)** GitHub Pages serving incorrect files due to misconfigured deployment source, leading to 404 for `main.js`.
 - **(Potential)** UI labels might not update correctly if `labels` objects are missing or incomplete in `src/cvs.json`.
 
 ## Evolution of Project Decisions
 
-- **Initial State**: CDN-based, single `index.html`, `http-server` for local serving, `cvs.json` in `public/` fetched via HTTP.
-- **Problem 1**: Original deployment issue (module specifier "vue" not resolved) due to import map problems.
-- **Decision 1**: Migrate to a Vite build system to handle dependencies and build robustly.
-    - This involved setting up `package.json`, Vite config, Tailwind config, PostCSS config.
-    - Refactoring `index.html` to a template.
-    - Moving all app logic to `src/App.vue` and styles to `src/assets/main.css`.
-- **Problem 2**: `npm run dev` errors due to missing Font Awesome package (`@fortawesome/free-brands-svg-icons`).
-- **Decision 2**: Add missing package to `package.json`.
-- **Problem 3**: `npm run dev` errors ("Cannot read properties of undefined (reading 'length')") due to mismatch between `cvs.json` flat structure and `App.vue`'s expected nested structure.
-- **Decision 3**:
-    - Move `cvs.json` to `src/` and import it directly.
-    - Implement data transformation logic in `App.vue` (`processCVs` method) to convert flat data to nested.
-    - Add defensive coding in `App.vue` for data access.
-- **Problem 4 (CI)**: GitHub Action build failing with the same Font Awesome missing package error.
-- **Decision 4**: Re-confirmed and fixed `package.json` to include `@fortawesome/free-brands-svg-icons`. User to push and re-test CI.
-- **Current State**: Project uses Vite, npm dependencies, direct JSON import with transformation. Awaiting CI build confirmation.
+- **Initial State**: CDN-based, single `index.html`, `http-server`.
+- **Problem 1**: Import map issues.
+- **Decision 1**: Migrate to Vite.
+- **Problem 2**: Local dev errors (Font Awesome).
+- **Decision 2**: Add missing package.
+- **Problem 3**: Local dev errors (CV data structure).
+- **Decision 3**: Import `cvs.json` directly, implement `processCVs`.
+- **Problem 4 (CI)**: GitHub Action build failing (Font Awesome).
+- **Decision 4**: Confirmed and fixed `package.json`.
+- **Problem 5 (Deployment Runtime)**: Deployed site shows 404 for `main.js`.
+- **Decision 5**: Identified GitHub Pages source misconfiguration. User updated settings to point to `gh-pages` branch, `/ (root)` folder. **This resolved the issue.**
+- **Current State**: Project is stable, built with Vite, and correctly deployed to GitHub Pages.
