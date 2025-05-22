@@ -1,0 +1,79 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Montserrat:wght@400;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply font-montserrat text-gray-800 bg-gray-100 m-0 p-0;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #4a4a4a;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #3b3b3b;
+}
+
+/* Card Effect for Sections */
+.card {
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  margin-bottom: 10px;
+  border-left: 4px solid #4b0082; /* primary color */
+}
+
+/* Section Titles */
+.section-title {
+  font-family: 'Montserrat', sans-serif;
+  color: #4b0082; /* primary color */
+  text-align: left;
+  font-size: 1.25rem;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+/* Replicated text-primary for consistency if needed outside Tailwind context */
+.text-primary {
+  color: #4b0082;
+}
+
+.contact-info {
+  color: #4b0082; /* primary color */
+}
+
+.card ul {
+  margin-left: 1rem; /* Equivalent to ml-4 in Tailwind if direct parent is the card */
+}
+
+.skill-badge {
+  background-color: #f3e8ff;
+  color: #4b0082; /* primary color */
+  padding: 0.15rem 0.5rem;
+  border-radius: 9999px; /* rounded-full */
+  font-size: 0.7rem;
+  margin-bottom: 4px;
+}
+
+/* Button Styles for a Consistent Color Theme */
+.bg-primary-button {
+  background-color: #4b0082; /* primary color */
+  color: white;
+}
+
+.bg-primary-button:hover {
+  background-color: #3a006b; /* A slightly darker shade for hover */
+}

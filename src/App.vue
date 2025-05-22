@@ -19,11 +19,11 @@
       <div class="mb-3 flex space-x-3">
         <button @click="exportPDF"
           class="bg-primary-button px-3 py-1 rounded-md transition duration-300 flex items-center shadow">
-          <i class="fas fa-file-pdf mr-1"></i> Export to PDF
+          <font-awesome-icon :icon="['fas', 'file-pdf']" class="mr-1" /> Export to PDF
         </button>
         <button @click="exportImage"
           class="bg-primary-button px-3 py-1 rounded-md transition duration-300 flex items-center shadow">
-          <i class="fas fa-file-image mr-1"></i> Export to Image
+          <font-awesome-icon :icon="['fas', 'file-image']" class="mr-1" /> Export to Image
         </button>
       </div>
     </div>
@@ -36,21 +36,21 @@
         <h2 class="text-gray-600 text-lg mt-1">{{ cvData.personal_info.title }}</h2>
         <div class="contact mt-3 text-sm contact-info">
           <p class="flex justify-center items-center space-x-3">
-            <i class="fas fa-envelope text-gray-600"></i>
+            <font-awesome-icon :icon="['fas', 'envelope']" class="text-gray-600" />
             <a :href="'mailto:' + cvData.personal_info.contact.email" class="hover:underline">
               {{ cvData.personal_info.contact.email }}
             </a>
             <span class="mx-3">|</span>
-            <i class="fas fa-phone text-gray-600"></i>
+            <font-awesome-icon :icon="['fas', 'phone']" class="text-gray-600" />
             <a :href="'tel:' + cvData.personal_info.contact.phone" class="hover:underline">
               {{ cvData.personal_info.contact.phone }}
             </a>
             <span class="mx-3">|</span>
-            <i class="fas fa-map-marker-alt text-gray-600"></i>
+            <font-awesome-icon :icon="['fas', 'map-marker-alt']" class="text-gray-600" />
             <span>{{ cvData.personal_info.contact.location }}</span>
           </p>
           <p class="flex justify-center items-center space-x-2 mt-2">
-            <i class="fab fa-linkedin text-gray-600"></i>
+            <font-awesome-icon :icon="['fab', 'linkedin']" class="text-gray-600" />
             <a :href="cvData.personal_info.contact.linkedin" target="_blank" class="hover:underline">
               Linkedin
             </a>
@@ -67,16 +67,12 @@
               <h3 class="text-lg font-semibold text-gray-800">{{ job.role }}</h3>
               <span class="text-gray-500 italic text-sm">{{ job.date_range }}</span>
             </div>
-            <p class="text-gray-600 mt-1 text-sm"><strong>      
-              <a 
-                v-if="job.external"
-                :href="job.external" 
-                target="_blank" 
-                class="text-xs bg-primary-button p-[0.35rem] text-white hover:bg-opacity-90 inline-flex items-center rounded-full opacity-80 mr-1">
-                <!-- <span>View More</span> -->
-                <i class="fas fa-external-link-alt"></i>
-              </a>
-              {{ job.company }}</strong> - {{ job.location }}      
+            <p class="text-gray-600 mt-1 text-sm"><strong>
+                <a v-if="job.external" :href="job.external" target="_blank"
+                  class="text-xs bg-primary-button p-[0.35rem] text-white hover:bg-opacity-90 inline-flex items-center rounded-full opacity-80 mr-1">
+                  <font-awesome-icon :icon="['fas', 'external-link-alt']" />
+                </a>
+                {{ job.company }}</strong> - {{ job.location }}
             </p>
             <ul class="list-disc list-inside text-gray-600 mt-2 text-[0.82rem]">
               <li v-for="(desc, i) in job.description" :key="i">{{ desc }}</li>
@@ -130,304 +126,233 @@
 </template>
 
 <script>
+import html2pdf from 'html2pdf.js';
+import html2canvas from 'html2canvas';
+import rawCvsData from './cvs.json'; // Import the JSON data
+
 export default {
-  name: 'App',
   data() {
     return {
-      cvs: [],            
+      cvs: [],
+      selectedLanguage: 'en',
+      selectedVersion: '',
+      availableVersions: [],
+      cvData: {
+        personal_info: { name: '', title: '', summary: '', contact: { email: '', phone: '', location: '', linkedin: '' } },
+        experience: [],
+        education: [],
+        skills: [],
+        references: [],
+        labels: {}
+      },
       languages: {
         en: 'English',
         es: 'Español',
         fr: 'Français'
       },
-      selectedLanguage: 'en', // Default language
-      selectedVersion: 1,     // Default version
-      availableVersions: [],
-      cvData: {
-        personal_info: {
-          name: '',
-          title: '',
-          contact: { email: '', phone: '', location: '', linkedin: '' },
-          summary: ''
-        },
-        experience: [],
-        education: [],
-        skills: [],
-        references: []
-      },
-      labels: {}
+      labels: { // Default labels, will be updated
+        selectLanguage: 'Select Language',
+        selectVersion: 'Select Version',
+        experience: 'Experience',
+        summary: 'Summary',
+        education: 'Education',
+        skills: 'Skills',
+        references: 'References'
+      }
     };
   },
-  methods: {
-    exportPDF() {
-      const element = document.getElementById('cv-content');
-      const opt = {
-        margin: 0.3,
-        filename: `${this.cvData.personal_info.name.replace(/ /g, '_')}_${this.cvData.personal_info.title.replace(/ /g, '_')}.pdf`,
-        image: { type: 'jpeg', quality: 1.0 },
-        html2canvas: { scale: 3 }, // eslint-disable-line no-undef
-        jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
-      };
-      html2pdf().set(opt).from(element).save(); // eslint-disable-line no-undef
-    },
-    exportImage() {
-      const element = document.getElementById('cv-content');
-      html2canvas(element).then(canvas => { // eslint-disable-line no-undef
-        const link = document.createElement('a');
-        link.download = `${this.cvData.personal_info.name.replace(/ /g, '_')}_CV.png`;
-        link.href = canvas.toDataURL('image/png');
-        link.click();
-      });
-    },
-    fetchCVs() {
-      // Assuming cvs.json is in the public directory or root, accessible via this path
-      fetch('./cvs.json?timestamp=' + new Date().getTime()) 
-        .then(response => {
-          if (!response.ok) {
-            throw new Error('Network response was not ok ' + response.statusText);
-          }
-          return response.json();
-        })
-        .then(data => {
-          this.cvs = data;
-          this.populateAvailableVersions(); // Call this before filterCVs
-          this.filterCVs(); // Initial filter
-        })
-        .catch(error => {
-          console.error('Error loading cvs.json:', error);
-          // Handle error appropriately in UI, e.g., show a message
-        });
-    },
-    filterCVs() {
-      const filtered = this.cvs.filter(
-        cv => cv.language === this.selectedLanguage && cv.version === this.selectedVersion
-      );
-      if (filtered.length > 0) {
-        this.cvData = filtered[0];
-        this.updateLabels();
-        this.updateJSONLD();
-      } else {
-        // Reset cvData if no match is found to avoid displaying stale data
-        this.cvData = {
-          personal_info: { name: 'N/A', title: 'N/A', contact: {}, summary: 'No CV data found for selection.' },
-          experience: [], education: [], skills: [], references: []
-        };
-        this.updateLabels(); // Update labels to show "N/A" or similar if needed
-        this.clearJSONLD();
-      }
-    },
-    updateLabels() {
-      // Default to English labels if selected language is not found or cvData is empty
-      let langLabels = {
-        summary: 'Summary', experience: 'Experience', education: 'Education',
-        skills: 'Skills', references: 'References', selectLanguage: 'Language', selectVersion: 'Version'
-      };
-      if (this.selectedLanguage === 'es') {
-        langLabels = {
-          summary: 'Resumen', experience: 'Experiencia', education: 'Educación',
-          skills: 'Habilidades', references: 'Referencias', selectLanguage: 'Idioma', selectVersion: 'Versión'
-        };
-      } else if (this.selectedLanguage === 'fr') {
-        langLabels = {
-          summary: 'Résumé', experience: 'Expérience', education: 'Éducation',
-          skills: 'Compétences', references: 'Références', selectLanguage: 'Langue', selectVersion: 'Version'
-        };
-      }
-      this.labels = langLabels;
-    },
-    updateJSONLD() {
-      if (!this.cvData || !this.cvData.personal_info || !this.cvData.personal_info.name) {
-        this.clearJSONLD();
-        return;
-      }
-      const cv = this.cvData;
-      const jsonld = {
-        "@context": "https://schema.org",
-        "@type": "Person",
-        "name": cv.personal_info.name,
-        "jobTitle": cv.personal_info.title,
-        "email": cv.personal_info.contact.email,
-        "telephone": cv.personal_info.contact.phone,
-        "address": {
-          "@type": "PostalAddress",
-          "addressLocality": cv.personal_info.contact.location
-        },
-        "url": cv.personal_info.contact.linkedin,
-        "description": cv.personal_info.summary,
-        "worksFor": (cv.experience || []).map(job => ({
-          "@type": "Organization",
-          "name": job.company,
-          "jobTitle": job.role,
-          "startDate": job.date_range ? job.date_range.split(' - ')[0] : '',
-          "endDate": job.date_range ? (job.date_range.includes('Present') || job.date_range.includes('Presente') || job.date_range.includes('Présent') ? "Present" : job.date_range.split(' - ')[1]) : '',
-          "description": (job.description || []).join(' ')
-        })),
-        "alumniOf": (cv.education || []).map(edu => ({
-          "@type": "EducationalOrganization",
-          "name": edu.institution,
-          "degree": edu.degree,
-          "startDate": edu.years ? edu.years.split('-')[0] : '',
-          "endDate": edu.years ? edu.years.split('-')[1] : ''
-        })),
-        "skills": cv.skills || [],
-        "references": (cv.references || []).map(ref => ({
-          "@type": "Person",
-          "name": ref.name,
-          "jobTitle": ref.title,
-          "worksFor": ref.company,
-          "description": ref.content
-        }))
-      };
-      const scriptTag = document.getElementById('jsonld-data');
-      if (scriptTag) {
-        scriptTag.textContent = JSON.stringify(jsonld, null, 2);
-      }
-    },
-    clearJSONLD() {
-      const scriptTag = document.getElementById('jsonld-data');
-      if (scriptTag) {
-        scriptTag.textContent = '';
-      }
-    },
-    populateAvailableVersions() {
-      const versions = this.cvs
-        .filter(cv => cv.language === this.selectedLanguage)
-        .map(cv => ({ version: cv.version, title: cv.personal_info.title }));
-      
-      const uniqueVersions = [];
-      const versionSet = new Set();
-      versions.forEach(v => {
-        if (!versionSet.has(v.version)) {
-          versionSet.add(v.version);
-          uniqueVersions.push(v);
-        }
-      });
-      this.availableVersions = uniqueVersions.sort((a, b) => a.version - b.version);
-
-      if (!this.availableVersions.some(v => v.version === this.selectedVersion)) {
-        this.selectedVersion = this.availableVersions.length ? this.availableVersions[0].version : 1; // Default to 1 if no versions
-      }
-    }
-  },
   computed: {
-    // currentRole was removed as it was not directly used in the template and cvData.personal_info.title is used instead.
-    // If needed, it can be re-added:
-    // currentRole() {
-    //   const cv = this.cvs.find(cv => cv.language === this.selectedLanguage && cv.version === this.selectedVersion);
-    //   return cv ? cv.personal_info.title : '';
-    // }
+    currentCV() {
+      if (!this.cvs || !this.cvs.length) return null; // Check if cvs itself is defined
+      const langCvs = this.cvs.find(cv => cv.language === this.selectedLanguage);
+      // Add checks for langCvs and langCvs.versions
+      if (!langCvs || !langCvs.versions || !langCvs.versions.length) return null;
+      return langCvs.versions.find(v => v.version === this.selectedVersion) || langCvs.versions[0];
+    }
   },
   watch: {
     selectedLanguage() {
       this.populateAvailableVersions();
-      // filterCVs will be called by selectedVersion watcher if it changes, or directly if it doesn't
-      // To ensure it's always called after language change:
-      this.filterCVs(); 
-    },
-    selectedVersion() {
       this.filterCVs();
+    },
+    currentCV(newVal) {
+      if (newVal) {
+        this.cvData = { ...this.cvData, ...newVal.data };
+        this.updateLabels(newVal.data.labels);
+        this.updateJSONLD(newVal.data);
+        document.title = `${newVal.data.personal_info.name} - ${newVal.data.personal_info.title}`;
+      }
     }
   },
-  mounted() {
-    this.fetchCVs();
-    // Initial label setup based on default language
-    this.updateLabels(); 
+  methods: {
+    processCVs() {
+      try {
+        // Transform the flat rawCvsData into the nested structure
+        const transformedCvs = [];
+        const languages = [...new Set(rawCvsData.map(item => item.language))]; // Get unique languages
+
+        languages.forEach(lang => {
+          const langVersions = rawCvsData
+            .filter(item => item.language === lang)
+            .map(item => {
+              // The item itself is a version, structure it into { version: ..., data: ... }
+              // We need a unique 'version' key for the dropdown, let's use item.id or generate one
+              // For now, let's assume item.version is a simple number like 1, 2, 3 for each language.
+              // We'll use item.id as the unique key for the version property.
+              // The 'data' will be the rest of the item.
+              // We also need to ensure 'labels' are part of the 'data' object if they exist.
+              // The original structure had labels inside data, e.g. item.personal_info.labels
+              // Let's assume labels are at the root of each version for now, or we can adjust.
+              // For simplicity, we'll pass the whole item as 'data' for now.
+              // The original expected structure was: { version: "versionKey", data: { personal_info: ..., labels: ... } }
+              // Let's make sure the 'data' property contains all necessary fields.
+              // The 'version' property in the transformed structure should be a unique identifier for that version within that language.
+              // We can use the original 'id' field (e.g., "en-1") as this unique version key.
+              
+              // Create a deep copy of the item to avoid modifying the original rawCvsData
+              const versionData = JSON.parse(JSON.stringify(item));
+              // Remove language and id from the data part as they are now part of the higher structure
+              delete versionData.language;
+              // delete versionData.id; // Keep id as the version key
+              // delete versionData.version; // Keep original version number if needed, or use id
+
+              return {
+                version: item.id, // Use the original 'id' as the unique version key
+                data: versionData // The rest of the item is the data for this version
+              };
+            });
+
+          if (langVersions.length > 0) {
+            transformedCvs.push({
+              language: lang,
+              versions: langVersions
+            });
+          }
+        });
+
+        this.cvs = transformedCvs;
+        this.populateAvailableVersions();
+        this.filterCVs(); // Initial filter
+      } catch (error) {
+        console.error("Failed to process CVs:", error);
+        this.cvData.personal_info.name = "Error loading CV data";
+      }
+    },
+    populateAvailableVersions() {
+      if (!this.cvs || this.cvs.length === 0) { // Guard against undefined or empty this.cvs
+        this.availableVersions = [];
+        this.selectedVersion = '';
+        return;
+      }
+      const langCvs = this.cvs.find(cv => cv.language === this.selectedLanguage);
+      // Add checks for langCvs and langCvs.versions
+      if (langCvs && langCvs.versions && langCvs.versions.length > 0) {
+        this.availableVersions = langCvs.versions.map(v => ({ version: v.version, title: v.data.personal_info.title || v.version }));
+        // This inner check for this.availableVersions.length > 0 is fine
+        if (this.availableVersions.length > 0) {
+          // Try to keep the selected version if it exists in the new list, otherwise default to the first
+          const currentSelectedExists = this.availableVersions.some(v => v.version === this.selectedVersion);
+          if (!currentSelectedExists || !this.selectedVersion) {
+            this.selectedVersion = this.availableVersions[0].version;
+          }
+        } else {
+          this.selectedVersion = '';
+        }
+      } else {
+        this.availableVersions = [];
+        this.selectedVersion = '';
+      }
+    },
+    filterCVs() {
+      if (this.currentCV) {
+        this.cvData = { ...this.currentCV.data }; // Ensure all parts of cvData are updated
+        this.updateLabels(this.currentCV.data.labels);
+        this.updateJSONLD(this.currentCV.data);
+        document.title = `${this.cvData.personal_info.name} - ${this.cvData.personal_info.title}`;
+      } else {
+        // Reset or show placeholder if no CV matches
+        this.cvData = { personal_info: { name: 'N/A', title: 'N/A', summary: '', contact: {} }, experience: [], education: [], skills: [], references: [], labels: {} };
+        this.updateLabels(this.labels); // Reset to default labels
+      }
+    },
+    updateLabels(newLabels) {
+      if (newLabels) {
+        this.labels = { ...this.labels, ...newLabels };
+      }
+    },
+    updateJSONLD(cvData) {
+      const jsonLdScript = document.getElementById('jsonld-data');
+      if (jsonLdScript && cvData && cvData.personal_info) {
+        const structuredData = {
+          "@context": "https://schema.org",
+          "@type": "Person",
+          "name": cvData.personal_info.name,
+          "jobTitle": cvData.personal_info.title,
+          "email": `mailto:${cvData.personal_info.contact.email}`,
+          "telephone": cvData.personal_info.contact.phone,
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": cvData.personal_info.contact.location ? cvData.personal_info.contact.location.split(',')[0].trim() : "",
+            "addressCountry": cvData.personal_info.contact.location ? cvData.personal_info.contact.location.split(',').pop().trim() : ""
+          },
+          "url": window.location.href,
+          "sameAs": [cvData.personal_info.contact.linkedin].filter(Boolean),
+          "description": cvData.personal_info.summary,
+          "knowsAbout": cvData.skills || [],
+          "alumniOf": cvData.education ? cvData.education.map(edu => ({ "@type": "EducationalOrganization", "name": edu.institution })) : [],
+          "hasOccupation": cvData.experience ? cvData.experience.map(exp => ({
+            "@type": "Occupation",
+            "occupationLocation": {
+              "@type": "Place",
+              "name": exp.location
+            },
+            "name": exp.role,
+            "description": exp.description.join(' '),
+            "worksFor": {
+              "@type": "Organization",
+              "name": exp.company
+            },
+            "startDate": exp.date_range ? exp.date_range.split(' - ')[0] : undefined,
+            "endDate": exp.date_range && exp.date_range.split(' - ')[1] !== 'Present' ? exp.date_range.split(' - ')[1] : undefined
+          })) : []
+        };
+        jsonLdScript.textContent = JSON.stringify(structuredData, null, 2);
+      }
+    },
+    exportPDF() {
+      const element = document.getElementById('cv-content');
+      const opt = {
+        margin: [0.5, 0.2, 0.5, 0.2], // top, left, bottom, right (inches)
+        filename: `${this.cvData.personal_info.name}_CV_${this.selectedLanguage}_${this.selectedVersion}.pdf`,
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 3, logging: false, useCORS: true, letterRendering: true, scrollY: 0 }, // Increased scale for better quality
+        jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+      };
+      html2pdf().from(element).set(opt).save();
+    },
+    exportImage() {
+      const element = document.getElementById('cv-content');
+      html2canvas(element, {
+        scale: 3, // Higher scale for better resolution
+        logging: false,
+        useCORS: true,
+        letterRendering: true,
+        scrollY: -window.scrollY // Ensure it captures from the top
+      }).then(canvas => {
+        const link = document.createElement('a');
+        link.download = `${this.cvData.personal_info.name}_CV_${this.selectedLanguage}_${this.selectedVersion}.png`;
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+      });
+    }
+  },
+  created() {
+    this.processCVs(); // Call the new processing method
   }
-}
+};
 </script>
 
-<style>
-/* Styles moved from index.html */
-.font-roboto {
-  font-family: 'Roboto', sans-serif;
-}
-
-.font-montserrat {
-  font-family: 'Montserrat', sans-serif;
-}
-
-/* Custom Scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: #f1f1f1;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #4a4a4a;
-  border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #3b3b3b;
-}
-
-/* Card Effect for Sections */
-.card {
-  background: #ffffff;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  padding: 15px;
-  margin-bottom: 10px;
-  border-left: 4px solid #4b0082; /* Indigo was suggested, this is a deep purple */
-}
-
-/* Section Titles */
-.section-title {
-  font-family: 'Montserrat', sans-serif;
-  color: #4b0082; /* Indigo */
-  text-align: left;
-  font-size: 1.25rem; /* Tailwind's text-xl */
-  margin-bottom: 8px; /* Tailwind's mb-2 */
-  font-weight: 600; /* Tailwind's font-semibold */
-}
-
-/* Overall Style Changes for a More Professional Look */
-.text-primary {
-  color: #4b0082; /* Indigo */
-}
-
-.contact-info {
-  color: #4b0082; /* Indigo */
-}
-
-.card ul {
-  margin-left: 1rem; /* Tailwind's ml-4 */
-}
-
-.skill-badge {
-  background-color: #f3e8ff; /* Lighter shade of Indigo/Purple */
-  color: #4b0082; /* Indigo */
-  padding: 0.15rem 0.5rem;
-  border-radius: 9999px; /* pill shape */
-  font-size: 0.7rem; 
-  margin-bottom: 4px; /* Tailwind's mb-1 */
-}
-
-/* Button Styles for a Consistent Color Theme */
-.bg-primary-button {
-  background-color: #4b0082; /* Indigo */
-  color: white;
-}
-
-.bg-primary-button:hover {
-  background-color: #3a006b; /* Darker Indigo */
-}
-
-/* Ensure body takes full viewport height for sticky footer if ever needed, and for scrollbar styling */
-/* html, body {
-  height: 100%;
-  margin: 0;
-} */
-
-/* General body styling from original index.html, if not covered by Tailwind on body tag itself */
-body {
-  font-family: 'Montserrat', sans-serif; /* Already on body tag in index.html */
-  color: #374151; /* text-gray-700, slightly different from original text-gray-800 */
-  background-color: #f3f4f6; /* bg-gray-100 */
-  margin: 0; /* Already on body tag in index.html */
-  padding: 0; /* Already on body tag in index.html */
-}
+<style scoped>
+/* Add any component-specific styles here if needed. 
+   Most global styles are in src/assets/main.css */
 </style>
