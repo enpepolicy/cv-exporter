@@ -377,7 +377,7 @@
         "location": "Marseille, France",
         "linkedin": "https://www.linkedin.com/in/enpepolicy"
       },
-      "summary": "Développeur Front-End avec 4 ans d'expérience professionnelle, spécialisé dans la création d'interfaces utilisateur réactives et dynamiques en utilisant Vue.js, enrichi par Tailwind CSS pour un design moderne et épuré avec une gestion d'état sophistiquée. Expertise en TypeScript pour une architecture front-end robuste, garantissant la sécurité des types et le respect des normes de codage maintenables, essentiels pour des applications web complexes et à grande échelle."
+      "summary": "Développeur Front-End avec 5 ans d'expérience professionnelle, spécialisé dans la création d'interfaces utilisateur réactives et dynamiques en utilisant Vue.js, enrichi par Tailwind CSS pour un design moderne et épuré avec une gestion d'état sophistiquée. Expertise en TypeScript pour une architecture front-end robuste, garantissant la sécurité des types et le respect des normes de codage maintenables, essentiels pour des applications web complexes et à grande échelle."
     },
     "experience": [
       {
@@ -427,6 +427,30 @@
           "Optimisé les performances de l'application et l'expérience utilisateur en utilisant des outils front-end avancés, y compris Vite."
         ],
         "external": "https://www.era2140.com/"
+      },
+      {
+        "role": "Full-Stack Web Developer",
+        "company": "Workana",
+        "location": "Remote (Colombia | Mexico | France)",
+        "date_range": "mai 2020 - décembre 2021",
+        "description": [
+          "Développé plus de 35 projets web avec Vue.js et Node.js, atteignant une satisfaction client de 95%.",
+          "Créé des interfaces utilisateur réactives avec Vue.js et intégré des API RESTful.",
+          "Optimisé les performances des applications et implémenté des solutions cloud scalables."
+        ],
+        "external": "https://www.workana.com/en/freelancer/c80a7f10d19f37c3f0bcad4aa103aa9f"
+      },
+      {
+        "role": "Full-Stack Web Developer",
+        "company": "Taste",
+        "location": "Mexico City, Mexique",
+        "date_range": "septembre 2019 - juin 2020",
+        "description": [
+          "Développé des applications SPA avec Vue.js pour le secteur financier.",
+          "Conçu et maintenu des architectures front-end modulaires et réutilisables.",
+          "Implémenté des intégrations tierces et optimisé les performances des applications."
+        ],
+        "external": "https://taste-mkt.com/"
       }
     ],
     "skills": [
@@ -619,7 +643,7 @@
         "location": "Marseille, France",
         "linkedin": "https://www.linkedin.com/in/enpepolicy"
       },
-      "summary": "Développeur Blockchain et Web3 avec plus de 4 ans d'expérience professionnelle, dont 2 ans axés sur les technologies blockchain et Web3. Compétent dans le développement d'applications décentralisées, la programmation de smart contracts et les solutions Ethereum full stack, avec une expertise supplémentaire dans le gaming blockchain, les NFT et les plateformes DeFi."
+      "summary": "Développeur Blockchain et Web3 avec plus de 5 ans d'expérience professionnelle, dont 2 ans axés sur les technologies blockchain et Web3. Compétent dans le développement d'applications décentralisées, la programmation de smart contracts et les solutions Ethereum full stack, avec une expertise supplémentaire dans le gaming blockchain, les NFT et les plateformes DeFi."
     },
     "experience": [
       {
