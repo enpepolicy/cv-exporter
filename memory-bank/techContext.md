@@ -4,25 +4,25 @@
 
 - **Core Frontend**:
     - HTML5
-    - CSS3 (via Tailwind CSS and custom styles)
+    - CSS3 (via Tailwind CSS and global styles in `src/assets/main.css`)
     - JavaScript (ES6 Modules)
+- **Build Tool / Development Server**:
+    - Vite (`vite`)
 - **JavaScript Framework**:
-    - Vue.js 3 (specifically `vue@3/dist/vue.esm-browser.js` via CDN)
+    - Vue.js 3 (managed via npm, imported in `src/main.js`)
 - **CSS Framework**:
-    - Tailwind CSS (via CDN `https://cdn.tailwindcss.com`)
+    - Tailwind CSS (managed via npm, configured in `tailwind.config.js` and `postcss.config.js`)
 - **Data Format**:
-    - JSON (for `cvs.json`)
+    - JSON (for `src/cvs.json`, imported directly into the application)
 - **Export Libraries**:
-    - `html2pdf.js` (version 0.10.1 via CDN) - For PDF export.
-    - `html2canvas.js` (version 1.4.1 via CDN) - For image export (used by `html2pdf.js` and directly for PNG export).
+    - `html2pdf.js` (managed via npm) - For PDF export.
+    - `html2canvas.js` (managed via npm) - For image export.
 - **Icons**:
-    - Font Awesome (version 6.4.0 via CDN)
+    - Font Awesome (managed via npm: `@fortawesome/fontawesome-svg-core`, `@fortawesome/vue-fontawesome`, `@fortawesome/free-solid-svg-icons`, `@fortawesome/free-brands-svg-icons`)
 - **Fonts**:
-    - Google Fonts (Roboto, Montserrat)
-- **Development Server (Recommended)**:
-    - `http-server` (Node.js package, version `^14.1.1` as per `package.json`) or VSCode Live Server extension.
-- **Package Manager (for dev dependencies like `http-server`)**:
-    - npm (implied by `package.json` and `package-lock.json`)
+    - Google Fonts (Roboto, Montserrat - imported in `src/assets/main.css`)
+- **Package Manager**:
+    - npm (manages all project dependencies via `package.json`)
 - **Version Control**:
     - Git (implied by `.gitignore`)
 
@@ -30,44 +30,48 @@
 
 1.  **Prerequisites**:
     *   A modern web browser (e.g., Chrome, Firefox, Edge).
-    *   Node.js and npm installed (if you want to use `http-server` from `package.json` or manage other Node.js based dev tools).
+    *   Node.js and npm installed.
 2.  **Get the Code**:
     *   Clone or download the project files.
-3.  **Install Dependencies (Optional, for `http-server`)**:
+3.  **Install Dependencies**:
     *   Navigate to the project root directory in your terminal.
-    *   Run `npm install` to install `http-server` (if not globally installed).
-4.  **Serve the Application**:
-    *   **Using `http-server`**:
-        *   In the project root directory, run `npx http-server` (or `http-server` if globally installed, or `npm start` if a script is added to `package.json` like `"start": "http-server"`).
-        *   Open your browser and navigate to the local address provided (e.g., `http://localhost:8080`).
-    *   **Using VSCode Live Server**:
-        *   Open the `index.html` file in VSCode.
-        *   Right-click and select "Open with Live Server".
-5.  **View and Interact**:
-    *   The CV application should now be running in your browser.
+    *   Run `npm install` to install all project dependencies listed in `package.json`.
+4.  **Serve the Application (Development Mode)**:
+    *   In the project root directory, run `npm run dev`.
+    *   Vite will start a development server, typically on a local port (e.g., `http://localhost:5173`). The exact URL, including the base path (`/cv-exporter/`), will be shown in the terminal.
+    *   Open this URL in your browser.
+5.  **Build for Production**:
+    *   Run `npm run build`.
+    *   Vite will create an optimized production build in the `dist/` directory.
+6.  **Preview Production Build Locally**:
+    *   Run `npm run preview`.
+    *   Vite will serve the contents of the `dist/` folder, allowing you to test the production build locally.
 
 ## Technical Constraints
 
-- **Client-Side Only**: All logic, data processing, and rendering happen in the user's browser. No backend beyond a static file server.
-- **CDN Dependencies**: Relies on CDNs for Vue.js, Tailwind CSS, Font Awesome, and export libraries. An internet connection is required for these to load initially. For offline development or deployment, these would need to be localized.
-- **Browser Compatibility**: Functionality (especially PDF/Image export) might vary slightly or have issues in older or less common browsers. Modern evergreen browsers are the primary target.
-- **Performance with Large `cvs.json`**: If `cvs.json` becomes extremely large, fetching and processing it entirely on the client-side might lead to performance degradation on initial load or when filtering. The current file size seems manageable.
-- **Export Quality**: The quality of PDF/Image exports depends on `html2pdf.js` and `html2canvas.js` accurately rendering the HTML/CSS. Complex CSS or layouts can sometimes pose challenges.
+- **Client-Side Only**: All logic, data processing, and rendering happen in the user's browser.
+- **Browser Compatibility**: Modern evergreen browsers are the primary target. Functionality (especially PDF/Image export) might vary in older browsers.
+- **Export Quality**: The quality of PDF/Image exports depends on `html2pdf.js` and `html2canvas.js` accurately rendering the HTML/CSS.
 
 ## Dependencies
 
-- **`http-server` (devDependency in `package.json`)**: A simple, zero-configuration command-line HTTP server. Used for serving the `index.html` and other static assets locally.
-- **External CDN Libraries**:
-    - `vue`: Core framework for UI.
-    - `tailwindcss`: For styling.
-    - `html2pdf.js`, `html2canvas.js`: For export features.
-    - `font-awesome`: For icons.
-    - `Google Fonts`: For custom typography.
+(Refer to `package.json` for a complete list of dependencies and their versions.)
+Key dependencies include:
+- `vue`: Core framework for UI.
+- `vite`, `@vitejs/plugin-vue`: Build tooling and Vue integration.
+- `tailwindcss`, `postcss`, `autoprefixer`: For styling.
+- `html2pdf.js`, `html2canvas`: For export features.
+- `@fortawesome/*`: For Font Awesome icons.
 
 ## Tool Usage Patterns
 
-- **Vue.js**: Used with the Options API in a single large instance within `index.html`. Data properties manage state, methods handle logic, computed properties derive data, and watchers react to state changes. The template is embedded directly in `index.html`.
-- **Tailwind CSS**: Utility classes are applied directly in the HTML structure for styling. Some custom CSS is also present in `<style>` tags for scrollbars, card effects, etc.
-- **`cvs.json`**: Acts as a simple database. Fetched via `fetch()` API. The `timestamp` query parameter is used to prevent caching during development/updates.
-- **`html2pdf.js` / `html2canvas.js`**: Invoked in Vue methods, targeting the `#cv-content` div to generate files. Options are configured for output format and quality.
-- **Import Maps**: Used to alias `vue` and `cvs` for ES module imports directly in the browser without a build step.
+- **Vite**: Handles development server, Hot Module Replacement (HMR), and production builds. Configuration is in `vite.config.js`.
+- **Vue.js**: Used with the Options API in a single root component (`src/App.vue`).
+    - Data properties manage state.
+    - Methods handle logic.
+    - Computed properties derive data.
+    - Watchers react to state changes.
+- **Tailwind CSS**: Utility classes are applied in `src/App.vue` template. Global styles and Tailwind directives are in `src/assets/main.css`. Configuration in `tailwind.config.js` and `postcss.config.js`.
+- **`src/cvs.json`**: Acts as a simple database, imported directly as a module into `src/App.vue`. Data is transformed from a flat list to a nested structure (language -> versions) within the `processCVs` method in `App.vue`.
+- **`html2pdf.js` / `html2canvas.js`**: Imported as modules and invoked in Vue methods in `src/App.vue`, targeting the `#cv-content` div.
+- **Font Awesome**: Icons are imported individually in `src/main.js` and registered globally for use with the `<font-awesome-icon>` component.

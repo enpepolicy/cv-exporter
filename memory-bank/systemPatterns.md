@@ -2,64 +2,65 @@
 
 ## System Architecture
 
-- **Client-Side Single Page Application (SPA)**: The application is entirely client-side, running in the user's browser.
-- **Static Site**: Consists of HTML, CSS, JavaScript, and a JSON data file. It can be hosted on any static web hosting service or served locally with a simple HTTP server like `http-server`.
+- **Client-Side Single Page Application (SPA)**: The application is entirely client-side, built with Vue.js and Vite.
+- **Static Site Output**: Vite builds the project into static assets (HTML, CSS, JS) in the `dist/` directory, which can be hosted on any static web hosting service.
 - **Data Flow**:
-    1. `index.html` is loaded.
-    2. Vue.js 3 application initializes.
-    3. The Vue app fetches CV data from `cvs.json`.
-    4. User selects language and version.
-    5. Vue app filters and displays the relevant CV data.
-    6. Export functions (`html2pdf.js`, `html2canvas.js`) process the `#cv-content` DOM element to generate PDF/image.
+    1. `index.html` (from `dist/` after build, or served by Vite dev server) is loaded.
+    2. JavaScript bundles are loaded, initializing the Vue.js 3 application (`src/App.vue` via `src/main.js`).
+    3. The Vue app imports CV data directly from `src/cvs.json` (which is bundled with the app).
+    4. The `processCVs` method in `App.vue` transforms the flat JSON data into a nested structure (language -> versions).
+    5. User selects language and version via UI controls.
+    6. Vue app filters and displays the relevant CV data from the processed state.
+    7. Export functions (`html2pdf.js`, `html2canvas.js`, imported as npm modules) process the `#cv-content` DOM element to generate PDF/image.
 
 ```mermaid
 graph LR
-    User[User Browser] -- Loads --> IndexHTML[index.html]
-    IndexHTML -- Initializes --> VueApp[Vue.js App]
-    VueApp -- Fetches --> CVSJSON[cvs.json]
-    User -- Selects Lang/Version --> VueApp
+    UserBrowser[User Browser] -- Loads --> IndexHTML[index.html (Vite served/built)]
+    IndexHTML -- Loads & Initializes --> VueApp[Vue.js App (src/App.vue)]
+    VueApp -- Imports & Processes --> CVSJSON[src/cvs.json (Bundled)]
+    UserBrowser -- Selects Lang/Version --> VueApp
     VueApp -- Updates DOM --> CVDisplay[CV Display Area]
-    User -- Clicks Export --> ExportLib[html2pdf.js / html2canvas.js]
+    UserBrowser -- Clicks Export --> ExportLib[html2pdf.js / html2canvas.js (npm modules)]
     ExportLib -- Reads DOM --> CVDisplay
     ExportLib -- Generates --> File[PDF / PNG]
-    File -- Downloads to --> User
+    File -- Downloads to --> UserBrowser
 ```
 
 ## Key Technical Decisions
 
-- **Vue.js 3**: Chosen for its reactivity, component-based architecture, and ease of use for building dynamic user interfaces. The Composition API or Options API can be used (current `index.html` uses Options API).
-- **Tailwind CSS**: Used for utility-first CSS styling, allowing for rapid UI development and customization. It's included via CDN.
-- **`cvs.json` for Data**: Centralizes all CV data, making it easier to manage and update content for multiple languages and versions without altering the core application logic.
-- **`html2pdf.js` and `html2canvas.js`**: Selected for client-side PDF and image generation, avoiding server-side processing dependencies.
-- **Import Maps**: Used in `index.html` to manage JavaScript module imports (Vue from CDN, `cvs.json` locally). This simplifies module loading without a build step for this simple project.
-- **JSON-LD for SEO**: Implemented to provide structured data to search engines, enhancing the CV's discoverability and representation in search results.
+- **Vite**: Chosen as the build tool and development server for its speed and modern ESM-based architecture.
+- **Vue.js 3**: Used for its reactivity and component-based architecture (currently a single root component `src/App.vue`). Options API is used.
+- **Tailwind CSS**: Managed via npm and PostCSS for utility-first CSS styling.
+- **`src/cvs.json` for Data**: CV data is stored in `src/cvs.json` and directly imported into the application, making it part of the build. Data is transformed in `App.vue` from a flat list to a nested structure.
+- **npm for Package Management**: All external libraries (Vue, Tailwind, export tools, Font Awesome) are managed as npm dependencies.
+- **No CDNs or Import Maps**: All dependencies are bundled or processed by Vite, removing reliance on external CDNs and import maps.
+- **JSON-LD for SEO**: Dynamically generated and updated by the Vue application.
 
 ## Design Patterns in Use
 
-- **Component-Based Architecture (Vue.js)**: The UI is implicitly structured around components, although `index.html` contains a single large Vue app instance. Future refactoring could break this down into smaller, reusable Vue components (e.g., for sections like Experience, Education, Skills).
-- **Data-Driven Views**: The UI dynamically renders based on the data fetched from `cvs.json` and the user's selections.
-- **Observer Pattern (Vue.js Reactivity)**: Vue's reactivity system automatically updates the DOM when underlying data changes (e.g., `selectedLanguage`, `cvData`).
-- **Strategy Pattern (Implicit for CV versions/languages)**: The `filterCVs` method effectively applies a strategy to select and display the correct CV data based on language and version criteria.
+- **Component-Based Architecture (Vue.js)**: The application is structured around a single root Vue component (`src/App.vue`).
+- **Data-Driven Views**: The UI dynamically renders based on the processed data from `src/cvs.json` and user selections.
+- **Observer Pattern (Vue.js Reactivity)**: Vue's reactivity system automatically updates the DOM when underlying data changes.
+- **Data Transformation**: The `processCVs` method in `App.vue` transforms the flat structure of `src/cvs.json` into a nested structure suitable for the application's logic.
 
 ## Component Relationships
 
-- **`App` (Main Vue Instance)**:
-    - Manages state: `cvs` (all CVs), `selectedLanguage`, `selectedVersion`, `cvData` (current CV), `labels`.
-    - Handles methods: `fetchCVs`, `filterCVs`, `updateLabels`, `updateJSONLD`, `exportPDF`, `exportImage`, `populateAvailableVersions`.
-    - Interacts with DOM elements: `#app` (mount point), `#cv-content` (for export), language/version select dropdowns.
-- **`cvs.json`**: Data source, an array of CV objects.
-- **`index.html`**: Contains the HTML structure, Vue app template, styles, and script includes.
-- **External Libraries**:
-    - `Vue.js`: Core rendering and reactivity.
-    - `Tailwind CSS`: Styling.
-    - `html2pdf.js`: PDF generation.
-    - `html2canvas.js`: Image generation.
-    - `Font Awesome`: Icons.
-    - `Google Fonts`: Typography.
+- **`src/App.vue` (Main Vue Component)**:
+    - Manages state: `cvs` (processed, nested CV data), `selectedLanguage`, `selectedVersion`, `cvData` (current CV being displayed), `labels`.
+    - Handles methods: `processCVs`, `filterCVs`, `updateLabels`, `updateJSONLD`, `exportPDF`, `exportImage`, `populateAvailableVersions`.
+    - Interacts with DOM elements: Mounts to `#app` in `index.html`, uses `#cv-content` for export.
+- **`src/main.js`**: Entry point for the Vite application. Initializes Vue, imports `App.vue`, global CSS, and sets up Font Awesome.
+- **`src/cvs.json`**: Data source, imported directly. Contains a flat array of CV version objects.
+- **`index.html` (root)**: Minimal HTML template for Vite.
+- **NPM Modules**:
+    - `vue`: Core rendering and reactivity.
+    - `tailwindcss`, `postcss`, `autoprefixer`: Styling.
+    - `html2pdf.js`, `html2canvas`: PDF/Image generation.
+    - `@fortawesome/*`: Icons.
 
 ## Critical Implementation Paths
 
-- **Data Fetching and Filtering (`fetchCVs`, `filterCVs`, `populateAvailableVersions`)**: Core logic for loading and displaying the correct CV. Robust error handling for `fetch` is important. The current implementation fetches `cvs.json` with a timestamp to bypass browser cache, which is a simple approach.
-- **PDF/Image Export (`exportPDF`, `exportImage`)**: Relies on external libraries correctly interpreting the DOM of `#cv-content`. Styling and layout complexities can sometimes affect export quality. The use of `scale: 3` in `html2canvas` options suggests an attempt to improve resolution.
-- **Reactivity and State Management (Vue.js)**: Ensuring that changes to `selectedLanguage` or `selectedVersion` correctly trigger updates to `cvData`, `labels`, `availableVersions`, and the JSON-LD script. Vue's `watch` and `computed` properties are used for this.
-- **JSON-LD Generation (`updateJSONLD`)**: Dynamically creating and updating the structured data script based on the current `cvData`.
+- **Data Processing and Filtering (`processCVs`, `filterCVs`, `populateAvailableVersions`)**: Core logic for transforming, loading, and displaying the correct CV.
+- **PDF/Image Export (`exportPDF`, `exportImage`)**: Relies on npm-imported libraries correctly interpreting the DOM of `#cv-content`.
+- **Reactivity and State Management (Vue.js)**: Ensuring changes to `selectedLanguage` or `selectedVersion` correctly trigger updates.
+- **JSON-LD Generation (`updateJSONLD`)**: Dynamically creating and updating the structured data script.

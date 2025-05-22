@@ -2,37 +2,51 @@
 
 ## Current Focus
 
-- Initial project documentation and context gathering.
-- Populating the Memory Bank files based on the existing project structure and code (`index.html`, `cvs.json`, `package.json`).
+- Resolving GitHub Action build failure related to Font Awesome dependency.
+- Ensuring the Vite-based build process is stable and all dependencies are correctly managed.
+- Updating Memory Bank documentation to reflect the major architectural shift from CDN/http-server to a Vite build system.
 
 ## Recent Changes
 
-- `memory-bank/projectbrief.md` created and populated.
-- `memory-bank/productContext.md` created and populated.
-- `memory-bank/systemPatterns.md` created and populated.
-- `memory-bank/techContext.md` created and populated.
+- **Migrated to Vite**: Project refactored from a single `index.html` with CDN dependencies to a Vite-based build system.
+    - `package.json` updated with Vite, Vue, Tailwind CSS, Font Awesome, and export libraries as npm dependencies.
+    - `http-server` removed.
+    - Tailwind CSS configured via `tailwind.config.js` and `postcss.config.js`.
+    - Global styles moved to `src/assets/main.css`.
+    - `src/main.js` created as the Vite app entry point, initializing Vue and Font Awesome.
+    - Root `index.html` simplified to a Vite template.
+    - Main application logic and template moved to `src/App.vue`.
+- **CV Data Handling Changed**:
+    - `cvs.json` moved from `public/` to `src/cvs.json`.
+    - `App.vue` now imports `cvs.json` directly instead of fetching it.
+    - A `processCVs` method was added to `App.vue` to transform the flat `src/cvs.json` data into the nested structure (language -> versions) expected by the component's logic.
+- **Dependency Fix**: Added `@fortawesome/free-brands-svg-icons` to `package.json` to resolve build errors.
+- **Defensive Coding**: Added checks in `App.vue` to prevent errors if `versions` array is missing/empty for a language.
 
 ## Next Steps
 
-- Review all populated Memory Bank files for consistency and completeness.
-- Update `memory-bank/progress.md` to reflect that the previously noted comment discrepancy in `index.html` regarding `cvs.json` loading is already resolved in the current version of `index.html`.
+- User to commit changes (`package.json`, `src/App.vue`, `src/cvs.json`, new config files, etc.) and push to Git.
+- User to re-run the GitHub Action to confirm the build now passes.
+- If the build is successful, finalize Memory Bank updates (`progress.md`).
+- If issues persist, further troubleshoot the GitHub Action or any new local errors.
 
 ## Active Decisions & Considerations
 
-- **Data Source Clarification (Resolved)**: Previously, a discrepancy was noted where the `index.html` comment suggested CV data was in-script, while the code fetched `cvs.json`. Upon review of the current `index.html` (as of 2025-05-22), the comment correctly states that data is loaded from `cvs.json`. This issue is considered resolved.
-- **Project Simplicity**: The project is currently a single HTML file with inline Vue.js and styles, relying on CDNs. This is simple for deployment but has limitations (e.g., no build step, harder to manage larger codebases). This simplicity is reflected in the documentation.
+- **Data Structure**: The application logic in `App.vue` expects a nested data structure for CVs (language objects containing version arrays). The `src/cvs.json` file contains a flat list, so a transformation step (`processCVs`) is now performed in `App.vue`.
+- **Labels in `cvs.json`**: For correct UI label localization, each version object within `src/cvs.json` should contain a `labels` object with translated strings. This was communicated to the user.
+- **Build Stability**: Ensuring the `npm run build` command works reliably both locally and in the CI environment is a priority.
 
 ## Important Patterns & Preferences
 
-- **CDN Usage**: Heavy reliance on CDNs for major libraries (Vue, Tailwind, Font Awesome, export tools).
-- **Single-File Structure**: Most of the application logic and templating resides in `index.html`.
-- **Data in `cvs.json`**: CV content is externalized to `cvs.json`, which is good for separation of concerns.
-- **Vue Options API**: The Vue application is structured using the Options API.
+- **Vite Build System**: The project now uses Vite for development and production builds.
+- **NPM Dependency Management**: All external libraries are managed via `package.json`.
+- **Single File Component (`src/App.vue`)**: The main application logic and template reside in `src/App.vue`.
+- **Direct JSON Import**: `src/cvs.json` is imported directly as a module.
+- **Vue Options API**: The Vue application in `src/App.vue` uses the Options API.
 
 ## Learnings & Project Insights
 
-- The project is a well-structured interactive CV viewer.
-- It effectively uses Vue.js for dynamic content and `cvs.json` for data management.
-- The export functionalities (PDF/Image) are key features.
-- The use of import maps is a modern approach for managing modules without a build step in simpler projects.
-- The previously noted inconsistency in `index.html` comments regarding data sourcing has been verified as resolved in the current file version.
+- Migrating from a CDN-based approach to a build system like Vite significantly changes project structure, dependency management, and asset handling.
+- Careful attention to `package.json` is crucial for CI/CD environments, as missing dependencies are a common source of build failures.
+- Data transformation logic may be needed if the source data structure doesn't perfectly match the application's internal expectations.
+- Incremental testing after major changes is important to catch issues early (e.g., testing `npm run dev` before `npm run build`).
