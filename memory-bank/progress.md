@@ -12,7 +12,8 @@
     - Common data sections (personal info base, education, honors/awards, references base) and skill sets (frontend, fullstack, blockchain) refactored into shared constants within `src/cvsData.js`.
     - These constants are now used across all CV entries for the respective sections, significantly reducing data duplication.
     - Application tested and confirmed functional after these data refactoring steps.
-- **Memory Bank Updated**: `techContext.md`, `systemPatterns.md`, and `activeContext.md` reflect the icon system change and the initial data refactoring.
+- **New Experience Added**: "Blockchain Engineer at Alloy (Contract)" experience added to all CV versions in `src/cvsData.js`, with tailored descriptions for each language and CV type.
+- **Memory Bank Updated**: `techContext.md`, `systemPatterns.md`, and `activeContext.md` reflect the icon system change and the initial data refactoring. `activeContext.md` also updated for the new Alloy experience.
 
 **Previous PDF/Styling Iterations (Context Kept for Reference):**
 - **Iteration 1**: General PDF robustness (overflow, wrapping, page breaks, line heights).
@@ -64,4 +65,4 @@
     - Updated all CV entries in `cvsCollection` within `cvsData.js` to use these constants for the respective sections.
     - Application tested and confirmed functional with these changes.
     - Next steps: Update memory bank, discuss deleting old `cvs.json`, and potentially refactor `experience` section further.
-- **Current State**: CV data partially refactored into `src/cvsData.js` with significant de-duplication achieved for common sections and skills. Application is functional. `npm install` for Font Awesome removal still pending.
+- **Current State**: CV data partially refactored into `src/cvsData.js` with significant de-duplication achieved for common sections and skills. New "Alloy" work experience added. Application is functional. `npm install` for Font Awesome removal still pending.
