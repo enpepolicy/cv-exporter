@@ -18,7 +18,7 @@
     - `html2pdf.js` (managed via npm) - For PDF export.
     - `html2canvas.js` (managed via npm) - For image export.
 - **Icons**:
-    - Font Awesome (managed via npm: `@fortawesome/fontawesome-svg-core`, `@fortawesome/vue-fontawesome`, `@fortawesome/free-solid-svg-icons`, `@fortawesome/free-brands-svg-icons`)
+    - Emojis (native browser rendering, directly embedded in Vue template)
 - **Fonts**:
     - Google Fonts (Roboto, Montserrat - imported in `src/assets/main.css`)
 - **Package Manager**:
@@ -61,7 +61,6 @@ Key dependencies include:
 - `vite`, `@vitejs/plugin-vue`: Build tooling and Vue integration.
 - `tailwindcss`, `postcss`, `autoprefixer`: For styling.
 - `html2pdf.js`, `html2canvas`: For export features.
-- `@fortawesome/*`: For Font Awesome icons.
 
 ## Tool Usage Patterns
 
@@ -74,4 +73,4 @@ Key dependencies include:
 - **Tailwind CSS**: Utility classes are applied in `src/App.vue` template. Global styles and Tailwind directives are in `src/assets/main.css`. Configuration in `tailwind.config.js` and `postcss.config.js`.
 - **`src/cvs.json`**: Acts as a simple database, imported directly as a module into `src/App.vue`. Data is transformed from a flat list to a nested structure (language -> versions) within the `processCVs` method in `App.vue`.
 - **`html2pdf.js` / `html2canvas.js`**: Imported as modules and invoked in Vue methods in `src/App.vue`, targeting the `#cv-content` div.
-- **Font Awesome**: Icons are imported individually in `src/main.js` and registered globally for use with the `<font-awesome-icon>` component.
+- **Emojis**: Directly embedded as text characters within the Vue template (`src/App.vue`). No external library is used for icons.

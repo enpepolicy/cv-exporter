@@ -32,7 +32,7 @@ graph LR
 - **Vue.js 3**: Used for its reactivity and component-based architecture (currently a single root component `src/App.vue`). Options API is used.
 - **Tailwind CSS**: Managed via npm and PostCSS for utility-first CSS styling.
 - **`src/cvs.json` for Data**: CV data is stored in `src/cvs.json` and directly imported into the application, making it part of the build. Data is transformed in `App.vue` from a flat list to a nested structure.
-- **npm for Package Management**: All external libraries (Vue, Tailwind, export tools, Font Awesome) are managed as npm dependencies.
+- **npm for Package Management**: All external libraries (Vue, Tailwind, export tools) are managed as npm dependencies. Emojis are used for icons, requiring no external library.
 - **No CDNs or Import Maps**: All dependencies are bundled or processed by Vite, removing reliance on external CDNs and import maps.
 - **JSON-LD for SEO**: Dynamically generated and updated by the Vue application.
 
@@ -49,14 +49,15 @@ graph LR
     - Manages state: `cvs` (processed, nested CV data), `selectedLanguage`, `selectedVersion`, `cvData` (current CV being displayed), `labels`.
     - Handles methods: `processCVs`, `filterCVs`, `updateLabels`, `updateJSONLD`, `exportPDF`, `exportImage`, `populateAvailableVersions`.
     - Interacts with DOM elements: Mounts to `#app` in `index.html`, uses `#cv-content` for export.
-- **`src/main.js`**: Entry point for the Vite application. Initializes Vue, imports `App.vue`, global CSS, and sets up Font Awesome.
+    - Uses emojis directly in the template for icons.
+- **`src/main.js`**: Entry point for the Vite application. Initializes Vue, imports `App.vue`, and global CSS. Font Awesome setup has been removed.
 - **`src/cvs.json`**: Data source, imported directly. Contains a flat array of CV version objects.
 - **`index.html` (root)**: Minimal HTML template for Vite.
 - **NPM Modules**:
     - `vue`: Core rendering and reactivity.
     - `tailwindcss`, `postcss`, `autoprefixer`: Styling.
     - `html2pdf.js`, `html2canvas`: PDF/Image generation.
-    - `@fortawesome/*`: Icons.
+    - Icons are handled by native emojis, no separate npm module.
 
 ## Critical Implementation Paths
 

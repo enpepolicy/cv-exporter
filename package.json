@@ -12,10 +12,6 @@
   "license": "ISC",
   "description": "Interactive CV Application",
   "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "^6.5.2",
-    "@fortawesome/free-solid-svg-icons": "^6.5.2",
-    "@fortawesome/free-brands-svg-icons": "^6.5.2",
-    "@fortawesome/vue-fontawesome": "^3.0.8",
     "html2canvas": "^1.4.1",
     "html2pdf.js": "^0.10.1",
     "vue": "^3.4.27"

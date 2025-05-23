@@ -19,41 +19,49 @@
       <div class="mb-3 flex space-x-3">
         <button @click="exportPDF"
           class="bg-primary-button px-3 py-1 rounded-md transition duration-300 flex items-center shadow">
-          <font-awesome-icon :icon="['fas', 'file-pdf']" class="mr-1" /> Export to PDF
+          <span class="mr-1">📄</span> Export to PDF
         </button>
         <button @click="exportImage"
           class="bg-primary-button px-3 py-1 rounded-md transition duration-300 flex items-center shadow">
-          <font-awesome-icon :icon="['fas', 'file-image']" class="mr-1" /> Export to Image
+          <span class="mr-1">🖼️</span> Export to Image
         </button>
       </div>
     </div>
 
     <!-- CV Content -->
-    <div id="cv-content">
+    <div id="cv-content" class="overflow-hidden">
       <!-- Header -->
       <header class="text-center pb-3 mb-5">
         <h1 class="text-primary text-3xl font-semibold">{{ cvData.personal_info.name }}</h1>
         <h2 class="text-gray-600 text-lg mt-1">{{ cvData.personal_info.title }}</h2>
         <div class="contact mt-3 text-sm contact-info">
-          <p class="flex justify-center items-center space-x-3">
-            <font-awesome-icon :icon="['fas', 'envelope']" class="text-gray-600" />
-            <a :href="'mailto:' + cvData.personal_info.contact.email" class="hover:underline">
-              {{ cvData.personal_info.contact.email }}
-            </a>
+          <p class="flex flex-wrap justify-center items-center gap-x-3 gap-y-1 text-sm contact-info">
+            <span class="inline-flex items-center">
+              <span class="mr-2">📧</span>
+              <a :href="'mailto:' + cvData.personal_info.contact.email" class="hover:underline">
+                {{ cvData.personal_info.contact.email }}
+              </a>
+            </span>
             <span class="mx-3">|</span>
-            <font-awesome-icon :icon="['fas', 'phone']" class="text-gray-600" />
-            <a :href="'tel:' + cvData.personal_info.contact.phone" class="hover:underline">
-              {{ cvData.personal_info.contact.phone }}
-            </a>
+            <span class="inline-flex items-center">
+              <span class="mr-2">📞</span>
+              <a :href="'tel:' + cvData.personal_info.contact.phone" class="hover:underline">
+                {{ cvData.personal_info.contact.phone }}
+              </a>
+            </span>
             <span class="mx-3">|</span>
-            <font-awesome-icon :icon="['fas', 'map-marker-alt']" class="text-gray-600" />
-            <span>{{ cvData.personal_info.contact.location }}</span>
+            <span class="inline-flex items-center">
+              <span class="mr-2">📍</span>
+              <span>{{ cvData.personal_info.contact.location }}</span>
+            </span>
           </p>
           <p class="flex justify-center items-center space-x-2 mt-2">
-            <font-awesome-icon :icon="['fab', 'linkedin']" class="text-gray-600" />
-            <a :href="cvData.personal_info.contact.linkedin" target="_blank" class="hover:underline">
-              Linkedin
-            </a>
+            <span class="inline-flex items-center">
+              <span class="mr-2">💼</span>
+              <a :href="cvData.personal_info.contact.linkedin" target="_blank" class="hover:underline">
+                Linkedin
+              </a>
+            </span>
           </p>
         </div>
       </header>
@@ -62,20 +70,20 @@
       <section class="experience card" v-if="cvData.experience && cvData.experience.length">
         <h2 class="section-title">{{ labels.experience }}</h2>
         <ul class="space-y-3">
-          <li v-for="(job, index) in cvData.experience" class="pb-2" :key="index">
-            <div class="flex justify-between items-center">
-              <h3 class="text-lg font-semibold text-gray-800">{{ job.role }}</h3>
-              <span class="text-gray-500 italic text-sm">{{ job.date_range }}</span>
+          <li v-for="(job, index) in cvData.experience" class="pb-2 break-inside-avoid" :key="index">
+            <div class="flex justify-between items-start">
+              <h3 class="text-lg font-semibold text-gray-800 min-w-0">{{ job.role }}</h3>
+              <span class="text-gray-500 italic text-sm text-right ml-2 flex-shrink-0">{{ job.date_range }}</span>
             </div>
-            <p class="text-gray-600 mt-1 text-sm"><strong>
+            <p class="text-gray-600 mt-1 text-sm"><strong class="inline-flex items-center">
                 <a v-if="job.external" :href="job.external" target="_blank"
-                  class="text-xs bg-primary-button p-[0.35rem] text-white hover:bg-opacity-90 inline-flex items-center rounded-full opacity-80 mr-1">
-                  <font-awesome-icon :icon="['fas', 'external-link-alt']" />
+                  class="text-xs text-primary-button hover:text-opacity-90 inline-flex items-center align-middle">
+                  <span class="mr-1">↗️</span>
                 </a>
                 {{ job.company }}</strong> - {{ job.location }}
             </p>
-            <ul class="list-disc list-inside text-gray-600 mt-2 text-[0.82rem]">
-              <li v-for="(desc, i) in job.description" :key="i">{{ desc }}</li>
+            <ul class="list-disc list-inside text-gray-600 mt-2 text-[0.82rem] leading-normal">
+              <li v-for="(desc, i) in job.description" :key="i" class="break-inside-avoid">{{ desc }}</li>
             </ul>
           </li>
         </ul>
@@ -84,17 +92,17 @@
       <!-- Summary -->
       <section class="summary card" v-if="cvData.personal_info && cvData.personal_info.summary">
         <h2 class="section-title">{{ labels.summary }}</h2>
-        <p class="text-justify text-sm">{{ cvData.personal_info.summary }}</p>
+        <p class="text-justify text-sm leading-relaxed">{{ cvData.personal_info.summary }}</p>
       </section>
 
       <!-- Education -->
       <section class="education card" v-if="cvData.education && cvData.education.length">
         <h2 class="section-title">{{ labels.education }}</h2>
         <ul class="space-y-3">
-          <li v-for="(edu, index) in cvData.education" :key="index">
-            <div class="flex justify-between items-center">
-              <h3 class="text-lg font-semibold text-gray-800">{{ edu.degree }}</h3>
-              <span class="text-gray-500 italic text-sm">{{ edu.years }}</span>
+          <li v-for="(edu, index) in cvData.education" :key="index" class="break-inside-avoid">
+            <div class="flex justify-between items-start">
+              <h3 class="text-lg font-semibold text-gray-800 min-w-0">{{ edu.degree }}</h3>
+              <span class="text-gray-500 italic text-sm text-right ml-2 flex-shrink-0">{{ edu.years }}</span>
             </div>
             <p class="text-gray-600 text-sm">{{ edu.institution }}</p>
           </li>
@@ -105,14 +113,14 @@
       <section class="skills card" v-if="cvData.skills && cvData.skills.length">
         <h2 class="section-title">{{ labels.skills }}</h2>
         <div class="flex flex-wrap gap-2">
-          <span class="skill-badge" v-for="(skill, index) in cvData.skills" :key="index">
+          <div class="skill-badge items-center break-words align-middle h-7" v-for="(skill, index) in cvData.skills" :key="index">
             {{ skill }}
-          </span>
+          </div>
         </div>
       </section>
 
       <!-- References - Moved to the Bottom as an Optional Section -->
-      <section class="references card" v-if="cvData.references && cvData.references.length">
+      <section class="references card break-inside-avoid" v-if="cvData.references && cvData.references.length">
         <h2 class="section-title">{{ labels.references }}</h2>
         <ul class="space-y-3">
           <li v-for="(ref, index) in cvData.references" :key="index">
@@ -351,8 +359,3 @@ export default {
   }
 };
 </script>
-
-<style scoped>
-/* Add any component-specific styles here if needed. 
-   Most global styles are in src/assets/main.css */
-</style>

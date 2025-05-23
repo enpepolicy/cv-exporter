@@ -65,7 +65,7 @@ body {
   padding: 0.15rem 0.5rem;
   border-radius: 9999px; /* rounded-full */
   font-size: 0.7rem;
-  margin-bottom: 4px;
+  /* margin-bottom: 4px; */ /* Removed to rely on flex gap for spacing */
 }
 
 /* Button Styles for a Consistent Color Theme */
