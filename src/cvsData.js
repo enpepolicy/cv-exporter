@@ -1,18 +1,90 @@
-[
+// --- Common Data Definitions ---
+
+const commonContact = {
+  email: "enriquep36@hotmail.com",
+  phone: "+33 0782708654",
+  location: "Marseille, France",
+  linkedin: "https://www.linkedin.com/in/enpepolicy"
+};
+
+const commonPersonalInfoBase = {
+  name: "Enrique Peña",
+  contact: commonContact
+};
+
+const commonEducation = [
+  {
+    degree: "Political Scientist, Political Science and Government", // Base English, may need translation handling
+    institution: "Universidad Nacional de Colombia",
+    location: "Colombia",
+    years: "2012 - 2017"
+  }
+];
+
+const commonHonorsAwards = [
+  {
+    title: "BCN HACK - Aüt protocol [2nd prize] - ETH BCN",
+    date: "Jul 2022",
+    description: "Drug Duck, 'Foursquare' for drugs to save thousands of lives annually.",
+    link: "https://taikai.network/en/datanatives/hackathons/bcn-hack/projects/cl5e0nc539095610108tojenn07/idea"
+  },
+  {
+    title: "ETHCC HACK 2022 - Polygon [Best Tooling / Infra Project IRL]",
+    date: "Aug 2022",
+    description: "Red Packet aims to gamify and simplify sending gifts to friends and family across multiple blockchains.",
+    link: "https://devpost.com/software/red-pocket"
+  }
+];
+
+// Base references, content might be overridden per language
+const commonReferencesBase = [
+  {
+    name: "Yanis Aissani",
+    title: "Full Stack / Blockchain Engineer",
+    company: "ERA 2140",
+    // content will be language-specific
+  },
+  {
+    name: "Juan David Polanco Rojas",
+    title: "Blockchain Developer",
+    company: "BSM - Universitat Pompeu Fabra",
+    // content will be language-specific
+  }
+];
+
+// --- Skill Set Definitions ---
+const frontendSkills = [
+  "Vue.js", "TypeScript", "JavaScript (ES6)", "Tailwind CSS", "Responsive UI Design",
+  "HTML5 & CSS3", "Vite", "Playwright", "CI/CD Workflows (Jenkins, AWS CodePipeline, Netlify)",
+  "Docker", "Web3 Integration", "Firebase Services", "AWS Ecosystem", "Websockets",
+  "Agile Methodologies", "User Experience (UX) Design", "Mentoring New Web Developers"
+];
+
+const fullstackSkills = [
+  "Vue.js", "Node.js", "TypeScript", "JavaScript (ES6)", "Express & Nest.js", "PHP & Laravel",
+  "AWS Ecosystem", "Firebase Services", "CI/CD Workflows (Git, Jenkins, AWS CodePipeline, Netlify)",
+  "Docker", "HTML5 & CSS3", "Tailwind CSS", "MySQL and MongoDB", "API Integration",
+  "Websockets", "Agile Methodologies", "Mentoring New Web Developers"
+];
+
+const blockchainSkills = [
+  "Blockchain Development", "Web3 Technologies", "Smart Contracts", "Ethereum & EVM", "Solidity",
+  "Web3.js & Ethers.js", "Vue.js", "Node.js", "TypeScript",
+  "CI/CD Workflows (Git, Jenkins, AWS CodePipeline, Netlify)", "Docker", "NFT Marketplaces",
+  "DeFi Protocols", "Moralis", "Infura", "MetaMask Integration", "AWS Ecosystem",
+  "Firebase Services", "Mentoring New Web Developers"
+];
+
+// --- CV Collection (to be refactored to use common data) ---
+const cvsCollection = [
   {
     "id": "en-1",
     "language": "en",
     "version": 1,
     "personal_info": {
-      "name": "Enrique Peña",
-      "title": "Front-End Developer",
-      "contact": {
-        "email": "enriquep36@hotmail.com",
-        "phone": "+33 0782708654",
-        "location": "Marseille, France",
-        "linkedin": "https://www.linkedin.com/in/enpepolicy"
-      },
-      "summary": "Front-End Developer with 5 years of professional experience specializing in crafting responsive and dynamic user interfaces using Vue.js, enriched by Tailwind CSS for modern and clean design with sophisticated state management. Expertise in TypeScript for robust front-end architecture, ensuring type safety and adherence to maintainable coding standards, essential for complex, large-scale web applications."
+      ...commonPersonalInfoBase, // Use common base
+      "title": "Front-End Developer", // Version-specific
+      "summary": "Front-End Developer with 5 years of professional experience specializing in crafting responsive and dynamic user interfaces using Vue.js, enriched by Tailwind CSS for modern and clean design with sophisticated state management. Expertise in TypeScript for robust front-end architecture, ensuring type safety and adherence to maintainable coding standards, essential for complex, large-scale web applications." // Version-specific
     },
     "experience": [
       {
@@ -64,75 +136,27 @@
         "external": "https://www.era2140.com/"
       }
     ],
-    "skills": [
-      "Vue.js",
-      "TypeScript",
-      "JavaScript (ES6)",
-      "Tailwind CSS",
-      "Responsive UI Design",
-      "HTML5 & CSS3",
-      "Vite",
-      "Playwright",
-      "CI/CD Workflows (Jenkins, AWS CodePipeline, Netlify)",
-      "Docker",
-      "Web3 Integration",
-      "Firebase Services",
-      "AWS Ecosystem",
-      "Websockets",
-      "Agile Methodologies",
-      "User Experience (UX) Design",
-      "Mentoring New Web Developers"
-    ],
-    "education": [
+    "skills": frontendSkills,
+    "education": commonEducation, // Use common education
+    "references": [ // Combine common base with specific content
       {
-        "degree": "Political Scientist, Political Science and Government",
-        "institution": "Universidad Nacional de Colombia",
-        "location": "Colombia",
-        "years": "2012 - 2017"
-      }
-    ],
-    "references": [
-      {
-        "name": "Yanis Aissani",
-        "title": "Full Stack / Blockchain Engineer",
-        "company": "ERA 2140",
+        ...commonReferencesBase[0],
         "content": "I had the chance to work with Enrique, who is an excellent developer with many technical qualities."
       },
       {
-        "name": "Juan David Polanco Rojas",
-        "title": "Blockchain Developer",
-        "company": "BSM - Universitat Pompeu Fabra",
+        ...commonReferencesBase[1],
         "content": "I have worked side by side with Enrique on two blockchain projects and look forward to many more. His knowledge in the blockchain ecosystem is impressive; he's up-to-date with the latest trends and tools. Working with Enrique is exciting due to his can-do mentality and best coding practices."
       }
     ],
-    "honors_awards": [
-      {
-        "title": "BCN HACK - Aüt protocol [2nd prize] - ETH BCN",
-        "date": "Jul 2022",
-        "description": "Drug Duck, 'Foursquare' for drugs to save thousands of lives annually.",
-        "link": "https://taikai.network/en/datanatives/hackathons/bcn-hack/projects/cl5e0nc539095610108tojenn07/idea"
-      },
-      {
-        "title": "ETHCC HACK 2022 - Polygon [Best Tooling / Infra Project IRL]",
-        "date": "Aug 2022",
-        "description": "Red Packet aims to gamify and simplify sending gifts to friends and family across multiple blockchains.",
-        "link": "https://devpost.com/software/red-pocket"
-      }
-    ]
+    "honors_awards": commonHonorsAwards // Use common honors_awards
   },
   {
     "id": "en-2",
     "language": "en",
     "version": 2,
     "personal_info": {
-      "name": "Enrique Peña",
+      ...commonPersonalInfoBase,
       "title": "Full Stack Developer",
-      "contact": {
-        "email": "enriquep36@hotmail.com",
-        "phone": "+33 0782708654",
-        "location": "Marseille, France",
-        "linkedin": "https://www.linkedin.com/in/enpepolicy"
-      },
       "summary": "Full Stack Developer specializing in TypeScript-focused software development within the Vue.js framework ecosystem, enhancing web design with responsive and dynamic user interfaces. Adept in Node.js for back-end development, producing high-performance, scalable applications within the AWS ecosystem, complemented by Firebase services for added functionality. Experienced in managing CI/CD workflows with tools like Jenkins, AWS CodePipeline, and Netlify."
     },
     "experience": [
@@ -185,75 +209,27 @@
         "external": "https://www.era2140.com/"
       }
     ],
-    "skills": [
-      "Vue.js",
-      "Node.js",
-      "TypeScript",
-      "JavaScript (ES6)",
-      "Express & Nest.js",
-      "PHP & Laravel",
-      "AWS Ecosystem",
-      "Firebase Services",
-      "CI/CD Workflows (Git, Jenkins, AWS CodePipeline, Netlify)",
-      "Docker",
-      "HTML5 & CSS3",
-      "Tailwind CSS",
-      "MySQL and MongoDB",
-      "API Integration",
-      "Websockets",
-      "Agile Methodologies",
-      "Mentoring New Web Developers"
-    ],
-    "education": [
-      {
-        "degree": "Political Scientist, Political Science and Government",
-        "institution": "Universidad Nacional de Colombia",
-        "location": "Colombia",
-        "years": "2012 - 2017"
-      }
-    ],
+    "skills": fullstackSkills,
+    "education": commonEducation,
     "references": [
       {
-        "name": "Yanis Aissani",
-        "title": "Full Stack / Blockchain Engineer",
-        "company": "ERA 2140",
+        ...commonReferencesBase[0],
         "content": "I had the chance to work with Enrique, an excellent developer with many technical skills and a strong work ethic."
       },
       {
-        "name": "Juan David Polanco Rojas",
-        "title": "Blockchain Developer",
-        "company": "BSM - Universitat Pompeu Fabra",
+        ...commonReferencesBase[1],
         "content": "I have worked side by side with Enrique on two blockchain projects and look forward to many more. His knowledge in the blockchain ecosystem is impressive; he's up-to-date with the latest trends and tools. Working with Enrique is exciting due to his can-do mentality and best coding practices."
       }
     ],
-    "honors_awards": [
-      {
-        "title": "BCN HACK - Aüt protocol [2nd prize] - ETH BCN",
-        "date": "Jul 2022",
-        "description": "Drug Duck, 'Foursquare' for drugs to save thousands of lives annually.",
-        "link": "https://taikai.network/en/datanatives/hackathons/bcn-hack/projects/cl5e0nc539095610108tojenn07/idea"
-      },
-      {
-        "title": "ETHCC HACK 2022 - Polygon [Best Tooling / Infra Project IRL]",
-        "date": "Aug 2022",
-        "description": "Red Packet aims to gamify and simplify sending gifts to friends and family across multiple blockchains.",
-        "link": "https://devpost.com/software/red-pocket"
-      }
-    ]
+    "honors_awards": commonHonorsAwards
   },
   {
     "id": "en-3",
     "language": "en",
     "version": 3,
     "personal_info": {
-      "name": "Enrique Peña",
+      ...commonPersonalInfoBase,
       "title": "Blockchain and Web3 Developer",
-      "contact": {
-        "email": "enriquep36@hotmail.com",
-        "phone": "+33 0782708654",
-        "location": "Marseille, France",
-        "linkedin": "https://www.linkedin.com/in/enpepolicy"
-      },
       "summary": "Blockchain and Web3 Developer with over 5 years of professional experience, including 2 years focused on blockchain technologies and Web3. Competent in developing decentralized applications, smart contract programming, and full-stack Ethereum solutions, with additional expertise in blockchain gaming, NFTs, and DeFi platforms."
     },
     "experience": [
@@ -306,77 +282,27 @@
         "external": "https://www.era2140.com/"
       }
     ],
-    "skills": [
-      "Blockchain Development",
-      "Web3 Technologies",
-      "Smart Contracts",
-      "Ethereum & EVM",
-      "Solidity",
-      "Web3.js & Ethers.js",
-      "Vue.js",
-      "Node.js",
-      "TypeScript",
-      "CI/CD Workflows (Git, Jenkins, AWS CodePipeline, Netlify)",
-      "Docker",
-      "NFT Marketplaces",
-      "DeFi Protocols",
-      "Moralis",
-      "Infura",
-      "MetaMask Integration",
-      "AWS Ecosystem",
-      "Firebase Services",
-      "Mentoring New Web Developers"
-    ],
-    "education": [
-      {
-        "degree": "Political Scientist, Political Science and Government",
-        "institution": "Universidad Nacional de Colombia",
-        "location": "Colombia",
-        "years": "2012 - 2017"
-      }
-    ],
+    "skills": blockchainSkills,
+    "education": commonEducation,
     "references": [
       {
-        "name": "Yanis Aissani",
-        "title": "Full Stack / Blockchain Engineer",
-        "company": "ERA 2140",
+        ...commonReferencesBase[0],
         "content": "Enrique is an excellent developer with many technical skills. His expertise in blockchain technologies is remarkable."
       },
       {
-        "name": "Juan David Polanco Rojas",
-        "title": "Blockchain Developer",
-        "company": "BSM - Universitat Pompeu Fabra",
+        ...commonReferencesBase[1],
         "content": "I have worked side by side with Enrique on two blockchain projects and look forward to many more. His knowledge in the blockchain ecosystem is impressive; he's up-to-date with the latest trends and tools. Working with Enrique is exciting due to his can-do mentality and best coding practices."
       }
     ],
-    "honors_awards": [
-      {
-        "title": "BCN HACK - Aüt protocol [2nd prize] - ETH BCN",
-        "date": "Jul 2022",
-        "description": "Drug Duck, 'Foursquare' for drugs to save thousands of lives annually.",
-        "link": "https://taikai.network/en/datanatives/hackathons/bcn-hack/projects/cl5e0nc539095610108tojenn07/idea"
-      },
-      {
-        "title": "ETHCC HACK 2022 - Polygon [Best Tooling / Infra Project IRL]",
-        "date": "Aug 2022",
-        "description": "Red Packet aims to gamify and simplify sending gifts to friends and family across multiple blockchains.",
-        "link": "https://devpost.com/software/red-pocket"
-      }
-    ]
+    "honors_awards": commonHonorsAwards
   },
   {
     "id": "fr-1",
     "language": "fr",
     "version": 1,
     "personal_info": {
-      "name": "Enrique Peña",
+      ...commonPersonalInfoBase,
       "title": "Développeur Front-End",
-      "contact": {
-        "email": "enriquep36@hotmail.com",
-        "phone": "+33 0782708654",
-        "location": "Marseille, France",
-        "linkedin": "https://www.linkedin.com/in/enpepolicy"
-      },
       "summary": "Développeur Front-End avec 5 ans d'expérience professionnelle, spécialisé dans la création d'interfaces utilisateur réactives et dynamiques en utilisant Vue.js, enrichi par Tailwind CSS pour un design moderne et épuré avec une gestion d'état sophistiquée. Expertise en TypeScript pour une architecture front-end robuste, garantissant la sécurité des types et le respect des normes de codage maintenables, essentiels pour des applications web complexes et à grande échelle."
     },
     "experience": [
@@ -453,75 +379,27 @@
         "external": "https://taste-mkt.com/"
       }
     ],
-    "skills": [
-      "Vue.js",
-      "TypeScript",
-      "JavaScript (ES6)",
-      "Tailwind CSS",
-      "Responsive UI Design",
-      "HTML5 & CSS3",
-      "Vite",
-      "Playwright",
-      "CI/CD Workflows (Jenkins, AWS CodePipeline, Netlify)",
-      "Docker",
-      "Web3 Integration",
-      "Firebase Services",
-      "AWS Ecosystem",
-      "Websockets",
-      "Méthodologies Agile",
-      "User Experience (UX) Design",
-      "Mentorat de nouveaux développeurs web"
-    ],
-    "education": [
-      {
-        "degree": "Scientifique politique, Sciences politiques et gouvernement",
-        "institution": "Universidad Nacional de Colombia",
-        "location": "Colombie",
-        "years": "2012 - 2017"
-      }
-    ],
+    "skills": frontendSkills,
+    "education": commonEducation,
     "references": [
       {
-        "name": "Yanis Aissani",
-        "title": "Full Stack / Blockchain Engineer",
-        "company": "ERA 2140",
+        ...commonReferencesBase[0],
         "content": "J'ai eu la chance de travailler avec Enrique, qui est un excellent développeur avec de nombreuses qualités techniques."
       },
       {
-        "name": "Juan David Polanco Rojas",
-        "title": "Développeur Blockchain",
-        "company": "BSM - Universitat Pompeu Fabra",
+        ...commonReferencesBase[1],
         "content": "J'ai travaillé aux côtés d'Enrique sur deux projets blockchain et j'attends avec impatience d'en réaliser beaucoup d'autres. Sa connaissance de l'écosystème blockchain est impressionnante; il est à jour avec les dernières tendances et outils. Travailler avec Enrique est passionnant grâce à sa mentalité positive et ses meilleures pratiques de codage."
       }
     ],
-    "honors_awards": [
-      {
-        "title": "BCN HACK - Aüt protocol [2ème prix] - ETH BCN",
-        "date": "juillet 2022",
-        "description": "Drug Duck, un 'Foursquare' pour les drogues visant à sauver des milliers de vies chaque année.",
-        "link": "https://taikai.network/en/datanatives/hackathons/bcn-hack/projects/cl5e0nc539095610108tojenn07/idea"
-      },
-      {
-        "title": "ETHCC HACK 2022 - Polygon [Meilleur projet d'outillage / infrastructure IRL]",
-        "date": "août 2022",
-        "description": "Red Packet vise à gamifier et simplifier l'envoi de cadeaux à des amis et à la famille sur plusieurs blockchains.",
-        "link": "https://devpost.com/software/red-pocket"
-      }
-    ]
+    "honors_awards": commonHonorsAwards
   },
   {
     "id": "fr-2",
     "language": "fr",
     "version": 2,
     "personal_info": {
-      "name": "Enrique Peña",
+      ...commonPersonalInfoBase,
       "title": "Développeur Full Stack",
-      "contact": {
-        "email": "enriquep36@hotmail.com",
-        "phone": "+33 0782708654",
-        "location": "Marseille, France",
-        "linkedin": "https://www.linkedin.com/in/enpepolicy"
-      },
       "summary": "Développeur Full Stack spécialisé dans le développement logiciel axé sur TypeScript au sein de l'écosystème du framework Vue.js, améliorant la conception web avec des interfaces utilisateur réactives et dynamiques. Compétent en Node.js pour le développement back-end, produisant des applications performantes et évolutives au sein de l'écosystème AWS, complétées par les services Firebase pour une fonctionnalité accrue. Expérimenté dans la gestion des workflows CI/CD avec des outils comme Jenkins, AWS CodePipeline et Netlify."
     },
     "experience": [
@@ -574,75 +452,27 @@
         "external": "https://www.era2140.com/"
       }
     ],
-    "skills": [
-      "Vue.js",
-      "Node.js",
-      "TypeScript",
-      "JavaScript (ES6)",
-      "Express & Nest.js",
-      "PHP & Laravel",
-      "AWS Ecosystem",
-      "Firebase Services",
-      "CI/CD Workflows (Git, Jenkins, AWS CodePipeline, Netlify)",
-      "Docker",
-      "HTML5 & CSS3",
-      "Tailwind CSS",
-      "MySQL et MongoDB",
-      "API Integration",
-      "Websockets",
-      "Méthodologies Agile",
-      "Mentorat de nouveaux développeurs web"
-    ],
-    "education": [
-      {
-        "degree": "Scientifique politique, Sciences politiques et gouvernement",
-        "institution": "Universidad Nacional de Colombia",
-        "location": "Colombie",
-        "years": "2012 - 2017"
-      }
-    ],
+    "skills": fullstackSkills,
+    "education": commonEducation,
     "references": [
       {
-        "name": "Yanis Aissani",
-        "title": "Full Stack / Blockchain Engineer",
-        "company": "ERA 2140",
+        ...commonReferencesBase[0],
         "content": "J'ai eu la chance de travailler avec Enrique, un excellent développeur avec de nombreuses compétences techniques et une solide éthique de travail."
       },
       {
-        "name": "Juan David Polanco Rojas",
-        "title": "Développeur Blockchain",
-        "company": "BSM - Universitat Pompeu Fabra",
+        ...commonReferencesBase[1],
         "content": "J'ai travaillé aux côtés d'Enrique sur deux projets blockchain et j'attends avec impatience d'en réaliser beaucoup d'autres. Sa connaissance de l'écosystème blockchain est impressionnante; il est à jour avec les dernières tendances et outils. Travailler avec Enrique est passionnant grâce à sa mentalité positive et ses meilleures pratiques de codage."
       }
     ],
-    "honors_awards": [
-      {
-        "title": "BCN HACK - Aüt protocol [2ème prix] - ETH BCN",
-        "date": "juillet 2022",
-        "description": "Drug Duck, un 'Foursquare' pour les drogues visant à sauver des milliers de vies chaque année.",
-        "link": "https://taikai.network/en/datanatives/hackathons/bcn-hack/projects/cl5e0nc539095610108tojenn07/idea"
-      },
-      {
-        "title": "ETHCC HACK 2022 - Polygon [Meilleur projet d'outillage / infrastructure IRL]",
-        "date": "août 2022",
-        "description": "Red Packet vise à gamifier et simplifier l'envoi de cadeaux à des amis et à la famille sur plusieurs blockchains.",
-        "link": "https://devpost.com/software/red-pocket"
-      }
-    ]
+    "honors_awards": commonHonorsAwards
   },
   {
     "id": "fr-3",
     "language": "fr",
     "version": 3,
     "personal_info": {
-      "name": "Enrique Peña",
+      ...commonPersonalInfoBase,
       "title": "Développeur Blockchain et Web3",
-      "contact": {
-        "email": "enriquep36@hotmail.com",
-        "phone": "+33 0782708654",
-        "location": "Marseille, France",
-        "linkedin": "https://www.linkedin.com/in/enpepolicy"
-      },
       "summary": "Développeur Blockchain et Web3 avec plus de 5 ans d'expérience professionnelle, dont 2 ans axés sur les technologies blockchain et Web3. Compétent dans le développement d'applications décentralisées, la programmation de smart contracts et les solutions Ethereum full stack, avec une expertise supplémentaire dans le gaming blockchain, les NFT et les plateformes DeFi."
     },
     "experience": [
@@ -695,78 +525,28 @@
         "external": "https://www.era2140.com/"
       }
     ],
-    "skills": [
-      "Blockchain Development",
-      "Web3 Technologies",
-      "Smart Contracts",
-      "Ethereum & EVM",
-      "Solidity",
-      "Web3.js & Ethers.js",
-      "Vue.js",
-      "Node.js",
-      "TypeScript",
-      "CI/CD Workflows (Git, Jenkins, AWS CodePipeline, Netlify)",
-      "Docker",
-      "NFT Marketplaces",
-      "DeFi Protocols",
-      "Moralis",
-      "Infura",
-      "MetaMask Integration",
-      "AWS Ecosystem",
-      "Firebase Services",
-      "Mentorat de nouveaux développeurs web"
-    ],
-    "education": [
-      {
-        "degree": "Scientifique politique, Sciences politiques et gouvernement",
-        "institution": "Universidad Nacional de Colombia",
-        "location": "Colombie",
-        "years": "2012 - 2017"
-      }
-    ],
+    "skills": blockchainSkills,
+    "education": commonEducation,
     "references": [
       {
-        "name": "Yanis Aissani",
-        "title": "Full Stack / Blockchain Engineer",
-        "company": "ERA 2140",
+        ...commonReferencesBase[0],
         "content": "Enrique est un excellent développeur avec de nombreuses compétences techniques. Son expertise dans les technologies blockchain est remarquable."
       },
       {
-        "name": "Juan David Polanco Rojas",
-        "title": "Développeur Blockchain",
-        "company": "BSM - Universitat Pompeu Fabra",
+        ...commonReferencesBase[1],
         "content": "J'ai travaillé aux côtés d'Enrique sur deux projets blockchain et j'attends avec impatience d'en réaliser beaucoup d'autres. Sa connaissance de l'écosystème blockchain est impressionnante; il est à jour avec les dernières tendances et outils. Travailler avec Enrique est passionnant grâce à sa mentalité positive et ses meilleures pratiques de codage."
       }
     ],
-    "honors_awards": [
-      {
-        "title": "BCN HACK - Aüt protocol [2ème prix] - ETH BCN",
-        "date": "juillet 2022",
-        "description": "Drug Duck, un 'Foursquare' pour les drogues visant à sauver des milliers de vies chaque année.",
-        "link": "https://taikai.network/en/datanatives/hackathons/bcn-hack/projects/cl5e0nc539095610108tojenn07/idea"
-      },
-      {
-        "title": "ETHCC HACK 2022 - Polygon [Meilleur projet d'outillage / infrastructure IRL]",
-        "date": "août 2022",
-        "description": "Red Packet vise à gamifier et simplifier l'envoi de cadeaux à des amis et à la famille sur plusieurs blockchains.",
-        "link": "https://devpost.com/software/red-pocket"
-      }
-    ]
+    "honors_awards": commonHonorsAwards
   },
   {
     "id": "es-1",
     "language": "es",
     "version": 1,
     "personal_info": {
-      "name": "Enrique Peña",
+      ...commonPersonalInfoBase,
       "title": "Desarrollador Front-End",
-      "contact": {
-        "email": "enriquep36@hotmail.com",
-        "phone": "+33 0782708654",
-        "location": "Marsella, Francia",
-        "linkedin": "https://www.linkedin.com/in/enpepolicy"
-      },
-      "summary": "Soy un Desarrollador Front-End con 5 años de experiencia profesional, especializado en crear interfaces de usuario responsivas y dinámicas utilizando Vue.js, enriquecidas por Tailwind CSS para un diseño moderno y limpio con gestión de estado sofisticada. Tengo experiencia en TypeScript para una arquitectura front-end robusta, asegurando seguridad de tipos y adherencia a estándares de código mantenibles, esenciales para aplicaciones web complejas y de gran escala."
+      "summary": "Soy un Desarrollador Front-End con 5 años de experiencia profesional, especializado en crear interfaces de usuario responsivas y dinámicas utilizando Vue.js, enriquecidas por Tailwind CSS para un diseño moderno y limpio con gestión de estado sofisticada. Tengo experiencia en TypeScript para una arquitectura front-end robusta, asegurando seguridad de tipos y adherencia a estándares de código mantenibles, esenciales para aplicaciones web complexas y de gran escala."
     },
     "experience": [
       {
@@ -837,56 +617,27 @@
       "User Experience (UX) Design",
       "Mentoría de nuevos desarrolladores web"
     ],
-    "education": [
-      {
-        "degree": "Científico Político, Ciencias Políticas y Gobierno",
-        "institution": "Universidad Nacional de Colombia",
-        "location": "Colombia",
-        "years": "2012 - 2017"
-      }
-    ],
+    "skills": frontendSkills,
+    "education": commonEducation,
     "references": [
       {
-        "name": "Yanis Aissani",
-        "title": "Full Stack / Blockchain Engineer",
-        "company": "ERA 2140",
+        ...commonReferencesBase[0],
         "content": "Tuve la oportunidad de trabajar con Enrique, quien es un excelente desarrollador con muchas cualidades técnicas."
       },
       {
-        "name": "Juan David Polanco Rojas",
-        "title": "Desarrollador Blockchain",
-        "company": "BSM - Universitat Pompeu Fabra",
+        ...commonReferencesBase[1],
         "content": "He trabajado codo a codo con Enrique en dos proyectos de blockchain y espero muchos más. Su conocimiento en el ecosistema blockchain es impresionante; está al día con las últimas tendencias y herramientas. Trabajar con Enrique es emocionante debido a su mentalidad positiva y sus mejores prácticas de codificación."
       }
     ],
-    "honors_awards": [
-      {
-        "title": "BCN HACK - Aüt protocol [2º premio] - ETH BCN",
-        "date": "Jul 2022",
-        "description": "Drug Duck, 'Foursquare' para drogas para salvar miles de vidas anualmente.",
-        "link": "https://taikai.network/en/datanatives/hackathons/bcn-hack/projects/cl5e0nc539095610108tojenn07/idea"
-      },
-      {
-        "title": "ETHCC HACK 2022 - Polygon [Mejor Proyecto de Herramientas / Infraestructura IRL]",
-        "date": "Ago 2022",
-        "description": "Red Packet tiene como objetivo gamificar y simplificar el envío de regalos a amigos y familiares a través de múltiples blockchains.",
-        "link": "https://devpost.com/software/red-pocket"
-      }
-    ]
+    "honors_awards": commonHonorsAwards
   },
   {
     "id": "es-2",
     "language": "es",
     "version": 2,
     "personal_info": {
-      "name": "Enrique Peña",
+      ...commonPersonalInfoBase,
       "title": "Desarrollador Full Stack",
-      "contact": {
-        "email": "enriquep36@hotmail.com",
-        "phone": "+33 0782708654",
-        "location": "Marsella, Francia",
-        "linkedin": "https://www.linkedin.com/in/enpepolicy"
-      },
       "summary": "Soy un Desarrollador Full Stack especializado en desarrollo de software enfocado en TypeScript dentro del ecosistema del framework Vue.js, mejorando el diseño web con interfaces de usuario responsivas y dinámicas. Soy experto en Node.js para desarrollo back-end, produciendo aplicaciones escalables y de alto rendimiento dentro del ecosistema AWS, complementadas con servicios de Firebase para funcionalidad adicional. Tengo experiencia en la gestión de flujos de trabajo CI/CD con herramientas como Jenkins, AWS CodePipeline y Netlify."
     },
     "experience": [
@@ -958,56 +709,27 @@
       "Metodologías Ágiles",
       "Mentoría de nuevos desarrolladores web"
     ],
-    "education": [
-      {
-        "degree": "Científico Político, Ciencias Políticas y Gobierno",
-        "institution": "Universidad Nacional de Colombia",
-        "location": "Colombia",
-        "years": "2012 - 2017"
-      }
-    ],
+    "skills": fullstackSkills,
+    "education": commonEducation,
     "references": [
       {
-        "name": "Yanis Aissani",
-        "title": "Full Stack / Blockchain Engineer",
-        "company": "ERA 2140",
+        ...commonReferencesBase[0],
         "content": "Tuve la oportunidad de trabajar con Enrique, un excelente desarrollador con muchas habilidades técnicas y una fuerte ética de trabajo."
       },
       {
-        "name": "Juan David Polanco Rojas",
-        "title": "Desarrollador Blockchain",
-        "company": "BSM - Universitat Pompeu Fabra",
+        ...commonReferencesBase[1],
         "content": "He trabajado codo a codo con Enrique en dos proyectos de blockchain y espero muchos más. Su conocimiento en el ecosistema blockchain es impresionante; está al día con las últimas tendencias y herramientas. Trabajar con Enrique es emocionante debido a su mentalidad positiva y sus mejores prácticas de codificación."
       }
     ],
-    "honors_awards": [
-      {
-        "title": "BCN HACK - Aüt protocol [2º premio] - ETH BCN",
-        "date": "Jul 2022",
-        "description": "Drug Duck, 'Foursquare' para drogas para salvar miles de vidas anualmente.",
-        "link": "https://taikai.network/en/datanatives/hackathons/bcn-hack/projects/cl5e0nc539095610108tojenn07/idea"
-      },
-      {
-        "title": "ETHCC HACK 2022 - Polygon [Mejor Proyecto de Herramientas / Infraestructura IRL]",
-        "date": "Ago 2022",
-        "description": "Red Packet tiene como objetivo gamificar y simplificar el envío de regalos a amigos y familiares a través de múltiples blockchains.",
-        "link": "https://devpost.com/software/red-pocket"
-      }
-    ]
+    "honors_awards": commonHonorsAwards
   },
   {
     "id": "es-3",
     "language": "es",
     "version": 3,
     "personal_info": {
-      "name": "Enrique Peña",
+      ...commonPersonalInfoBase,
       "title": "Desarrollador Blockchain y Web3",
-      "contact": {
-        "email": "enriquep36@hotmail.com",
-        "phone": "+33 0782708654",
-        "location": "Marsella, Francia",
-        "linkedin": "https://www.linkedin.com/in/enpepolicy"
-      },
       "summary": "Soy un Desarrollador Blockchain y Web3 con más de 5 años de experiencia profesional, incluyendo 2 años enfocado en tecnologías blockchain y Web3. Competente en el desarrollo de aplicaciones descentralizadas, programación de smart contracts y soluciones Ethereum full stack, con experiencia adicional en juegos blockchain, NFTs y plataformas DeFi."
     },
     "experience": [
@@ -1081,41 +803,20 @@
       "Firebase Services",
       "Mentoría de nuevos desarrolladores web"
     ],
-    "education": [
-      {
-        "degree": "Científico Político, Ciencias Políticas y Gobierno",
-        "institution": "Universidad Nacional de Colombia",
-        "location": "Colombia",
-        "years": "2012 - 2017"
-      }
-    ],
+    "skills": blockchainSkills,
+    "education": commonEducation,
     "references": [
       {
-        "name": "Yanis Aissani",
-        "title": "Full Stack / Blockchain Engineer",
-        "company": "ERA 2140",
+        ...commonReferencesBase[0],
         "content": "Enrique es un excelente desarrollador con muchas habilidades técnicas. Su experiencia en tecnologías blockchain es notable."
       },
       {
-        "name": "Juan David Polanco Rojas",
-        "title": "Desarrollador Blockchain",
-        "company": "BSM - Universitat Pompeu Fabra",
+        ...commonReferencesBase[1],
         "content": "He trabajado codo a codo con Enrique en dos proyectos de blockchain y espero muchos más. Su conocimiento en el ecosistema blockchain es impresionante; está al día con las últimas tendencias y herramientas. Trabajar con Enrique es emocionante debido a su mentalidad positiva y sus mejores prácticas de codificación."
       }
     ],
-    "honors_awards": [
-      {
-        "title": "BCN HACK - Aüt protocol [2º premio] - ETH BCN",
-        "date": "Jul 2022",
-        "description": "Drug Duck, 'Foursquare' para drogas para salvar miles de vidas anualmente.",
-        "link": "https://taikai.network/en/datanatives/hackathons/bcn-hack/projects/cl5e0nc539095610108tojenn07/idea"
-      },
-      {
-        "title": "ETHCC HACK 2022 - Polygon [Mejor Proyecto de Herramientas / Infraestructura IRL]",
-        "date": "Ago 2022",
-        "description": "Red Packet tiene como objetivo gamificar y simplificar el envío de regalos a amigos y familiares a través de múltiples blockchains.",
-        "link": "https://devpost.com/software/red-pocket"
-      }
-    ]
+    "honors_awards": commonHonorsAwards
   }  
-]
+];
+
+export default cvsCollection;

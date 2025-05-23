@@ -1,14 +1,18 @@
 # Progress
 
-## What Works (as of Font Awesome to Emoji Migration)
+## What Works
 
 - **Local Development Server (`npm run dev`)**: Fully functional.
-- **Dependencies**: All managed via npm. Font Awesome removed, emojis used for icons.
-- **GitHub Action Build (`npm run build` in CI)**: Assumed successful pending `npm install` and commit.
-- **GitHub Pages Deployment Runtime (`https://enpepolicy.github.io/cv-exporter/`)**: Assumed functional pending `npm install`, commit, and deployment of new changes.
-- **Icon Replacement**: Font Awesome icons replaced with emojis in `src/App.vue`.
+- **Dependencies**: All managed via npm. Font Awesome successfully removed.
+- **Icon System**: Font Awesome icons fully replaced with native emojis in `src/App.vue`. Visuals and export functionality verified.
 - **Code Cleanup**: Font Awesome references removed from `src/main.js` and `package.json`.
-- **Memory Bank Updated**: `techContext.md`, `systemPatterns.md`, and `activeContext.md` reflect the icon system change.
+- **CV Data Refactoring (Phase 1)**:
+    - `src/cvs.json` converted to `src/cvsData.js` (JavaScript module).
+    - `src/App.vue` updated to import data from `src/cvsData.js`.
+    - Common data sections (personal info base, education, honors/awards, references base) and skill sets (frontend, fullstack, blockchain) refactored into shared constants within `src/cvsData.js`.
+    - These constants are now used across all CV entries for the respective sections, significantly reducing data duplication.
+    - Application tested and confirmed functional after these data refactoring steps.
+- **Memory Bank Updated**: `techContext.md`, `systemPatterns.md`, and `activeContext.md` reflect the icon system change and the initial data refactoring.
 
 **Previous PDF/Styling Iterations (Context Kept for Reference):**
 - **Iteration 1**: General PDF robustness (overflow, wrapping, page breaks, line heights).
@@ -18,33 +22,28 @@
 
 ## What's Left to Build / Verify
 
-- **`npm install` Execution**: Finalize removal of Font Awesome packages from `node_modules` and update `package-lock.json`. (User previously denied, awaiting confirmation/re-attempt).
-- **Visual Testing (Post-Emoji)**:
-    - Confirm all emojis display correctly across different browsers/OS if possible.
-    - Check layout and alignment around new emojis in `src/App.vue`.
-    - Verify the new external link icon (↗️) style.
-- **Functional Testing**:
-    - Test PDF export functionality (check for regressions and new emoji rendering).
-    - Test image export functionality (check for regressions and new emoji rendering).
-- **Labels in `cvs.json`**:
-    - User needs to ensure that each CV object in `src/cvs.json` contains a `labels` object with appropriate translations for UI elements for full localization functionality (ongoing consideration).
-- **General Testing**: Further testing of all features on the deployed site is always recommended after these changes.
+- **`npm install` Execution**: Still pending to finalize removal of Font Awesome packages from `node_modules` and update `package-lock.json`. (User previously denied, awaiting confirmation/re-attempt).
+- **CV Data Refactoring (Phase 2 - Experience Section)**: Further de-duplication of the `experience` section in `src/cvsData.js` by creating base experience objects and localized details (if desired by user).
+- **Deletion of `src/cvs.json`**: Pending user confirmation after successful refactor and testing of `src/cvsData.js`.
+- **Labels in `cvsData.js`**: User needs to ensure that each CV object in `src/cvsData.js` (or the common structures it uses) contains a `labels` object with appropriate translations for UI elements for full localization functionality (ongoing consideration).
+- **General Testing**: Further testing of all features on the deployed site is always recommended after these significant changes.
 
 ## Current Status
 
-- **Icon System Refactor**: Successfully transitioned from Font Awesome to native emojis.
-- **Dependency Management**: Font Awesome dependencies removed from `package.json`. `npm install` pending.
-- **Data Handling**: `cvs.json` is a local module, imported and transformed.
+- **Icon System Refactor**: Completed. Emojis are in use and tested.
+- **Dependency Management**: Font Awesome dependencies removed from `package.json`. `npm install` still pending.
+- **Data Handling**: CV data migrated to `src/cvsData.js`, a JavaScript module. Common sections (personal_info base, education, honors, references base, skills) have been de-duplicated using shared constants. The module exports a flat array compatible with `App.vue`.
 - **Deployment**: Awaiting `npm install` and then deployment of these changes.
-- **PDF Styling**: Previous styling iterations are in place; testing with new emojis is needed.
+- **PDF Styling**: Verified with emojis.
 
 ## Known Issues
 
-- **(Resolved)** GitHub Action build failure due to missing Font Awesome package (this issue should remain resolved as FA is now removed).
-- **(Resolved)** GitHub Pages serving incorrect files due to misconfigured deployment source, leading to 404 for `main.js`.
-- **(Potential)** UI labels might not update correctly if `labels` objects are missing or incomplete in `src/cvs.json`.
-- **(Pending Verification - Post-Emoji)** Visual rendering and alignment of emojis.
-- **(Pending Verification - Post-Emoji)** PDF/Image export rendering with emojis.
+- **(Resolved)** GitHub Action build failure due to missing Font Awesome package.
+- **(Resolved)** GitHub Pages serving incorrect files due to misconfigured deployment source.
+- **(Potential)** UI labels might not update correctly if `labels` objects are missing or incomplete in `cvsData.js`.
+- **(Verified)** Visual rendering and alignment of emojis appear correct.
+- **(Verified)** PDF/Image export rendering with emojis functions correctly.
+- **(Observation)** A 404 error for an unspecified resource was observed in the browser console during `npm run dev`. This did not affect the tested functionality but may warrant investigation if other issues arise.
 
 ## Evolution of Project Decisions
 
@@ -57,5 +56,12 @@
 - **Problem 8 (PDF Export - Feedback on Iteration 2)**: Skill chip alignment in PDF still problematic (likely wrapped line alignment).
 - **Decision 8 (Iteration 3)**: Added `align-content-start` to the parent `div` of skill chips to control the alignment of wrapped lines.
 - **Problem 9 (Icon System)**: User request to replace Font Awesome icons with emojis and remove Font Awesome.
-- **Decision 9 (Current)**: Replaced Font Awesome icons with emojis in `src/App.vue`, removed Font Awesome from `src/main.js` and `package.json`. Updated Memory Bank. `npm install` and testing are next.
-- **Current State**: Project icon system refactored to use emojis. Awaiting `npm install` and thorough testing.
+- **Decision 9 (Completed)**: Replaced Font Awesome icons with emojis in `src/App.vue`, removed Font Awesome from `src/main.js` and `package.json`. Updated Memory Bank. Visual and functional testing completed. `npm install` is pending.
+- **Problem 10 (Data Repetition)**: CV data in `src/cvs.json` was highly repetitive across different language/version combinations. User requested refactoring to a JS module to reduce duplication.
+- **Decision 10 (In Progress)**:
+    - Renamed `src/cvs.json` to `src/cvsData.js` and changed `App.vue` import.
+    - Defined common constants in `cvsData.js` for `personal_info` (base), `education`, `honors_awards`, `references` (base), and skill sets (`frontendSkills`, `fullstackSkills`, `blockchainSkills`).
+    - Updated all CV entries in `cvsCollection` within `cvsData.js` to use these constants for the respective sections.
+    - Application tested and confirmed functional with these changes.
+    - Next steps: Update memory bank, discuss deleting old `cvs.json`, and potentially refactor `experience` section further.
+- **Current State**: CV data partially refactored into `src/cvsData.js` with significant de-duplication achieved for common sections and skills. Application is functional. `npm install` for Font Awesome removal still pending.

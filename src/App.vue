@@ -136,7 +136,7 @@
 <script>
 import html2pdf from 'html2pdf.js';
 import html2canvas from 'html2canvas';
-import rawCvsData from './cvs.json'; // Import the JSON data
+import rawCvsData from './cvsData.js'; // Import the JS data module
 
 export default {
   data() {

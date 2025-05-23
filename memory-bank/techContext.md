@@ -13,7 +13,7 @@
 - **CSS Framework**:
     - Tailwind CSS (managed via npm, configured in `tailwind.config.js` and `postcss.config.js`)
 - **Data Format**:
-    - JSON (for `src/cvs.json`, imported directly into the application)
+    - JavaScript Module (for `src/cvsData.js`). CV data is defined within this module, using shared constants to de-duplicate common information (like personal details, education, skills, etc.) before exporting a flat array of CV objects.
 - **Export Libraries**:
     - `html2pdf.js` (managed via npm) - For PDF export.
     - `html2canvas.js` (managed via npm) - For image export.
@@ -71,6 +71,6 @@ Key dependencies include:
     - Computed properties derive data.
     - Watchers react to state changes.
 - **Tailwind CSS**: Utility classes are applied in `src/App.vue` template. Global styles and Tailwind directives are in `src/assets/main.css`. Configuration in `tailwind.config.js` and `postcss.config.js`.
-- **`src/cvs.json`**: Acts as a simple database, imported directly as a module into `src/App.vue`. Data is transformed from a flat list to a nested structure (language -> versions) within the `processCVs` method in `App.vue`.
+- **`src/cvsData.js`**: Acts as the primary data source. It's a JavaScript module that defines shared constants for common CV information and skill sets. It then programmatically constructs and exports a flat array of all CV versions. This array is imported by `src/App.vue`, where the `processCVs` method transforms it into a nested structure (language -> versions) for display. This approach centralizes data management and reduces redundancy.
 - **`html2pdf.js` / `html2canvas.js`**: Imported as modules and invoked in Vue methods in `src/App.vue`, targeting the `#cv-content` div.
 - **Emojis**: Directly embedded as text characters within the Vue template (`src/App.vue`). No external library is used for icons.

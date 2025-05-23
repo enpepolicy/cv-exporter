@@ -2,58 +2,46 @@
 
 ## Current Focus
 
-- **Icon System Replacement**: Transitioned from Font Awesome to native emojis for all icons.
-- **Visual Verification**: Ensuring emojis render correctly and maintain visual appeal.
+Refactoring CV data (`cvsData.js`) to de-duplicate content. Initial phase (common sections like personal info base, education, honors/awards, references base, and skills lists) complete and tested.
 
 ## Recent Changes
 
-- **Font Awesome Removal**:
-    - Replaced all `<font-awesome-icon>` components in `src/App.vue` with corresponding emojis:
-        - PDF Export: 📄
-        - Image Export: 🖼️
-        - Email: 📧
-        - Phone: 📞
-        - Location: 📍
-        - LinkedIn: 💼
-        - External Link (Experience): ↗️ (styling also changed to remove circular background)
-    - Removed Font Awesome imports and global component registration from `src/main.js`.
-    - Removed Font Awesome dependencies from `package.json` (`@fortawesome/fontawesome-svg-core`, `@fortawesome/free-solid-svg-icons`, `@fortawesome/free-brands-svg-icons`, `@fortawesome/vue-fontawesome`).
-- **Memory Bank Updates**:
-    - `techContext.md` updated to reflect emoji usage and removal of Font Awesome.
-    - `systemPatterns.md` updated to reflect emoji usage and removal of Font Awesome.
-
-**Previous PDF/Styling Iterations (Context Kept for Reference):**
-- **Iteration 1**: General PDF robustness (overflow, wrapping, page breaks, line heights).
-- **Iteration 2 (Targeted Icon/Chip Fixes - Pre-Emoji)**: Granular alignment for header icons (wrapping icon-text pairs), external link icon, and `align-middle` for skill chips.
-- **Iteration 3 (Skill Chip Container Fix)**: Added `align-content-start` to the skill chip container div.
-- **Iteration 4 (Header Contact Block Structure - Pre-Emoji)**: Structural changes to header contact info for alignment.
+- Renamed `src/cvs.json` to `src/cvsData.js` and converted it to a JavaScript module.
+- Updated `src/App.vue` to import data from `src/cvsData.js`.
+- Refactored `cvsData.js` to define and use shared constants for:
+    - `commonPersonalInfoBase` (name, contact details)
+    - `commonEducation`
+    - `commonHonorsAwards`
+    - `commonReferencesBase` (structure for references)
+    - `frontendSkills`, `fullstackSkills`, `blockchainSkills`
+- Applied these constants to all CV entries in `cvsCollection` for the respective sections.
+- Verified basic application functionality (data loading, display) after these refactoring steps.
+- Previous task (Emoji migration) was successfully completed and documented.
 
 ## Next Steps
 
-- **Run `npm install`**: To finalize the removal of Font Awesome packages from `node_modules` and update `package-lock.json`. (User previously denied, will re-attempt or await confirmation).
-- **Visual Testing**:
-    - Run the development server (`npm run dev`).
-    - Use browser tools to visually inspect the application:
-        - Confirm all emojis are displayed correctly.
-        - Check layout and alignment around new emojis.
-        - Verify the new external link icon (↗️) style.
-- **Functional Testing**:
-    - Test PDF export functionality.
-    - Test image export functionality.
-- **Update `progress.md`**: Document the successful transition to emojis and the removal of Font Awesome.
-- **Address any visual or functional issues** that arise from the emoji replacement.
+- Update `progress.md`, `systemPatterns.md`, and `techContext.md` to reflect the data refactoring in `cvsData.js`.
+- Ask the user for confirmation to delete the now redundant `src/cvs.json` file.
+- Discuss potential further refactoring of the `experience` section within `cvsData.js` for more advanced de-duplication, if desired by the user.
+- Await further instructions.
 
 ## Active Decisions & Considerations
 
-- **Emoji for Icons**: Switched to native emojis for simplicity and to remove an external dependency. This may have implications for cross-browser/OS rendering consistency, but is generally well-supported.
-- **Styling Adjustments for Emojis**: Emojis are treated as text characters, so their alignment and spacing might need different considerations than font icons. The external link icon style was explicitly changed.
+- **Emoji for Icons**: (Completed) Switched to native emojis.
+- **Styling Adjustments for Emojis**: (Completed) Emojis are treated as text characters.
+- **Data Refactoring Strategy**: The `cvsData.js` module is refactored internally but continues to export a flat array (`cvsCollection`) in the same structure previously provided by `cvs.json`. This minimizes changes required in `App.vue`, particularly in the `processCVs` method.
+- **Iterative Refactoring**: Large refactoring tasks are best done in stages, with testing after each stage.
 
 ## Important Patterns & Preferences
 
-- **Tailwind CSS for Styling**: Continue to leverage Tailwind utility classes for any adjustments needed around emojis.
-- **Dependency Minimization**: Removing Font Awesome simplifies the project's dependencies.
+- **Tailwind CSS for Styling**: Continue to leverage Tailwind utility classes.
+- **Dependency Minimization**: Ongoing goal (e.g., Font Awesome removal).
+- **Memory Bank Maintenance**: Core files (`projectbrief.md`, `productContext.md`, `systemPatterns.md`, `techContext.md`, `activeContext.md`, `progress.md`) are kept up-to-date to reflect the project's current state and evolution.
 
 ## Learnings & Project Insights
 
-- Replacing an icon library with emojis can reduce dependencies but requires careful testing of visual consistency and alignment.
-- User feedback is crucial for catching missed details or undesired styling changes during refactoring.
+- Replacing an icon library with emojis can reduce dependencies but requires careful testing of visual consistency and alignment. (Insight from previous task)
+- User feedback is crucial for catching missed details or undesired styling changes during refactoring. (General insight)
+- Maintaining a comprehensive Memory Bank is essential for project continuity and effective task resumption. (Core principle)
+- Iterative refactoring with testing at each step helps manage complexity and catch issues early.
+- When refactoring data sources, maintaining the expected output structure for consumers (like Vue components) can simplify the transition.
