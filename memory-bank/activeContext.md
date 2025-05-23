@@ -12,8 +12,12 @@ CV data management and structure. Recently completed refactoring `src/cvsData.js
     - Created individual experience modules under `src/data/experiences/` (e.g., `alloy.js`, `dispatcherPro.js`, etc.).
     - Created CV assembly files per language under `src/data/cvs/` (e.g., `en.js`, `fr.js`, `es.js`).
     - The main `src/cvsData.js` now imports and aggregates data from these modules.
-- Added `external: "https://www.alloy.capital/"` to the "Blockchain Engineer at Alloy (Contract)" work experience in all CV versions within `src/cvsData.js` (now managed in `src/data/experiences/alloy.js`).
-- Added new work experience "Blockchain Engineer at Alloy (Contract)" to all CV versions. Descriptions were tailored for Front-End, Full Stack, and Blockchain CV types across English, Spanish, and French.
+- **Updated Alloy Experience (Iterative Refinements)**:
+    - Modified `src/data/experiences/alloy.js` in multiple steps.
+    - Initially removed "(Contract)" from the company name and revised descriptions to remove mentions of EVM node management, aiming for conciseness (around 4 bullet points).
+    - Subsequently, further refined descriptions to remove phrases like "decentralized applications," shifting focus to "institutional-grade," "enterprise," or "robust and secure application architectures" to better reflect the product's nature as an enterprise service aggregator.
+- Added `external: "https://www.alloy.capital/"` to the "Blockchain Engineer at Alloy" work experience in all CV versions (managed in `src/data/experiences/alloy.js`).
+- Added new work experience "Blockchain Engineer at Alloy" to all CV versions. Descriptions were tailored for Front-End, Full Stack, and Blockchain CV types across English, Spanish, and French, and subsequently updated with the refinements mentioned above.
 - Renamed `src/cvs.json` to `src/cvsData.js` and converted it to a JavaScript module (initial refactor step).
 - Updated `src/App.vue` to import data from `src/cvsData.js` (initial refactor step).
 - Refactored `cvsData.js` to define and use shared constants for common sections and skills (initial refactor step, now superseded by modular files).

@@ -15,8 +15,12 @@
         - CVs are now assembled per language in files under `src/data/cvs/` (e.g., `en.js`, `fr.js`, `es.js`).
         - The main `src/cvsData.js` now imports and aggregates data from these modules, maintaining the same export structure for `App.vue`.
     - Application tested and confirmed functional after these data refactoring steps.
-- **New Experience Added**: "Blockchain Engineer at Alloy (Contract)" experience added to all CV versions (now managed in `src/data/experiences/alloy.js` and assembled in language-specific CV files), with tailored descriptions and external URL `https://www.alloy.capital/`.
-- **Memory Bank Updated**: `techContext.md`, `systemPatterns.md`, and `activeContext.md` reflect the icon system change, the initial data refactoring, the new Alloy experience, and the major modularization of `cvsData.js`.
+- **Alloy Experience Updated (Iterative Refinements)**:
+    - The "Blockchain Engineer at Alloy" experience (managed in `src/data/experiences/alloy.js`) was updated in multiple steps.
+    - Initially, "(Contract)" was removed from the company name, and descriptions were revised to remove mentions of EVM node management and to improve conciseness.
+    - Subsequently, descriptions were further refined to remove phrases like "decentralized applications," shifting focus to "institutional-grade," "enterprise," or "robust and secure application architectures" to better reflect the product's nature as an enterprise service aggregator.
+    - The external URL `https://www.alloy.capital/` remains.
+- **Memory Bank Updated**: `techContext.md`, `systemPatterns.md`, and `activeContext.md` reflect the icon system change, the initial data refactoring, the Alloy experience and its subsequent updates, and the major modularization of `cvsData.js`.
 
 **Previous PDF/Styling Iterations (Context Kept for Reference):**
 - **Iteration 1**: General PDF robustness (overflow, wrapping, page breaks, line heights).
@@ -68,4 +72,4 @@
     - Updated all CV entries in `cvsCollection` (Now assembled in language-specific files like `src/data/cvs/en.js`).
     - Application tested and confirmed functional with these changes.
     - Next steps: Update `systemPatterns.md` and `techContext.md` in the memory bank.
-- **Current State**: CV data fully refactored into a modular structure under `src/data/`. New "Alloy" work experience (including external URL) integrated. Application is functional. `npm install` for Font Awesome removal still pending.
+- **Current State**: CV data fully refactored into a modular structure under `src/data/`. The "Alloy" work experience has been updated (details above). Application is functional. `npm install` for Font Awesome removal still pending.
