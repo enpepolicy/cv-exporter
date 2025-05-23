@@ -98,7 +98,8 @@ const cvsCollection = [
           "Contributed to implementing best practices in front-end architecture within a decentralized context, ensuring seamless integration with Ethereum blockchain nodes and APIs.",
           "Actively participated in code reviews to maintain high-quality standards for front-end deliverables.",
           "Utilized AWS services for deploying and managing front-end application components."
-        ]
+        ],
+        external: "https://www.alloy.capital/"
       },
       {
         "role": "Senior Front-End Developer",
@@ -184,7 +185,8 @@ const cvsCollection = [
           "Implemented best practices in decentralized architectures, integrating Ethereum blockchain nodes, APIs, and third-party services across the full stack.",
           "Conducted comprehensive code reviews for both front-end (React.js, Next.js) and back-end components, ensuring system integrity and performance.",
           "Employed AWS for robust application deployment and infrastructure management."
-        ]
+        ],
+        external: "https://www.alloy.capital/"
       },
       {
         "role": "Senior Front-End Developer",
@@ -270,7 +272,8 @@ const cvsCollection = [
           "Implemented best practices in decentralized architectures, integrating Ethereum nodes, custom APIs, and third-party services, while utilizing React.js and Next.js for user-facing components.",
           "Led and participated in code reviews, particularly for smart contracts and blockchain (Ethereum) interaction modules.",
           "Utilized AWS for scalable deployment and management of blockchain infrastructure components."
-        ]
+        ],
+        external: "https://www.alloy.capital/"
       },
       {
         "role": "Senior Front-End Developer",
@@ -356,7 +359,8 @@ const cvsCollection = [
           "Contribué à la mise en œuvre des meilleures pratiques en architecture front-end dans un contexte décentralisé, assurant une intégration transparente avec les nœuds et API de la blockchain Ethereum.",
           "Participé activement aux revues de code (code reviews) pour maintenir des normes de haute qualité pour les livrables front-end.",
           "Employé les services AWS pour le déploiement et la gestion des composants applicatifs front-end."
-        ]
+        ],
+        external: "https://www.alloy.capital/"
       },
       {
         "role": "Senior Front-End Developer",
@@ -466,7 +470,8 @@ const cvsCollection = [
           "Mis en œuvre les meilleures pratiques dans les architectures décentralisées, intégrant les nœuds de la blockchain Ethereum, les API et les services tiers sur l'ensemble de la stack.",
           "Mené des revues de code (code reviews) complètes pour les composants front-end (React.js, Next.js) et back-end, garantissant l'intégrité et la performance du système.",
           "Utilisé AWS pour un déploiement d'application et une gestion d'infrastructure robustes."
-        ]
+        ],
+        external: "https://www.alloy.capital/"
       },
       {
         "role": "Senior Front-End Developer",
@@ -552,7 +557,8 @@ const cvsCollection = [
           "Mis en œuvre les meilleures pratiques dans les architectures décentralisées, intégrant les nœuds Ethereum, les API personnalisées et les services tiers, tout en utilisant React.js et Next.js pour les composants orientés utilisateur.",
           "Dirigé et participé à des revues de code (code reviews), en particulier pour les smart contracts et les modules d'interaction avec la blockchain (Ethereum).",
           "Utilisé AWS pour le déploiement évolutif et la gestion des composants de l'infrastructure blockchain."
-        ]
+        ],
+        external: "https://www.alloy.capital/"
       },
       {
         "role": "Senior Front-End Developer",
@@ -638,7 +644,8 @@ const cvsCollection = [
           "Contribuí a la implementación de mejores prácticas en la arquitectura front-end dentro de un contexto descentralizado, asegurando una integración fluida con los nodos y API de la blockchain Ethereum.",
           "Participé activamente en revisiones de código (code reviews) para mantener altos estándares de calidad en los entregables de front-end.",
           "Utilicé servicios de AWS para el despliegue y la gestión de los componentes de la aplicación front-end."
-        ]
+        ],
+        external: "https://www.alloy.capital/"
       },
       {
         "role": "Senior Front-End Developer",
@@ -743,7 +750,8 @@ const cvsCollection = [
           "Implementé mejores prácticas en arquitecturas descentralizadas, integrando nodos de la blockchain Ethereum, API y servicios de terceros en toda la pila tecnológica.",
           "Realicé revisiones de código (code reviews) exhaustivas tanto para componentes front-end (React.js, Next.js) como back-end, asegurando la integridad y el rendimiento del sistema.",
           "Empleé AWS para un despliegue robusto de aplicaciones y gestión de infraestructura."
-        ]
+        ],
+        external: "https://www.alloy.capital/"
       },
       {
         "role": "Senior Front-End Developer",
@@ -848,7 +856,8 @@ const cvsCollection = [
           "Implementé mejores prácticas en arquitecturas descentralizadas, integrando nodos de Ethereum, API personalizadas y servicios de terceros, mientras utilizaba React.js y Next.js para los componentes orientados al usuario.",
           "Lideré y participé en revisiones de código (code reviews), particularmente para smart contracts y módulos de interacción con la blockchain (Ethereum).",
           "Utilicé AWS para el despliegue escalable y la gestión de componentes de la infraestructura blockchain."
-        ]
+        ],
+        external: "https://www.alloy.capital/"
       },
       {
         "role": "Senior Front-End Developer",

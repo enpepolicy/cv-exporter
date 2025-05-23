@@ -6,6 +6,7 @@ Refactoring CV data (`cvsData.js`) to de-duplicate content. Initial phase (commo
 
 ## Recent Changes
 
+- Added `external: "https://www.alloy.capital/"` to the "Blockchain Engineer at Alloy (Contract)" work experience in all CV versions within `src/cvsData.js`.
 - Added new work experience "Blockchain Engineer at Alloy (Contract)" to all CV versions in `src/cvsData.js`. Descriptions were tailored for Front-End, Full Stack, and Blockchain CV types across English, Spanish, and French.
 - Renamed `src/cvs.json` to `src/cvsData.js` and converted it to a JavaScript module.
 - Updated `src/App.vue` to import data from `src/cvsData.js`.
