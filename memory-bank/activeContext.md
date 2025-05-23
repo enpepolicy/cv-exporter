@@ -2,36 +2,35 @@
 
 ## Current Focus
 
-Refactoring CV data (`cvsData.js`) to de-duplicate content. Initial phase (common sections like personal info base, education, honors/awards, references base, and skills lists) complete and tested.
+CV data management and structure. Recently completed refactoring `src/cvsData.js` into a modular structure.
 
 ## Recent Changes
 
-- Added `external: "https://www.alloy.capital/"` to the "Blockchain Engineer at Alloy (Contract)" work experience in all CV versions within `src/cvsData.js`.
-- Added new work experience "Blockchain Engineer at Alloy (Contract)" to all CV versions in `src/cvsData.js`. Descriptions were tailored for Front-End, Full Stack, and Blockchain CV types across English, Spanish, and French.
-- Renamed `src/cvs.json` to `src/cvsData.js` and converted it to a JavaScript module.
-- Updated `src/App.vue` to import data from `src/cvsData.js`.
-- Refactored `cvsData.js` to define and use shared constants for:
-    - `commonPersonalInfoBase` (name, contact details)
-    - `commonEducation`
-    - `commonHonorsAwards`
-    - `commonReferencesBase` (structure for references)
-    - `frontendSkills`, `fullstackSkills`, `blockchainSkills`
-- Applied these constants to all CV entries in `cvsCollection` for the respective sections.
+- **Refactored `src/cvsData.js` into multiple files:**
+    - Created `src/data/common.js` for shared personal info, education, honors, and references.
+    - Created `src/data/skills.js` for skill set definitions.
+    - Created individual experience modules under `src/data/experiences/` (e.g., `alloy.js`, `dispatcherPro.js`, etc.).
+    - Created CV assembly files per language under `src/data/cvs/` (e.g., `en.js`, `fr.js`, `es.js`).
+    - The main `src/cvsData.js` now imports and aggregates data from these modules.
+- Added `external: "https://www.alloy.capital/"` to the "Blockchain Engineer at Alloy (Contract)" work experience in all CV versions within `src/cvsData.js` (now managed in `src/data/experiences/alloy.js`).
+- Added new work experience "Blockchain Engineer at Alloy (Contract)" to all CV versions. Descriptions were tailored for Front-End, Full Stack, and Blockchain CV types across English, Spanish, and French.
+- Renamed `src/cvs.json` to `src/cvsData.js` and converted it to a JavaScript module (initial refactor step).
+- Updated `src/App.vue` to import data from `src/cvsData.js` (initial refactor step).
+- Refactored `cvsData.js` to define and use shared constants for common sections and skills (initial refactor step, now superseded by modular files).
 - Verified basic application functionality (data loading, display) after these refactoring steps.
 - Previous task (Emoji migration) was successfully completed and documented.
 
 ## Next Steps
 
-- Update `progress.md` to reflect the addition of the new Alloy experience.
-- Discuss potential further refactoring of the `experience` section within `cvsData.js` for more advanced de-duplication, if desired by the user.
+- Update `progress.md`, `systemPatterns.md`, and `techContext.md` to reflect the new modular data architecture.
 - Await further instructions.
 
 ## Active Decisions & Considerations
 
 - **Emoji for Icons**: (Completed) Switched to native emojis.
 - **Styling Adjustments for Emojis**: (Completed) Emojis are treated as text characters.
-- **Data Refactoring Strategy**: The `cvsData.js` module is refactored internally but continues to export a flat array (`cvsCollection`) in the same structure previously provided by `cvs.json`. This minimizes changes required in `App.vue`, particularly in the `processCVs` method.
-- **Iterative Refactoring**: Large refactoring tasks are best done in stages, with testing after each stage.
+- **Data Refactoring Strategy**: `src/cvsData.js` has been refactored into a modular structure under `src/data/`. The main `src/cvsData.js` file now acts as an aggregator, ensuring it continues to export `cvsCollection` in the flat array structure expected by `App.vue`, thus minimizing changes to the Vue component.
+- **Iterative Refactoring**: Large refactoring tasks are best done in stages, with testing after each stage. This modularization is a significant step in that direction.
 
 ## Important Patterns & Preferences
 
@@ -47,3 +46,4 @@ Refactoring CV data (`cvsData.js`) to de-duplicate content. Initial phase (commo
 - Iterative refactoring with testing at each step helps manage complexity and catch issues early.
 - When refactoring data sources, maintaining the expected output structure for consumers (like Vue components) can simplify the transition.
 - Adding new, multi-faceted experience entries requires careful tailoring for each CV variant (language/type) to maintain relevance and truthfulness.
+- Modularizing data into smaller, focused files (e.g., by data type or specific experience) significantly improves maintainability and readability of the codebase, especially for large datasets.

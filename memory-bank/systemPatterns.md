@@ -7,17 +7,37 @@
 - **Data Flow**:
     1. `index.html` (from `dist/` after build, or served by Vite dev server) is loaded.
     2. JavaScript bundles are loaded, initializing the Vue.js 3 application (`src/App.vue` via `src/main.js`).
-    3. The Vue app imports CV data directly from `src/cvsData.js` (a JavaScript module, bundled with the app). This module internally uses shared constants to construct and export a flat array of CV objects.
-    4. The `processCVs` method in `App.vue` transforms the imported flat array from `cvsData.js` into a nested structure (language -> versions).
-    5. User selects language and version via UI controls.
-    6. Vue app filters and displays the relevant CV data from the processed state.
-    7. Export functions (`html2pdf.js`, `html2canvas.js`, imported as npm modules) process the `#cv-content` DOM element to generate PDF/image.
+    3. The Vue app imports CV data from `src/cvsData.js`. This main `cvsData.js` file now acts as an aggregator, importing data from a modular structure located in `src/data/`.
+        - `src/data/common.js`: Holds shared data like contact info, base personal info, education, honors, and reference bases.
+        - `src/data/skills.js`: Holds skill set arrays (frontend, fullstack, blockchain).
+        - `src/data/experiences/*.js`: Individual files for each work experience, defining base info and language/version specific descriptions.
+        - `src/data/cvs/*.js`: Files per language (e.g., `en.js`, `fr.js`, `es.js`) that import from `common.js`, `skills.js`, and `experiences/*.js` to assemble the complete CV objects for that language.
+    4. `src/cvsData.js` concatenates the CV arrays from `src/data/cvs/*.js` and exports a single flat `cvsCollection` array.
+    5. The `processCVs` method in `App.vue` transforms this imported flat array from `cvsData.js` into a nested structure (language -> versions).
+    6. User selects language and version via UI controls.
+    7. Vue app filters and displays the relevant CV data from the processed state.
+    8. Export functions (`html2pdf.js`, `html2canvas.js`, imported as npm modules) process the `#cv-content` DOM element to generate PDF/image.
 
 ```mermaid
-graph LR
+graph TD
     UserBrowser[User Browser] -- Loads --> IndexHTML[index.html (Vite served/built)]
     IndexHTML -- Loads & Initializes --> VueApp[Vue.js App (src/App.vue)]
-    VueApp -- Imports & Processes --> CVSDATA[src/cvsData.js (JS Module, Bundled)]
+    VueApp -- Imports from --> MainCVSData[src/cvsData.js (Aggregator)]
+
+    MainCVSData -->|imports & concatenates| EN_CVs[src/data/cvs/en.js]
+    MainCVSData -->|imports & concatenates| FR_CVs[src/data/cvs/fr.js]
+    MainCVSData -->|imports & concatenates| ES_CVs[src/data/cvs/es.js]
+
+    EN_CVs -->|imports| CommonData[src/data/common.js]
+    EN_CVs -->|imports| SkillsData[src/data/skills.js]
+    EN_CVs -->|imports| ExpModules[src/data/experiences/*.js]
+    FR_CVs -->|imports| CommonData
+    FR_CVs -->|imports| SkillsData
+    FR_CVs -->|imports| ExpModules
+    ES_CVs -->|imports| CommonData
+    ES_CVs -->|imports| SkillsData
+    ES_CVs -->|imports| ExpModules
+
     UserBrowser -- Selects Lang/Version --> VueApp
     VueApp -- Updates DOM --> CVDisplay[CV Display Area]
     UserBrowser -- Clicks Export --> ExportLib[html2pdf.js / html2canvas.js (npm modules)]
@@ -31,7 +51,11 @@ graph LR
 - **Vite**: Chosen as the build tool and development server for its speed and modern ESM-based architecture.
 - **Vue.js 3**: Used for its reactivity and component-based architecture (currently a single root component `src/App.vue`). Options API is used.
 - **Tailwind CSS**: Managed via npm and PostCSS for utility-first CSS styling.
-- **`src/cvsData.js` for Data**: CV data is managed in `src/cvsData.js`, a JavaScript module. This module defines shared constants for common data sections (personal info, education, etc.) and skill sets. It then programmatically constructs and exports a flat array of CV objects, which is imported by `App.vue`. This approach de-duplicates common information while providing the `App.vue` component with data in the flat structure it expects for processing.
+- **Modular Data Structure (`src/data/`)**: CV data is now managed in a modular structure under `src/data/`.
+    - Shared constants (personal info, education, skills) are in `src/data/common.js` and `src/data/skills.js`.
+    - Each work experience is defined in its own module under `src/data/experiences/`.
+    - Language-specific CVs are assembled in modules under `src/data/cvs/` (e.g., `en.js`).
+    - The main `src/cvsData.js` imports these modules and exports a single flat `cvsCollection`. This approach significantly improves maintainability and de-duplicates common information while providing `App.vue` with data in the expected flat structure.
 - **npm for Package Management**: All external libraries (Vue, Tailwind, export tools) are managed as npm dependencies. Emojis are used for icons, requiring no external library.
 - **No CDNs or Import Maps**: All dependencies are bundled or processed by Vite, removing reliance on external CDNs and import maps.
 - **JSON-LD for SEO**: Dynamically generated and updated by the Vue application.
@@ -39,11 +63,12 @@ graph LR
 ## Design Patterns in Use
 
 - **Component-Based Architecture (Vue.js)**: The application is structured around a single root Vue component (`src/App.vue`).
-- **Data-Driven Views**: The UI dynamically renders based on the processed data from `src/cvsData.js` (after transformation by `processCVs`) and user selections.
+- **Data-Driven Views**: The UI dynamically renders based on the processed data from the aggregated `cvsCollection` (exported by `src/cvsData.js` after transformation by `processCVs`) and user selections.
 - **Observer Pattern (Vue.js Reactivity)**: Vue's reactivity system automatically updates the DOM when underlying data changes.
-- **Data Transformation**: 
-    - `src/cvsData.js` internally uses shared constants and JavaScript logic to compose a flat array of CV objects, effectively de-duplicating common data at the source.
-    - The `processCVs` method in `App.vue` then transforms this imported flat array into a nested structure (language -> versions) suitable for the application's display logic.
+- **Data Transformation**:
+    - Data is now structured modularly in `src/data/`. Shared constants are in `common.js` and `skills.js`. Experiences are in `src/data/experiences/*.js`. Language-specific CVs are assembled in `src/data/cvs/*.js`.
+    - The main `src/cvsData.js` aggregates these modules into a flat `cvsCollection` array.
+    - The `processCVs` method in `App.vue` transforms this imported flat array into a nested structure (language -> versions) suitable for the application's display logic.
 
 ## Component Relationships
 
@@ -53,7 +78,12 @@ graph LR
     - Interacts with DOM elements: Mounts to `#app` in `index.html`, uses `#cv-content` for export.
     - Uses emojis directly in the template for icons.
 - **`src/main.js`**: Entry point for the Vite application. Initializes Vue, imports `App.vue`, and global CSS. Font Awesome setup has been removed.
-- **`src/cvsData.js`**: JavaScript module acting as the primary data source. It defines shared constants for common CV sections and skill sets, then programmatically constructs and exports a flat array of all CV versions. This array is then imported by `src/App.vue`.
+- **`src/cvsData.js`**: Now acts as an aggregator. It imports data from the modular structure under `src/data/` (specifically from `src/data/cvs/*.js`) and exports the final `cvsCollection` array.
+- **`src/data/**`**: New directory containing modularized data:
+    - `src/data/common.js`: Shared constants.
+    - `src/data/skills.js`: Skill lists.
+    - `src/data/experiences/*.js`: Individual experience modules.
+    - `src/data/cvs/*.js`: Language-specific CV assembly modules.
 - **`index.html` (root)**: Minimal HTML template for Vite.
 - **NPM Modules**:
     - `vue`: Core rendering and reactivity.

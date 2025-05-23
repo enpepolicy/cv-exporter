@@ -13,7 +13,12 @@
 - **CSS Framework**:
     - Tailwind CSS (managed via npm, configured in `tailwind.config.js` and `postcss.config.js`)
 - **Data Format**:
-    - JavaScript Module (for `src/cvsData.js`). CV data is defined within this module, using shared constants to de-duplicate common information (like personal details, education, skills, etc.) before exporting a flat array of CV objects.
+    - JavaScript Modules (for CV data). Data is now modularized:
+        - `src/data/common.js`: Shared constants (personal info, education, etc.).
+        - `src/data/skills.js`: Skill set arrays.
+        - `src/data/experiences/*.js`: Individual modules for each work experience.
+        - `src/data/cvs/*.js`: Modules that assemble CVs per language, importing from common, skills, and experience modules.
+        - `src/cvsData.js`: The main aggregator module that imports from `src/data/cvs/*.js` and exports the final `cvsCollection` array.
 - **Export Libraries**:
     - `html2pdf.js` (managed via npm) - For PDF export.
     - `html2canvas.js` (managed via npm) - For image export.
@@ -71,6 +76,12 @@ Key dependencies include:
     - Computed properties derive data.
     - Watchers react to state changes.
 - **Tailwind CSS**: Utility classes are applied in `src/App.vue` template. Global styles and Tailwind directives are in `src/assets/main.css`. Configuration in `tailwind.config.js` and `postcss.config.js`.
-- **`src/cvsData.js`**: Acts as the primary data source. It's a JavaScript module that defines shared constants for common CV information and skill sets. It then programmatically constructs and exports a flat array of all CV versions. This array is imported by `src/App.vue`, where the `processCVs` method transforms it into a nested structure (language -> versions) for display. This approach centralizes data management and reduces redundancy.
+- **CV Data Modules (`src/data/*` and `src/cvsData.js`)**:
+    - Data is now managed in a modular fashion under the `src/data/` directory.
+    - `src/data/common.js` and `src/data/skills.js` store shared constants and skill lists.
+    - Each work experience is detailed in its own file within `src/data/experiences/`.
+    - Language-specific CVs are constructed in files like `src/data/cvs/en.js`, importing necessary data from other modules.
+    - The main `src/cvsData.js` file now serves as an aggregator, importing the language-specific CV arrays and combining them into the final `cvsCollection` that is exported to `App.vue`.
+    - This modular structure enhances maintainability and reduces redundancy, while `App.vue` continues to receive data in the expected flat array format for processing.
 - **`html2pdf.js` / `html2canvas.js`**: Imported as modules and invoked in Vue methods in `src/App.vue`, targeting the `#cv-content` div.
 - **Emojis**: Directly embedded as text characters within the Vue template (`src/App.vue`). No external library is used for icons.
