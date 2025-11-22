@@ -4,7 +4,7 @@ export const alloyExperienceBase = {
   role: "Blockchain Engineer",
   company: "Alloy",
   location: "Berlin, Germany · Remote", // Base location, specific translations can be handled if needed
-  date_range: "Jan 2025 - Present", // Base date range
+  date_range: "Jan 2025 - Sep 2025", // Base date range
   external: "https://www.alloy.capital/",
 };
 

@@ -2,9 +2,9 @@
 
 export const eventHorizonExperienceBase = {
   role: "Front-End Developer", // Base role, can be overridden for specific CV versions
-  company: "Event Horizon Tech EU [Contractor]",
-  location: "America and Europe", // Base location
-  date_range: "Dec 2023 - Jun 2024", // English base
+  company: "Event Horizon Tech EU",
+  location: "Europe · Remote", // Base location
+  date_range: "Dec 2023 - Present", // English base
   external: "https://eventhorizontech.eu/"
 };
 
@@ -17,7 +17,7 @@ export const eventHorizonDescriptions = {
   "en-2": [ // Full-Stack (Role changes to Full Stack Developer)
     "Managed and consolidated freelance projects and tech initiatives under Event Horizon Tech EU.",
     "Delivered over 35 projects across America and Europe with high client retention and 95% positive ratings.",
-    "Managed full stack development, ensuring seamless integration between front-end applications and back-end services."
+    "Modernized deployment workflows by upgrading pipelines across production codebases and their development environments, orchestrating a comprehensive CI/CD strategy powered by AWS services."
   ],
   "en-3": [ // Blockchain (Role changes to Full Stack Developer)
     "Managed and consolidated freelance projects and tech initiatives under Event Horizon Tech EU.",
@@ -32,7 +32,7 @@ export const eventHorizonDescriptions = {
   "fr-2": [ // Full-Stack (Role changes to Full Stack Developer)
     "Géré et consolidé des projets freelance et des initiatives technologiques sous Event Horizon Tech EU.",
     "Livré plus de 35 projets à travers l'Amérique et l'Europe avec une forte rétention de clients et 95% d'évaluations positives.",
-    "Géré le développement full stack, assurant une intégration transparente entre les applications front-end et les services back-end."
+    "Modernisé les workflows de déploiement en mettant à jour les pipelines de plusieurs bases de code en production ainsi que leurs environnements de développement, orchestrant une stratégie CI/CD complète alimentée par les services AWS."
   ],
   "fr-3": [ // Blockchain (Role changes to Full Stack Developer)
     "Géré et consolidé des projets freelance et des initiatives technologiques sous Event Horizon Tech EU.",
@@ -47,7 +47,7 @@ export const eventHorizonDescriptions = {
   "es-2": [ // Full-Stack (Role changes to Full Stack Developer)
     "Gestioné y consolidé proyectos freelance e iniciativas tecnológicas bajo Event Horizon Tech EU.",
     "Entregué más de 35 proyectos a través de América y Europa con alta retención de clientes y 95% de valoraciones positivas.",
-    "Gestioné el desarrollo full stack, asegurando una integración fluida entre aplicaciones front-end y servicios back-end."
+    "Modernicé los flujos de despliegue actualizando pipelines en múltiples bases de código en producción y en sus entornos de desarrollo, orquestando una estrategia CI/CD integral impulsada por servicios de AWS."
   ],
   "es-3": [ // Blockchain (Role changes to Full Stack Developer)
     "Gestioné y consolidé proyectos freelance e iniciativas tecnológicas bajo Event Horizon Tech EU.",
@@ -64,13 +64,13 @@ export const eventHorizonRoles = {
 };
 
 export const eventHorizonDateRanges = {
-  en: "Dec 2023 - Jun 2024",
-  fr: "décembre 2023 - juin 2024",
-  es: "Dic 2023 - Jun 2024"
+  en: "Dec 2023 - Present",
+  fr: "décembre 2023 - présent",
+  es: "Dic 2023 - Actualidad"
 };
 
 export const eventHorizonLocations = {
-  en: "America and Europe",
-  fr: "Amerique et Europe", // Note: Original was "Amerique et Europe"
-  es: "América y Europa"
+  en: "Europe · Remote",
+  fr: "Europe · Télétravail",
+  es: "Europa · Remoto"
 };

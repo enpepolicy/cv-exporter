@@ -27,9 +27,9 @@ const es_cv_frontend = {
     summary: "Soy un Desarrollador Front-End con 5 años de experiencia profesional, especializado en crear interfaces de usuario responsivas y dinámicas utilizando Vue.js, enriquecidas por Tailwind CSS para un diseño moderno y limpio con gestión de estado sofisticada. Tengo experiencia en TypeScript para una arquitectura front-end robusta, asegurando seguridad de tipos y adherencia a estándares de código mantenibles, esenciales para aplicaciones web complexas y de gran escala."
   },
   experience: [
-    { ...alloyExperienceBase, date_range: "Ene 2025 - Actualidad", location: "Berlín, Alemania · Remoto", description: alloyDescriptions["es-1"] },
-    { ...dispatcherProExperienceBase, date_range: dispatcherProDateRanges.es, location: "París, Francia", description: dispatcherProDescriptions["es-1"] },
     { ...eventHorizonExperienceBase, role: eventHorizonRoles["es-1"], date_range: eventHorizonDateRanges.es, location: eventHorizonLocations.es, description: eventHorizonDescriptions["es-1"] },
+    { ...alloyExperienceBase, date_range: "Ene 2025 - Sep 2025", location: "Berlín, Alemania · Remoto", description: alloyDescriptions["es-1"] },
+    { ...dispatcherProExperienceBase, date_range: dispatcherProDateRanges.es, location: "París, Francia", description: dispatcherProDescriptions["es-1"] },
     { ...carftExperienceBase, role: carftRoles["es-1"], date_range: carftDateRanges.es, location: "Lyon, Francia", description: carftDescriptions["es-1"] },
     { ...era2140ExperienceBase, role: era2140Roles["es-1"], location: era2140Locations["es-1"], date_range: era2140DateRanges.es, description: era2140Descriptions["es-1"] }
   ],
@@ -52,9 +52,9 @@ const es_cv_fullstack = {
     summary: "Soy un Desarrollador Full Stack especializado en desarrollo de software enfocado en TypeScript dentro del ecosistema del framework Vue.js, mejorando el diseño web con interfaces de usuario responsivas y dinámicas. Soy experto en Node.js para desarrollo back-end, produciendo aplicaciones escalables y de alto rendimiento dentro del ecosistema AWS, complementadas con servicios de Firebase para funcionalidad adicional. Tengo experiencia en la gestión de flujos de trabajo CI/CD con herramientas como Jenkins, AWS CodePipeline y Netlify."
   },
   experience: [
-    { ...alloyExperienceBase, date_range: "Ene 2025 - Actualidad", location: "Berlín, Alemania · Remoto", description: alloyDescriptions["es-2"] },
-    { ...dispatcherProExperienceBase, date_range: dispatcherProDateRanges.es, location: "París, Francia", description: dispatcherProDescriptions["es-2"] },
     { ...eventHorizonExperienceBase, role: eventHorizonRoles["es-2"], date_range: eventHorizonDateRanges.es, location: eventHorizonLocations.es, description: eventHorizonDescriptions["es-2"] },
+    { ...alloyExperienceBase, date_range: "Ene 2025 - Sep 2025", location: "Berlín, Alemania · Remoto", description: alloyDescriptions["es-2"] },
+    { ...dispatcherProExperienceBase, date_range: dispatcherProDateRanges.es, location: "París, Francia", description: dispatcherProDescriptions["es-2"] },
     { ...carftExperienceBase, role: carftRoles["es-2"], date_range: carftDateRanges.es, location: "Lyon, Francia", description: carftDescriptions["es-2"] },
     { ...era2140ExperienceBase, role: era2140Roles["es-2"], location: era2140Locations["es-2"], date_range: era2140DateRanges.es, description: era2140Descriptions["es-2"] }
   ],
@@ -77,9 +77,9 @@ const es_cv_blockchain = {
     summary: "Soy un Desarrollador Blockchain y Web3 con más de 5 años de experiencia profesional, incluyendo 2 años enfocado en tecnologías blockchain y Web3. Competente en el desarrollo de aplicaciones descentralizadas, programación de smart contracts y soluciones Ethereum full stack, con experiencia adicional en juegos blockchain, NFTs y plataformas DeFi."
   },
   experience: [
-    { ...alloyExperienceBase, date_range: "Ene 2025 - Actualidad", location: "Berlín, Alemania · Remoto", description: alloyDescriptions["es-3"] },
-    { ...dispatcherProExperienceBase, date_range: dispatcherProDateRanges.es, location: "París, Francia", description: dispatcherProDescriptions["es-3"] },
     { ...eventHorizonExperienceBase, role: eventHorizonRoles["es-3"], date_range: eventHorizonDateRanges.es, location: eventHorizonLocations.es, description: eventHorizonDescriptions["es-3"] },
+    { ...alloyExperienceBase, date_range: "Ene 2025 - Sep 2025", location: "Berlín, Alemania · Remoto", description: alloyDescriptions["es-3"] },
+    { ...dispatcherProExperienceBase, date_range: dispatcherProDateRanges.es, location: "París, Francia", description: dispatcherProDescriptions["es-3"] },
     { ...carftExperienceBase, role: carftRoles["es-3"], date_range: carftDateRanges.es, location: "Lyon, Francia", description: carftDescriptions["es-3"] }, // Original had "Développeur Full Stack" for CARFT role in es-3, harmonized
     { ...era2140ExperienceBase, role: era2140Roles["es-3"], location: era2140Locations["es-3"], date_range: era2140DateRanges.es, description: era2140Descriptions["es-3"] } // Original had "Développeur Full Stack Javascript" for ERA2140 role in es-3, harmonized
   ],
